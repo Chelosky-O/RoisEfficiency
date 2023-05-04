@@ -45,3 +45,5 @@ app.get('/login', function(req,res){
 app.get('/producto', function(req,res){
     res.render('pages/producto');
 });
+
+app.use( express.static( "views" ) );
