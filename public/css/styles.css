@@ -10847,3 +10847,7 @@ textarea.form-control-lg {
   border-bottom-right-radius: .3rem;
   }
   }
+
+  .red{
+    color: red;
+  }
