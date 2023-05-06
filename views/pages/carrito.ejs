@@ -69,19 +69,19 @@
                                 <%}%>
                             </div>
                             <div class="col">
-                                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                                <a href="#">-</a><a href="#" class="border"><%=item.quantity%></a><a href="#">+</a>
                             </div>
                             <% if(item.sale_price){ %>
                                 <div class="col">&dollar;<%= item.sale_price * item.quantity %></div>
                                 <%} else{%>
                                     <div class="col">&dollar;<%= item.price * item.quantity %></div>
                                 <%}%>
-                            <span>
-                            <form method="post" action="/remove_product">
+                            <div class="col">
+                                <form method="post" action="/remove_product">
                                 <input type="hidden" name="id" value="<%= item.id %>">
                                 <input type="submit" name="remove-btn" class="btn btn-outline-dark mt-auto" value="Quitar">
                             </form>
-                        </span>
+                            </div>
                         </div>
                     </div>
                     <% }) %>

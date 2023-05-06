@@ -113,15 +113,18 @@ app.post('/remove_product', function(req,res){
     var id = req.body.id;
     var cart = req.session.cart;
     
-    for(let i=0; i<cart.length; i++){
-        if(cart[i].id == id){
-            cart.splice(cart.indexOf(i),1);
-        }
+    var index = cart.findIndex(function(item) {
+        return item.id == id;
+    });
+    
+    if(index !== -1) {
+        cart.splice(index, 1);
     }
 
     calculateTotal(cart,req);
     res.redirect('/cart');
 });
+
 
 
 app.use( express.static( "views" ) );
