@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2023 a las 01:05:26
+-- Tiempo de generación: 06-05-2023 a las 22:08:39
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,18 +34,19 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `sale_price` int(11) DEFAULT NULL,
   `quantity` int(11) NOT NULL,
-  `image` text NOT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL
+  `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `quantity`, `image`, `category`, `type`) VALUES
-(1, 'Lente 1', 'Para ver', 30000, 29990, 10, 'lente1.jpg', NULL, NULL),
-(2, 'lente 2', 'este es el lente 2', 99999, 50000, 10, 'lente2.png', NULL, NULL);
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `quantity`, `image`) VALUES
+(1, 'Lente de Descanso Anti Luz Azul (Negro)', 'Lente de Descanso Anti Luz Azul (Negro)', 30000, NULL, 5, 'Lente_1.png'),
+(2, 'PANTHER - So Long', 'PANTHER - So Long', 29990, 27990, 7, 'Lente_2.png'),
+(3, 'PANTHER 2', 'PANTHER 2', 24990, NULL, 2, 'Lente_3.png'),
+(4, 'Optisalud 86', 'Lente Óptico: Marco + Cristales desde $60.000; Cristales Orgánicos (los más livianos y resistentes a rayas) con Antireflejo, Filtro 100% UV', 80000, NULL, 5, 'Lente_4.png'),
+(5, 'Lente de Descanso', 'Lente de Descanso', 6990, NULL, 20, 'Lente_5.png');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
