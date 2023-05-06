@@ -20,70 +20,45 @@
 
         <div class="card">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container px-4 px-lg-5">
-                    <a class="navbar-brand" href="#!">Optica Rois</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                    <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-
             <div class="row">
-                <div class="col-md-8 cart">
+                <div class="col-md-8 cart" style="height: 400%">
                     <div class="title">
                         <div class="row">
                             <div class="col"><h4><b>Carrito de compra</b></h4></div>
                         </div>
                     </div>    
                     <% cart.forEach(function(item) { %>
-                    <div class="row">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="images/<%= item.image %>"></div>
-                            <div class="col">
+                    
+                        <div class="row main align-items-center" style="height: 100%">
+                            <div class="col-2 d-flex justify-content-center"><img class="img-fluid" src="images/<%= item.image %>"></div>
+                            <div class="col-4 d-flex justify-content-center">
                                 <div class="row text-muted"><%= item.name %></div>
-                                <% if(item.sale_price){ %>
-                                <div class="row">&dollar;<%= item.sale_price%></div>
-                                <%} else{%>
-                                <div class="row">&dollar;<%= item.price%></div>
-                                <%}%>
                             </div>
-                            <div class="col">
-                                <a href="#">-</a><a href="#" class="border"><%=item.quantity%></a><a href="#">+</a>
-                            </div>
+                                                                           
                             <% if(item.sale_price){ %>
-                                <div class="col">&dollar;<%= item.sale_price * item.quantity %></div>
-                                <%} else{%>
-                                    <div class="col">&dollar;<%= item.price * item.quantity %></div>
-                                <%}%>
-                            <div class="col">
+                            <div class="col-1 d-flex justify-content-center">&dollar;<%= item.sale_price * item.quantity %></div>
+                            <%} else{%>
+                                <div class="col-1 d-flex justify-content-center">&dollar;<%= item.price * item.quantity %></div>
+                            <%}%>
+
+                            <form method="post" action="/edit_product_quantity" class="col-3">
+                                <div class="input-group align-items-center">
+                                    <input type="hidden" name="id" value="<%= item.id %>">
+                                    <input type="submit" name="decrease_quantity" class="form-control btn btn-secondary" value="-">
+                                    <input type="text" name="quantity" class="form-control align-self-center" value="<%= item.quantity %>" readonly style="margin-top:33%">
+                                    <input type="submit" name="increase_quantity" class="form-control btn btn-secondary" value="+">
+                                </div>
+                              </form>
+                              
+                            
+                            <div class="col-1 d-flex justify-content-center">
                                 <form method="post" action="/remove_product">
-                                <input type="hidden" name="id" value="<%= item.id %>">
-                                <input type="submit" name="remove-btn" class="btn btn-outline-dark mt-auto" value="Quitar">
-                            </form>
+                                    <input type="hidden" name="id" value="<%= item.id %>">
+                                    <input type="submit" name="remove-btn" class="btn" value="Quitar">
+                                </form>
                             </div>
+
                         </div>
-                    </div>
                     <% }) %>
 
 

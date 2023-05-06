@@ -125,6 +125,54 @@ app.post('/remove_product', function(req,res){
     res.redirect('/cart');
 });
 
+app.post('/edit_product_quantity', function(req,res){
+
+    var id = req.body.id;
+    var quantity = req.body.quantity;
+    var increase_btn = req.body.increase_quantity;
+    var decrease_btn = req.body.decrease_quantity;
+    var cantidad_lente;
+    var cart = req.session.cart;
+
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.query("SELECT quantity FROM products WHERE id = ?", [id], (err, result) => {
+        if (err) throw err;
+        cantidad_lente=result[0].quantity;
+        
+        if(increase_btn){
+            for(let i =0; i < cart.length; i++){
+                if(cart[i].id == id){  
+                        if(cantidad_lente>cart[i].quantity){
+                            cart[i].quantity++;
+                        } 
+                }
+            }
+        }
+    
+        if(decrease_btn){
+            for(let i =0; i < cart.length; i++){
+                if(cart[i].id == id){
+                    if(quantity > 1){
+                        cart[i].quantity--;
+                    }
+                }
+            }
+        }
+    
+        calculateTotal(cart,req);
+        res.redirect('/cart');
+
+    });
+
+    
+});
+
 
 
 app.use( express.static( "views" ) );
