@@ -48,22 +48,30 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="images/<%= result[0].image %>" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">Shop item template</h1>
+                        <div class="small mb-1">SKU: <%= result[0].id %></div>
+                        <h1 class="display-5 fw-bolder"><%= result[0].name %></h1>
 
                         <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through">$45.00</span>
-                            <span>$40.00</span>
+                            <% if(result[0].sale_price){ %>
+                            <span class="text-decoration-line-through">$<%= result[0].price %></span>
+                            <span>$<%= result[0].sale_price %></span>
+                            <% }else{ %>
+                                <span>$<%= result[0].price %></span>
+                            <% } %>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                        <p class="lead"><%= result[0].description %></p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
+                            <form action="/add_to_cart" method="post">
+                                <input type="hidden" name="id" value="<%= result[0].id %>">
+                                <input type="hidden" name="name" value="<%= result[0].name %>">
+                                <input type="hidden" name="price" value="<%= result[0].price %>">
+                                <input type="hidden" name="sale_price" value="<%= result[0].sale_price %>">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="image" value="<%= result[0].image %>">
+                                <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -73,7 +73,23 @@ app.get('/login', function(req,res){
 
 //Acceso descripción producto
 app.get('/producto', function(req,res){
-    res.render('pages/producto');
+    response = {
+        id:req.query.id_producto
+    };
+    //console.log(response.id);
+
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.query("SELECT * FROM products where id = " + response.id + ";",(err,result)=>{
+        res.render('pages/producto',{result:result});
+    });
+
+   
 });
 
 app.post('/add_to_cart', function(req,res){
@@ -172,6 +188,7 @@ app.post('/edit_product_quantity', function(req,res){
 
     
 });
+
 
 
 
