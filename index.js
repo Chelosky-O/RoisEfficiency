@@ -51,7 +51,9 @@ function calculateTotal(cart,req){
 
 //Acceso index
 app.get('/', function(req,res){
-
+    var isLoggedIn = false;
+    var user_id = 1;
+    var user_name = "prueba"
     var con = mysql.createConnection({
         host:"localhost",
         user:"root",
@@ -60,15 +62,22 @@ app.get('/', function(req,res){
     });
 
     con.query("SELECT * FROM products",(err,result)=>{
-        res.render('pages/index',{result:result});
+        res.render('pages/index',{isLoggedIn:isLoggedIn,user_id:user_id,user_name:user_name,result:result});
     });
 
 });
+
 
 //Acceso al login
 app.get('/login', function(req,res){
     
     res.render('pages/login');
+});
+
+//Acceso al login
+app.get('/register', function(req,res){
+    
+    res.render('pages/register');
 });
 
 //Acceso descripción producto
