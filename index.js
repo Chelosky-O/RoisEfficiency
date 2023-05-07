@@ -52,8 +52,9 @@ function calculateTotal(cart,req){
 //Acceso index
 app.get('/', function(req,res){
     var isLoggedIn = false;
-    var user_id = 1;
-    var user_name = "prueba"
+    var user_rut = req.session.rut;
+    var user_password = req.session.password;
+    var user_name='';
     var con = mysql.createConnection({
         host:"localhost",
         user:"root",
@@ -61,17 +62,38 @@ app.get('/', function(req,res){
         database:"RoisEfficiency"
     });
 
+    if (user_rut !== undefined && user_password !== undefined) {
+        con.query("SELECT * FROM users WHERE rut=? and password=?", [user_rut, user_password],(err,result1)=>{
+            if(result1 && result1.length > 0){
+                isLoggedIn=true;
+                user_name=result1[0].primer_nombre;
+            }
+            else{
+                const errorMsg = "El usuario o la contraseña son incorrectos. Por favor, intenta de nuevo.";
+                res.render('pages/login', {errorMsg: errorMsg});
+            }
+        });
+    }
+    
     con.query("SELECT * FROM products",(err,result)=>{
-        res.render('pages/index',{isLoggedIn:isLoggedIn,user_id:user_id,user_name:user_name,result:result});
+        res.render('pages/index',{isLoggedIn:isLoggedIn,user_rut:user_rut,user_name:user_name,result:result});
     });
 
 });
 
+app.post('/authLogin',function(req,res){
+    var rut = req.body.rut;
+    var password = req.body.password;
+    req.session.rut = rut;
+    req.session.password = password;
+    res.redirect('/');
+});
 
 //Acceso al login
 app.get('/login', function(req,res){
     
-    res.render('pages/login');
+    const errorMsg=undefined;
+    res.render('pages/login', {errorMsg: errorMsg});
 });
 
 //Acceso al login

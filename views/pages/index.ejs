@@ -28,7 +28,9 @@
                     <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
                 </ul>
                 <%}else { %>
+                <li class="nav-item"><a class="nav-link greeting" style="color: red; font-weight: bold;">Hola, <%= user_name %></a></li>
                 </ul>
+                  </a>
                 <form class="d-flex">
                     <a class="btn btn-outline-dark" href="/logout">
                       <i class="bi-box-arrow-right me-1"></i>

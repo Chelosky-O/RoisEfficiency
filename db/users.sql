@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2023 a las 00:37:21
+-- Tiempo de generación: 08-05-2023 a las 00:50:49
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,15 +34,16 @@ CREATE TABLE `users` (
   `segundo_apellido` varchar(20) NOT NULL,
   `rut` varchar(10) NOT NULL,
   `direccion` varchar(50) NOT NULL,
-  `receta` varchar(100) NOT NULL
+  `receta` varchar(100) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `direccion`, `receta`) VALUES
-('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes');
+INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `direccion`, `receta`, `password`) VALUES
+('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes', '123');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
