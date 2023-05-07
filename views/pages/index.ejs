@@ -77,7 +77,8 @@
                                     <% }else{ %>
                                         <h3 >$<strong class=""><%= item.price %></strong></h3>
                                     <% } %>
-
+                                    
+                                    <div style="position: relative; bottom:auto">
                                     <form action="/add_to_cart" method="post">
                                         <input type="hidden" name="id" value="<%= item.id %>">
                                         <input type="hidden" name="name" value="<%= item.name %>">
@@ -85,16 +86,24 @@
                                         <input type="hidden" name="sale_price" value="<%= item.sale_price %>">
                                         <input type="hidden" name="quantity" value="1">
                                         <input type="hidden" name="image" value="<%= item.image %>">
+                                        
                                         <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
+                                          
+                                          
                                     </form>
+
+                                    <!-- Product actions-->
+                                    <form action="/view_product" method="post">
+                                        <input type="hidden" name="id" value="<%= item.id %>">
+                                   
+                                        <input type="submit" value="Ver detalle" class="btn btn-outline-dark mt-auto">
                                     
+                                    </form> 
+                                </div>
                                 </div>
                                 
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="producto?id_producto=<%= item.id %>">Ver detalle</a></div>
-                            </div>
+                            
                         </div>
                     </div>
                     <% }) %>

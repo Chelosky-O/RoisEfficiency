@@ -189,6 +189,23 @@ app.post('/edit_product_quantity', function(req,res){
     
 });
 
+app.post('/view_product', function(req,res){
+
+    var id = req.body.id;
+
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.query("SELECT * FROM products", (err, result) => {
+        if (err) throw err;
+        res.render('pages/producto', { id_producto: id, result: result });
+      });
+    
+});
 
 
 
