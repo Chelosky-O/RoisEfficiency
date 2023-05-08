@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2023 a las 00:50:49
+-- Tiempo de generación: 08-05-2023 a las 04:36:34
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -33,6 +33,7 @@ CREATE TABLE `users` (
   `primer_apellido` varchar(20) NOT NULL,
   `segundo_apellido` varchar(20) NOT NULL,
   `rut` varchar(10) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `receta` varchar(100) NOT NULL,
   `password` varchar(20) NOT NULL
@@ -42,8 +43,21 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `direccion`, `receta`, `password`) VALUES
-('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes', '123');
+INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `direccion`, `receta`, `password`) VALUES
+('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes', '123'),
+('SIMA', 'uban', 'muñoz', 'cáceres', '21199140-2', 'sima@gmail.com', 'Amalia Armstrong 7541', '', 'poto');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`rut`,`email`),
+  ADD UNIQUE KEY `uc_rut` (`rut`),
+  ADD UNIQUE KEY `uc_email` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
