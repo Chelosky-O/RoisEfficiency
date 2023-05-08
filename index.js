@@ -51,10 +51,10 @@ function calculateTotal(cart,req){
 
 //Acceso index
 app.get('/', function(req,res){
-    var isLoggedIn = false;
+    req.session.isLoggedIn = false;
     var user_rut = req.session.rut;
     var user_password = req.session.password;
-    var user_name='';
+    req.session.user_name;
     var con = mysql.createConnection({
         host:"localhost",
         user:"root",
@@ -65,8 +65,8 @@ app.get('/', function(req,res){
     if (user_rut !== undefined && user_password !== undefined) {
         con.query("SELECT * FROM users WHERE rut=? and password=?", [user_rut, user_password],(err,result1)=>{
             if(result1 && result1.length > 0){
-                isLoggedIn=true;
-                user_name=result1[0].primer_nombre;
+                req.session.isLoggedIn=true;
+                req.session.user_name=result1[0].primer_nombre;
             }
             else{
                 const errorMsg = "El usuario o la contraseña son incorrectos. Por favor, intenta de nuevo.";
@@ -76,16 +76,25 @@ app.get('/', function(req,res){
     }
     
     con.query("SELECT * FROM products",(err,result)=>{
-        res.render('pages/index',{isLoggedIn:isLoggedIn,user_rut:user_rut,user_name:user_name,result:result});
+        res.render('pages/index',{isLoggedIn:req.session.isLoggedIn,user_rut:req.session.rut,user_name:req.session.user_name,result:result});
     });
 
 });
+
+
 
 app.post('/authLogin',function(req,res){
     var rut = req.body.rut;
     var password = req.body.password;
     req.session.rut = rut;
     req.session.password = password;
+    res.redirect('/');
+});
+
+app.post('/logout',function(req,res){
+    req.session.isLoggedIn=false;
+    req.session.rut = undefined;
+    req.session.password = undefined;
     res.redirect('/');
 });
 
@@ -100,27 +109,6 @@ app.get('/login', function(req,res){
 app.get('/register', function(req,res){
     
     res.render('pages/register');
-});
-
-//Acceso descripción producto
-app.get('/producto', function(req,res){
-    response = {
-        id:req.query.id_producto
-    };
-    //console.log(response.id);
-
-    var con = mysql.createConnection({
-        host:"localhost",
-        user:"root",
-        password:"",
-        database:"RoisEfficiency"
-    });
-
-    con.query("SELECT * FROM products where id = " + response.id + ";",(err,result)=>{
-        res.render('pages/producto',{result:result});
-    });
-
-   
 });
 
 app.post('/add_to_cart', function(req,res){
@@ -233,7 +221,7 @@ app.post('/view_product', function(req,res){
 
     con.query("SELECT * FROM products", (err, result) => {
         if (err) throw err;
-        res.render('pages/producto', { id_producto: id, result: result });
+        res.render('pages/producto', { id_producto: id, result: result,isLoggedIn:req.session.isLoggedIn,user_rut:req.session.rut,user_name:req.session.user_name});
       });
     
 });
