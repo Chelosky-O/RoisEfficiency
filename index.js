@@ -49,6 +49,25 @@ function calculateTotal(cart,req){
 }
 
 
+//Acceso a vista Login_admin (GET)
+
+//Login admin (POST)
+
+//Acceso vista admin, con botones para todas sus opcion (agregar producto, editar...) (Get)
+
+//Agregar producto con codigo de barra(POST)
+
+//Añadir stock producto..(POST)
+
+//Eliminar stock producto..(POST)
+
+//Ver inventario (GET)
+
+//ver productos de un usuario (POST con GET)
+
+//Actualizar carrito, boton tiene que hacer la compra FAKE
+
+
 //Acceso index
 app.get('/', function(req,res){
     var con = mysql.createConnection({
@@ -129,7 +148,6 @@ app.post('/authLogin',function(req,res){
                 req.session.user_name=result1[0].primer_nombre;
                 req.session.rut = user_rut;
                 req.session.password = user_password;
-                req.session.isLoggedIn = true;
                 res.redirect('/');
             }
             else{
