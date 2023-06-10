@@ -3,6 +3,7 @@ var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
+const { redirect } = require('express/lib/response');
 
 mysql.createConnection({
     host:"localhost",
@@ -49,24 +50,96 @@ function calculateTotal(cart,req){
 }
 
 
-//Acceso a vista Login_admin (GET)
 
-//Login admin (POST)
+//////////////////////////////A D M I N///////////////////////////////////////
 
-//Acceso vista admin, con botones para todas sus opcion (agregar producto, editar...) (Get)
+app.get('/admin', function(req,res){
+    req.session.adminIsLoggedIn=undefined;
+    req.session.admin_name=undefined;
+    req.session.admin_rut = undefined;
+    req.session.admin_password = undefined;
+    res.render('pages/adminLogin', {errorMsg: undefined,successMsg:undefined});
+});
 
-//Agregar producto con codigo de barra(POST)
+app.get('/adminMain', function(req,res){
+    if (req.session.adminIsLoggedIn === true){
+        res.render('pages/adminMain');
+    }
+    else{
+       res.redirect('/admin'); 
+    }
+    
+});
 
-//Añadir stock producto..(POST)
+app.post('/adminAuthLogin',function(req,res){
+    var admin_rut = req.body.rut;
+    var admin_password = req.body.password;
 
-//Eliminar stock producto..(POST)
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
 
-//Ver inventario (GET)
+    if (admin_rut !== undefined && admin_password !== undefined) {
+        con.query("SELECT * FROM admins WHERE rut=? and password=?", [admin_rut, admin_password],(err,result)=>{
+            if(result && result.length > 0){
+                req.session.adminIsLoggedIn=true;
+                req.session.admin_name=result[0].primer_nombre;
+                req.session.admin_rut = admin_rut;
+                req.session.admin_password = admin_password;
+                res.redirect('/adminMain');
+            }
+            else{
+                const errorMsg = "El rut o la contraseña son incorrectos. Por favor, intenta de nuevo.";
+                const successMsg = undefined;
+                res.render('pages/adminLogin', {errorMsg: errorMsg,successMsg:successMsg});
+            }
+        });
+    }
+});
+
+
+app.get('/adminInventario', function(req,res){
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+    if (req.session.adminIsLoggedIn === true){
+        con.query("SELECT * FROM products",(err,result)=>{
+                res.render('pages/adminInventario',{result:result});
+        });
+    }
+    else{
+        res.redirect('/admin'); 
+     }
+    
+});
+
+app.get('/adminEscaneo', function(req,res){
+    if (req.session.adminIsLoggedIn === true){
+            res.render('pages/adminEscaneo');
+    }
+    else{
+        res.redirect('/admin'); 
+     }
+});
+
+app.get('/adminModificacion', function(req, res) {
+    if (req.session.adminIsLoggedIn === true) {
+        const scannedText = req.query.text; // Obtener el valor escaneado del query string
+        res.render('pages/adminModificacion', { scannedText: scannedText });
+    } else {
+        res.redirect('/admin');
+    }
+});
 
 //ver productos de un usuario (POST con GET)
 
 //Actualizar carrito, boton tiene que hacer la compra FAKE
-
 
 //Acceso index
 app.get('/', function(req,res){

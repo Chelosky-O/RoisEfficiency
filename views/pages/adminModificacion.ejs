@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página genérica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .scanned-text {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Título de la página</h1>
+    
+    <p>Contenido de la página</p>
+    
+    <div class="scanned-text">
+        <% if (typeof scannedText !== 'undefined') { %>
+            Valor escaneado: <%= scannedText %>
+        <% } else { %>
+            No se ha escaneado ningún valor.
+        <% } %>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
