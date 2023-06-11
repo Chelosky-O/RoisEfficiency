@@ -11,7 +11,7 @@
     <div class="container">
       <div class="title">Registro</div>
       <div class="content">
-        <form action="/register" method="post">
+        <form action="/register" method="post" enctype="multipart/form-data">
           <div class="user-details">
             <div class="input-box">
               <span class="details">Primer Nombre</span>
@@ -40,6 +40,10 @@
             <div class="input-box">
               <span class="details">Email</span>
               <input type="email" name="email" placeholder="ejemplo@ejemplo.com" required>
+            </div>
+            <div class="input-box">
+              <span class="details">Receta Oftalmologica</span>
+              <input type="file" name="file">
             </div>
             <div class="input-box">
               <span class="details">Contraseña</span>
