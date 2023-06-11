@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
 const { redirect } = require('express/lib/response');
+const multer  = require('multer');
+const fileUpload = require('express-fileupload');
+const fs = require('fs');
 
 mysql.createConnection({
     host:"localhost",
@@ -50,6 +53,8 @@ function calculateTotal(cart,req){
 }
 
 
+//////////////////////////////// UPLOAD /////////////////////////////////////
+app.use(fileUpload())
 
 //////////////////////////////A D M I N///////////////////////////////////////
 
@@ -169,9 +174,20 @@ app.post('/register',function(req,res){
     var rut = req.body.rut;
     var email = req.body.email;
     var direccion = req.body.direccion;    
-    var receta = "";
     var password = req.body.password;
-    
+    var receta = "";
+
+    let EDFile = req.files.file;
+    console.log(EDFile.name);
+    const path = './uploads/' + rut;
+
+    fs.mkdir(path, { recursive: true }, (err) => {
+        if (err) throw err;
+    });
+
+    EDFile.mv(path+"/"+EDFile.name);
+    receta = path+"/";
+
     try {
         con.connect(function(err) {
             if (err) throw err;
