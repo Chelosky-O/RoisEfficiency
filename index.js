@@ -63,7 +63,7 @@ app.get('/admin', function(req,res){
 
 app.get('/adminMain', function(req,res){
     if (req.session.adminIsLoggedIn === true){
-        res.render('pages/adminMain');
+        res.render('pages/adminMain',{admin_name:req.session.admin_name});
     }
     else{
        res.redirect('/admin'); 
@@ -99,7 +99,6 @@ app.post('/adminAuthLogin',function(req,res){
         });
     }
 });
-
 
 app.get('/adminInventario', function(req,res){
     var con = mysql.createConnection({
@@ -202,7 +201,6 @@ app.post('/register',function(req,res){
 });
 
 
-
 app.post('/authLogin',function(req,res){
     var user_rut = req.body.rut;
     var user_password = req.body.password;
@@ -239,7 +237,6 @@ app.post('/logout',function(req,res){
     res.redirect('/');
 });
 
-//Acceso al login
 app.get('/login', function(req,res){
     
     const errorMsg=undefined;
@@ -247,7 +244,6 @@ app.get('/login', function(req,res){
     res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
 });
 
-//Acceso al register
 app.get('/register', function(req,res){
     
     const errorMsg=undefined;
@@ -283,8 +279,9 @@ app.post('/add_to_cart', function(req,res){
 app.get('/cart', function(req,res){
     var cart = req.session.cart;
     var total = req.session.total;
+    var isLoggedIn = req.session.isLoggedIn
 
-    res.render('pages/carrito',{cart:cart,total:total});
+    res.render('pages/carrito',{cart:cart,total:total,isLoggedIn:isLoggedIn});
 });
 
 app.post('/remove_product', function(req,res){
@@ -369,6 +366,54 @@ app.post('/view_product', function(req,res){
     
 });
 
+app.get('/checkout', function(req,res){
+    var total = req.session.total;
+    res.render('pages/checkout',{total:total});
+});
 
+app.post('/place_order', function(req,res){
+
+    var name = req.body.name;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var city = req.body.city;
+    var address = req.body.address;
+    var cost = req.session.total;
+    var status = "not paid";
+    var date = new Date();
+    var products_ids = "";
+
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    var cart = req.session.cart;
+    for(let i=0; i<cart.length; i++){
+        products_ids = products_ids + "," + cart[i].id;
+    }
+
+    con.connect((err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date,products_ids) VALUES ?"
+            var values = [
+                [cost,name,email,status,city,address,phone,date,products_ids]
+            ];
+
+            con.query(query,[values],(err,result)=>{
+                res.redirect('/payment')
+            });
+        }
+    });
+
+});
+
+app.get('/payment', function(req,res){
+    res.render('pages/payment');
+});
 
 app.use( express.static( "views" ) );
