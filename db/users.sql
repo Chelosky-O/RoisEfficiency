@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2023 a las 04:36:34
+-- Tiempo de generación: 11-06-2023 a las 05:47:38
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `direccion`, `receta`, `password`) VALUES
+('prueba', 'prueba', 'prueba', 'prueba', '15616115-5', 'asd@asd.com', 'asd', '', '123'),
 ('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes', '123'),
+('prueba2', 'p', 'p', 'p', '20707065-4', 'pruebaaa@prueba.com', 'lol', '', '123'),
 ('SIMA', 'uban', 'muñoz', 'cáceres', '21199140-2', 'sima@gmail.com', 'Amalia Armstrong 7541', '', 'poto');
 
 --

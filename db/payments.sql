@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2023 a las 05:47:06
+-- Tiempo de generación: 11-06-2023 a las 05:47:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -24,25 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `admins`
+-- Estructura de tabla para la tabla `payments`
 --
 
-CREATE TABLE `admins` (
-  `primer_nombre` varchar(20) NOT NULL,
-  `segundo_nombre` varchar(20) NOT NULL,
-  `primer_apellido` varchar(20) NOT NULL,
-  `segundo_apellido` varchar(20) NOT NULL,
-  `rut` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
+CREATE TABLE `payments` (
+  `id` bigint(11) NOT NULL,
+  `order_id` bigint(11) NOT NULL,
+  `transaction_id` text NOT NULL,
+  `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `admins`
+-- Índices para tablas volcadas
 --
 
-INSERT INTO `admins` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `password`) VALUES
-('admin', 'admin', 'admin', 'admin', '11111111-1', 'admin@admin.cl', 'admin');
+--
+-- Indices de la tabla `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
