@@ -61,13 +61,18 @@
                         <div class="col">PRECIO TOTAL</div>
                         <div class="col text-right">&dollar; <%=total%></div>
                     </div>
-                    <% if(isLoggedIn) { %>
-                            <div> 
-                                <form method="get" action="/checkout">
-                                    <input type="submit" class="btn-secondary" value="Realizar compra" name="">
-                                </form>
-                            </div>
-                    <%}%>
+                    <% if (typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
+                        <a class="btn-secondary" href="/login">Inicia sesión para comprar</a>
+                        <a class="btn-secondary" href="/register">Regístrate</a>
+
+                    <% } else { %>
+                        <div>
+                            <form method="get" action="/checkout">
+                                <input type="submit" class="btn-secondary" value="Realizar compra" name="">
+                            </form>
+                        </div>
+                    <% } %>
+                    
                 </div>
             </div>
         </div>
