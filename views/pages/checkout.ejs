@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Checkout</title>
+  <title>Formulario de compra</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -49,15 +49,16 @@
 </head>
 <body>
 
-  <h2>Checkout Form</h2>
+  <h2>Formulario de compra</h2>
 
   <form action="/place_order" method="post">
 
     <label for="fname">Nombre</label><br>
-    <input type="text" id="fname" name="name" value="Valor predefinido del nombre" required><br>
+    <input type="text" id="fname" name="name" value="<%=user_name%> <%=user_lastname%>" required readonly><br>
+
 
     <label for="email">Correo electrónico</label><br>
-    <input type="email" id="email" name="email" value="valor@predefinido.com" required><br>
+    <input type="email" id="email" name="email" value="<%=user_email%>" required readonly><br>
 
     <label for="phone">Teléfono</label><br>
     <input type="tel" id="phone" name="phone" required><br>
@@ -66,7 +67,7 @@
     <input type="text" id="city" name="city" required><br>
 
     <label for="address">Dirección</label><br>
-    <input type="text" id="address" name="address" required><br>
+    <input type="text" id="address" name="address" value="<%=user_address%>" required readonly><br>
 
     <div>
         <p>Monto total: $ <%= total %></p>

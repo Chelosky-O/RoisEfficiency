@@ -3,7 +3,7 @@ var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
-const { redirect } = require('express/lib/response');
+const { redirect, render } = require('express/lib/response');
 const multer  = require('multer');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
@@ -58,6 +58,10 @@ app.use(fileUpload())
 
 //////////////////////////////A D M I N///////////////////////////////////////
 
+app.get('/test', function(req,res){
+    res.render('pages/test');
+});
+
 app.get('/admin', function(req,res){
     req.session.adminIsLoggedIn=undefined;
     req.session.admin_name=undefined;
@@ -66,15 +70,16 @@ app.get('/admin', function(req,res){
     res.render('pages/adminLogin', {errorMsg: undefined,successMsg:undefined});
 });
 
-app.get('/adminMain', function(req,res){
-    if (req.session.adminIsLoggedIn === true){
-        res.render('pages/adminMain',{admin_name:req.session.admin_name});
+app.get('/adminMain', function(req, res) {
+    if (req.session.adminIsLoggedIn === true) {
+        var msgact = req.session.msgact;
+        req.session.msgact = undefined;
+        res.render('pages/adminMain', { admin_name: req.session.admin_name, msg: msgact });
+    } else {
+        res.redirect('/admin');
     }
-    else{
-       res.redirect('/admin'); 
-    }
-    
 });
+
 
 app.post('/adminAuthLogin',function(req,res){
     var admin_rut = req.body.rut;
@@ -125,7 +130,7 @@ app.get('/adminInventario', function(req,res){
 
 app.get('/adminEscaneo', function(req,res){
     if (req.session.adminIsLoggedIn === true){
-            res.render('pages/adminEscaneo');
+            res.render('pages/adminEscaneo',{msgerror:undefined});
     }
     else{
         res.redirect('/admin'); 
@@ -135,11 +140,57 @@ app.get('/adminEscaneo', function(req,res){
 app.get('/adminModificacion', function(req, res) {
     if (req.session.adminIsLoggedIn === true) {
         const scannedText = req.query.text; // Obtener el valor escaneado del query string
-        res.render('pages/adminModificacion', { scannedText: scannedText });
+        var con = mysql.createConnection({
+            host: "localhost",
+            user: "root",
+            password: "",
+            database: "RoisEfficiency"
+        });
+        con.query("SELECT * FROM products WHERE name=?", [scannedText], function(err, product) {
+            if (err) {
+                console.log(err);
+                res.redirect('/admin');
+            } else {
+                if (product.length === 0) {
+                    res.render('pages/adminEscaneo', { msgerror: "No hay ningún producto con este código" });
+                } else {
+                    res.render('pages/adminModificacion', { product: product });
+                }
+            }
+        });
     } else {
         res.redirect('/admin');
     }
 });
+
+app.post('/modificarProducto', function(req, res) {
+    var productName = req.body.productName;
+    var price = req.body.price;
+    var salePrice = req.body.salePrice;
+    var quantity = req.body.quantity;
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "RoisEfficiency"
+    });
+
+    var query = "UPDATE products SET price = ?, sale_price = ?, quantity = ? WHERE name = ?";
+
+    con.query(query, [price, salePrice, quantity, productName], function(err, result) {
+        if (err) {
+            console.log(err);
+            res.redirect('/adminEscaneo');
+        } else {
+            req.session.msgact = productName + " actualizado correctamente";
+            res.redirect('/adminMain');
+        }
+             
+    });
+});
+
+
 
 //ver productos de un usuario (POST con GET)
 
@@ -233,6 +284,9 @@ app.post('/authLogin',function(req,res){
             if(result1 && result1.length > 0){
                 req.session.isLoggedIn=true;
                 req.session.user_name=result1[0].primer_nombre;
+                req.session.user_lastname=result1[0].primer_apellido;
+                req.session.user_email=result1[0].email;
+                req.session.user_address=result1[0].direccion;
                 req.session.rut = user_rut;
                 req.session.password = user_password;
                 res.redirect('/');
@@ -384,7 +438,7 @@ app.post('/view_product', function(req,res){
 
 app.get('/checkout', function(req,res){
     var total = req.session.total;
-    res.render('pages/checkout',{total:total});
+    res.render('pages/checkout',{total:total,user_name:req.session.user_name,user_lastname:req.session.user_lastname,user_email:req.session.user_email,user_address:req.session.user_address});
 });
 
 app.post('/place_order', function(req,res){
@@ -411,20 +465,24 @@ app.post('/place_order', function(req,res){
         products_ids = products_ids ? products_ids + "," + cart[i].id : cart[i].id;
     }
 
-    con.connect((err)=>{
-        if(err){
-            console.log(err);
-        }else{
-            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date,products_ids) VALUES ?"
-            var values = [
-                [cost,name,email,status,city,address,phone,date,products_ids]
-            ];
-
-            con.query(query,[values],(err,result)=>{
-                res.redirect('/payment')
+    try {
+        con.connect(function(err) {
+            if (err) throw err;
+            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            var values = [cost,name,email,status,city,address,phone,date];
+    
+            con.query(query, values, function (err, result) {
+                if (err) {
+                    throw err;
+                } else {
+                    res.redirect('/payment');
+                }
             });
-        }
-    });
+        });
+    } catch (err) {
+        console.error(err);
+    }
+    
 
 });
 

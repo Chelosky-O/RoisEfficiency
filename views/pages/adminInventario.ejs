@@ -15,7 +15,7 @@
                 <th>Precio</th>
                 <th>Precio Oferta</th>
                 <th>Cantidad</th>
-                <th>Imagen</th>
+                <th>QR Code</th> <!-- Añadido la cabecera del código QR -->
             </tr>
         </thead>
         <tbody>
@@ -27,6 +27,10 @@
                     <td><%= result[i].price %></td>
                     <td><%= result[i].sale_price %></td>
                     <td><%= result[i].quantity %></td>
+                    <td>
+                        <!-- Generamos el código QR -->
+                        <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<%= encodeURIComponent(result[i].name) %>&choe=UTF-8" alt="QR Code" />
+                    </td>
                     <!-- <td><img src="<%= result[i].image %>" alt="Product Image" width="100"></td>  -->
                     <!-- <td><%= result[i].image %></td> -->
                 </tr>
