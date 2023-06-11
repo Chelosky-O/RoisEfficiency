@@ -486,6 +486,86 @@ app.post('/place_order', function(req,res){
 
 });
 
+app.get('/profile', function(req,res){
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+    query_session = 'SELECT * FROM users WHERE rut="'+req.session.rut+'"';
+    con.query(query_session, (err, result) => {
+        if (err) throw err;
+        res.render('pages/profile', {result: result,isLoggedIn:req.session.isLoggedIn,user_rut:req.session.rut,user_name:req.session.user_name});
+      });
+    
+});
+
+app.post('/edit_profile',function(req,res){
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+    
+    var primer_nombre = req.body.primer_nombre;
+    var segundo_nombre = req.body.segundo_nombre;
+    var primer_apellido = req.body.primer_apellido;
+    var segundo_apellido = req.body.segundo_apellido;
+    var rut = req.session.rut;
+    var email = req.body.email;
+    var direccion = req.body.direccion;    
+    var password = req.body.password;
+    var receta = "";
+
+    if (req.files){
+        let EDFile = req.files.file;
+        const path = './uploads/' + rut;
+        
+        fs.rmSync(path, {recursive: true})
+
+        fs.mkdir(path, { recursive: true }, (err) => {
+            if (err) throw err;
+        });
+
+        EDFile.mv(path+"/"+EDFile.name);
+        receta = path+"/";
+    }else{
+        receta = './uploads/' + rut + "/";
+    }
+    
+
+    //console.log(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido)
+
+    
+    try {
+        con.connect(function(err) {
+            if (err) throw err;
+            var sql = 'UPDATE users SET primer_nombre="'+primer_nombre+'", segundo_nombre="'+segundo_nombre+'", primer_apellido="'+primer_apellido+'", segundo_apellido="'+segundo_apellido+'", email="'+email+'", direccion="'+direccion+'", receta="'+receta+'", password="'+password+'" WHERE rut="'+rut+'"';
+            con.query(sql, function (err, result) {
+                if (err) {
+                  if (err.code === 'ER_DUP_ENTRY') {
+                    const errorMsg = 'ERROR';
+                    res.render('pages/login', {errorMsg: errorMsg});
+                  } else {
+                    throw err;
+                  }
+                } else {
+                  const successMsg = 'Se han actualizado correctamente los datos.';
+                  const errorMsg = undefined;
+                  res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
+                }
+              });
+              
+        });
+    } catch (err) {
+        console.error(err);
+        const errorMsg=undefined;
+        res.render('pages/register', {errorMsg: errorMsg})
+    }
+});
+
 app.get('/payment', function(req,res){
     res.render('pages/payment');
 });
