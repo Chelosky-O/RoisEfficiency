@@ -42,7 +42,7 @@ function isProductInCart(cart, id){
 function calculateTotal(cart,req){
     total = 0;
     for(let i=0; i<cart.length; i++){
-        if(cart[i].sale_price){
+        if(cart[i].sale_price && cart[i].sale_price>0){
             total = total + (cart[i].sale_price * cart[i].quantity);
         }else{
             total = total + (cart[i].price * cart[i].quantity);
@@ -451,7 +451,7 @@ app.post('/place_order', function(req,res){
     var cost = req.session.total;
     var status = "not paid";
     var date = new Date();
-    var products_ids = "";
+    var product_ids = [];
 
     var con = mysql.createConnection({
         host:"localhost",
@@ -461,21 +461,26 @@ app.post('/place_order', function(req,res){
     });
 
     var cart = req.session.cart;
-    for(let i=0; i<cart.length; i++){
-        products_ids = products_ids ? products_ids + "," + cart[i].id : cart[i].id;
+
+    for(let i = 0; i < cart.length; i++){
+        for(let j = 0; j < cart[i].quantity; j++) {
+            product_ids.push(cart[i].id);
+        }
     }
+    let product_ids_string = product_ids.join(",");
 
     try {
         con.connect(function(err) {
             if (err) throw err;
-            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            var values = [cost,name,email,status,city,address,phone,date];
+            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date,product_ids) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            var values = [cost,name,email,status,city,address,phone,date,product_ids_string];
     
             con.query(query, values, function (err, result) {
                 if (err) {
                     throw err;
                 } else {
-                    res.redirect('/payment');
+                    //res.redirect('/payment');
+                    res.render('pages/gracias',{name:req.body.name})
                 }
             });
         });

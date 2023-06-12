@@ -28,7 +28,7 @@
                             <div class="col-4 d-flex justify-content-center">
                                 <div class="row text-muted"><%= item.name %></div>
                             </div>
-                            <% if(item.sale_price){ %>
+                            <% if(item.sale_price && item.sale_price>0){ %>
                             <div class="col-1 d-flex justify-content-center">&dollar;<%= item.sale_price * item.quantity %></div>
                             <%} else{%>
                                 <div class="col-1 d-flex justify-content-center">&dollar;<%= item.price * item.quantity %></div>
