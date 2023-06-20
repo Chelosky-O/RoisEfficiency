@@ -62,6 +62,63 @@ app.get('/test', function(req,res){
     res.render('pages/test');
 });
 
+app.get('/adminProducto', function(req,res){
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+    if (req.session.adminIsLoggedIn === true){
+            con.query("SELECT max(id) FROM products",(err,result)=>{
+            res.render('pages/adminProducto',{result:result});
+        });
+    }
+    else{
+        res.redirect('/admin'); 
+     }
+});
+
+app.post('/addProduct', function(req, res) {
+    var id = req.body.id;
+    var productName = req.body.productName;
+    var description = req.body.description;
+    var price = req.body.price;
+    var salePrice = req.body.salePrice;
+    var quantity = req.body.quantity;
+    var imagen = "";
+    if (req.body.salePrice == ''){
+        salePrice = null;
+    } 
+
+    let EDFile = req.files.file;
+    const path = './public/images';
+
+    
+    imagen = "Lente_" + id + ".png";
+    EDFile.mv(path+"/"+imagen);
+
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "RoisEfficiency"
+    });
+    
+    var query = "INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `quantity`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    con.query(query, [id, productName, description, price, salePrice, quantity, imagen], function(err, result) {
+        if (err) {
+            console.log(err);
+            res.redirect('/adminMain');
+        } else {
+            req.session.msgact = productName + " Añadido Correctamente";
+            res.redirect('/adminMain');
+        }
+             
+    });
+});
+
 app.get('/admin', function(req,res){
     req.session.adminIsLoggedIn=undefined;
     req.session.admin_name=undefined;
@@ -229,7 +286,6 @@ app.post('/register',function(req,res){
     var receta = "";
 
     let EDFile = req.files.file;
-    console.log(EDFile.name);
     const path = './uploads/' + rut;
 
     fs.mkdir(path, { recursive: true }, (err) => {

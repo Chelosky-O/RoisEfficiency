@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Administración - Añadir</title>
+    <link rel="stylesheet" type="text/css" href="css/adminModificacion.css">
+</head>
+<body>
+    <h1>Administración - Añadir</h1>
+
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Sale Price</th>
+                <th>Quantity</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form action="/addProduct" method="post" enctype="multipart/form-data">
+
+                    <tr>
+                        
+                        <td><input name="id" readonly value="<%= result[0]['max(id)']+1 %>"></td>
+                        <td><input type="text" id="productName" name="productName" placeholder="Nombre" required></td>
+                        <td><input type="text" id="description" name="description" placeholder="Texto " required></td>
+                        <td><input type="text" id="price" name="price" placeholder="$" required></td>
+                        <td><input type="text" id="salePrice" name="salePrice" placeholder="$"></td>
+                        <td><input type="text" id="quantity" name="quantity" placeholder="Cantidad" required></td>
+                        <td><input type="file" name="file" class="form-control"></td>
+                    </tr>
+
+                
+                <input type="submit" value="Añadir Producto">
+            </form>
+        </tbody>
+    </table>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
