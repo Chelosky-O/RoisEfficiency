@@ -95,7 +95,7 @@ app.post('/addProduct', function(req, res) {
     const path = './public/images';
 
     
-    imagen = "Lente_" + id + ".png";
+    imagen = EDFile.name;
     EDFile.mv(path+"/"+imagen);
 
 
