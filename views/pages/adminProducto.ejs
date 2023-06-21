@@ -23,23 +23,49 @@
         <tbody>
             <form action="/addProduct" method="post" enctype="multipart/form-data">
 
-                    <tr>
-                        
-                        <td><input name="id" readonly value="<%= result[0]['max(id)']+1 %>"></td>
-                        <td><input type="text" id="productName" name="productName" placeholder="Nombre" required></td>
-                        <td><input type="text" id="description" name="description" placeholder="Texto " required></td>
-                        <td><input type="text" id="price" name="price" placeholder="$" required></td>
-                        <td><input type="text" id="salePrice" name="salePrice" placeholder="$"></td>
-                        <td><input type="text" id="quantity" name="quantity" placeholder="Cantidad" required></td>
-                        <td><input type="file" name="file" class="form-control"></td>
-                    </tr>
-
-                
+                <tr>
+                    <td><input name="id" readonly value="<%= result[0]['max(id)']+1 %>"></td>
+                    <td><input type="text" id="productName" name="productName" placeholder="Nombre" required></td>
+                    <td><input type="text" id="description" name="description" placeholder="Texto " required></td>
+                    <td><input type="text" id="price" name="price" placeholder="$" required></td>
+                    <td><input type="text" id="salePrice" name="salePrice" placeholder="$"></td>
+                    <td><input type="text" id="quantity" name="quantity" placeholder="Cantidad" required></td>
+                    <td>
+                        <input type="file" id="imageInput" name="file" class="form-control">
+                    </td>
+                </tr>
                 <input type="submit" value="Añadir Producto">
             </form>
         </tbody>
     </table>
+    <div align="right">
+        <img id="imagePreview" src="#" alt="Vista previa de imagen" style="max-width: 400px; max-height: 400px; display: none;">
+    </div>
+    
+    
 
-    <script src="/js/admin.js"></script>
+    <script>
+        // Capturar el evento de cambio de archivo
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function() {
+                    imagePreview.src = reader.result;
+                    imagePreview.style.display = 'block';
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '#';
+                imagePreview.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
