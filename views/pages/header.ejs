@@ -2,55 +2,77 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Título de la página</title>
     <link rel="stylesheet" type="text/css" href="css/header.css">
 </head>
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container px-4 px-lg-5">
-          <a class="navbar-brand" href="#!">Óptica Rois</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                  <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#!">Acerca de nosotros</a></li>
-                  <% if(typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
-                      <li class="nav-item">
-                          <button class="nav-link btn" onclick="location.href='/login'">
-                              <span class="circle1"></span>
-                              <span class="circle2"></span>
-                              <span class="circle3"></span>
-                              <span class="circle4"></span>
-                              <span class="circle5"></span>
-                              <span class="text">Login</span>
-                          </button>
-                      </li>
-                      <li class="nav-item">
-                          <button class="nav-link btn" onclick="location.href='/register'">
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #333333;">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!" style="color: white;">Óptica Rois</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/" style="color: white;">Inicio</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bottom" style="color: white;">Acerca de nosotros</a>
+                    </li>
+                </ul>
+                <% if(typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="nav-link btn" onclick="location.href='/login'">
                             <span class="circle1"></span>
                             <span class="circle2"></span>
                             <span class="circle3"></span>
                             <span class="circle4"></span>
                             <span class="circle5"></span>
-                            <span class="text">Register</span>
+                            <span class="text" style="color: white;">Login</span>
                         </button>
-                      </li>
-                  </ul>
-                  <% } else { %>
-                  <li class="nav-item">
-                      <a class="nav-link greeting" style="color: red; font-weight: bold;" href="/profile">Hola, <%= user_name %></a>
-                  </li>
-                  </ul>
-                  </a>
-                  <form class="d-flex" action="/logout" method="post">
-                      <input type="submit" class="btn btn-outline-dark mt-auto" value="Cerrar sesión" />
-                  </form>
-                  <% } %>
-          </div>
-      </div>
-  </nav>
-  
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn" onclick="location.href='/register'">
+                            <span class="circle1"></span>
+                            <span class="circle2"></span>
+                            <span class="circle3"></span>
+                            <span class="circle4"></span>
+                            <span class="circle5"></span>
+                            <span class="text" style="color: white;">Register</span>
+                        </button>
+                    </li>
+                </ul>
+                <% } else { %>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link greeting" style="color: red; font-weight: bold;" href="/profile">¡Hola <%= user_name %>, edita tu perfil aquí!</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="d-flex" action="/logout" method="post">
+                            <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;; " value="Cerrar sesión" />
+                        </form>
+                    </li>
+                </ul>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+        const scrollToBottom = () => {
+            const element = document.getElementById('bottom');
+            element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        };
+    
+        const links = document.querySelectorAll('a[href="#bottom"]');
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                scrollToBottom();
+            });
+        });
+    </script>
 </body>
 </html>
 
