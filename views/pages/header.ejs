@@ -5,23 +5,31 @@
     <link rel="stylesheet" type="text/css" href="css/header.css">
 </head>
 <body>
-    <!-- Navigation-->
+    <!-- Nueva fila superior con color de fondo -->
+    <div class="row" style="background-color: #752B50; color: white; padding: 2px;">
+        <div class="col text-center">
+            Rois Chile | Envíos a todo Chile | Entregas en la V región
+        </div>
+    </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #333333;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!" style="color: white;">Óptica Rois</a>
+            <a class="nav-link active " aria-current="page" href="/"><h1 class="text-start">ÓPTICAS <span class="burdeo">R</span><span class="gris">O</span><span class="burdeo">IS</span></h1></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/" style="color: white;">Inicio</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bottom" style="color: white;">Acerca de nosotros</a>
+                        <a class="nav-link" href="#bottom" style="color: black;">Acerca de nosotros</a>
                     </li>
                 </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-dark" type="submit">Buscar</button>
+                </form>
                 <% if(typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <button class="nav-link btn" onclick="location.href='/login'">
                             <span class="circle1"></span>
@@ -29,7 +37,7 @@
                             <span class="circle3"></span>
                             <span class="circle4"></span>
                             <span class="circle5"></span>
-                            <span class="text" style="color: white;">Login</span>
+                            <span class="text" style="color: black;">Mi cuenta</span>
                         </button>
                     </li>
                     <li class="nav-item">
@@ -39,14 +47,14 @@
                             <span class="circle3"></span>
                             <span class="circle4"></span>
                             <span class="circle5"></span>
-                            <span class="text" style="color: white;">Register</span>
+                            <span class="text" style="color: black;">Register</span>
                         </button>
                     </li>
                 </ul>
                 <% } else { %>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link greeting" style="color: red; font-weight: bold;" href="/profile">¡Hola <%= user_name %>, edita tu perfil aquí!</a>
+                        <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">¡Hola <%= user_name %>, edita tu perfil aquí!</a>
                     </li>
                     <li class="nav-item">
                         <form class="d-flex" action="/logout" method="post">
@@ -76,5 +84,4 @@
 </body>
 </html>
 
-        
-        
+

@@ -27,8 +27,8 @@ app.use(session({
     secret: 'mysecret',
     resave: false,
     saveUninitialized: false
-  }));
-  
+}));
+
 
 function isProductInCart(cart, id){
     for(let i=0; i<cart.length; i++){
@@ -76,7 +76,7 @@ app.get('/adminProducto', function(req,res){
     }
     else{
         res.redirect('/admin'); 
-     }
+    }
 });
 
 app.post('/addProduct', function(req, res) {
@@ -114,8 +114,7 @@ app.post('/addProduct', function(req, res) {
         } else {
             req.session.msgact = productName + " Añadido Correctamente";
             res.redirect('/adminMain');
-        }
-             
+        }    
     });
 });
 
@@ -181,7 +180,7 @@ app.get('/adminInventario', function(req,res){
     }
     else{
         res.redirect('/admin'); 
-     }
+    }
     
 });
 
@@ -191,7 +190,7 @@ app.get('/adminEscaneo', function(req,res){
     }
     else{
         res.redirect('/admin'); 
-     }
+    }
 });
 
 app.get('/adminModificacion', function(req, res) {
@@ -243,7 +242,6 @@ app.post('/modificarProducto', function(req, res) {
             req.session.msgact = productName + " actualizado correctamente";
             res.redirect('/adminMain');
         }
-             
     });
 });
 
