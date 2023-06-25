@@ -7,11 +7,11 @@ body {
 	align-items: center; /* Centrar verticalmente */
 	justify-content: center; /* Centrar horizontalmente */
 	min-height: 1%; /* Establecer altura mínima de la página */
-  }
-  
+}
+
 
 .form {
-  width: 50%;
+  width: 40%;
   margin: 10% auto;
   padding: 5%;
   background-color: #333333;
@@ -21,6 +21,7 @@ body {
 
 .form--signup {
   text-align: center;
+  justify-content: center;
 }
 
 .input-group {
@@ -53,45 +54,45 @@ body {
 }
 
 .input--submit {
-  background-color: #750d37;
-  color: #ffffff;
-  border: none;
-  border-radius: 3px;
-  padding: 2% 6%;
-  font-size: 1em;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
+background-color: #750d37;
+color: #ffffff;
+border: none;
+border-radius: 3px;
+padding: 2% 6%;
+font-size: 1em;
+cursor: pointer;
+display: block;
+margin: 0 auto;
 }
 
 .input--submit:hover {
-  background-color: #750d37;
+background-color: #750d37;
 }
 
 .error-msg {
-  color: #cccccc;
-  font-weight: bold;
-  font-size: 0.8em;
-  visibility: visible;
-  margin-bottom: 5%;
+color: #cccccc;
+font-weight: bold;
+font-size: 0.8em;
+visibility: visible;
+margin-bottom: 5%;
 }
 
 .admin-icon {
-  font-size: 3em;
-  color: #e74c3c;
-  margin-bottom: 10%;
+font-size: 3em;
+color: #e74c3c;
+margin-bottom: 10%;
 }
 
 @media screen and (max-width: 768px) {
-  .form {
+.form {
     width: 70%;
-  }
+}
 }
 
 @media screen and (max-width: 480px) {
-  .form {
+.form {
     width: 90%;
-  }
+}
 }
 
 .logo-container {
@@ -107,6 +108,3 @@ body {
     height: auto;
     border-radius: 50%; /* Agrega bordes redondeados al logo si lo deseas */
 }
-
-  
-  
