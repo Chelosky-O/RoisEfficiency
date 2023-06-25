@@ -11118,10 +11118,9 @@ border-bottom-right-radius: 16px;
 }
 
 
-
 .login-dark {
   height:80vh;
-  background:#E1E8EE url(../../assets/img/star-sky.jpg);
+  background:#E1E8EE;
   background-size:100% 100%;
   position:relative;
 }
