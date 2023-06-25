@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2023 a las 01:03:36
+-- Tiempo de generación: 26-06-2023 a las 01:17:11
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -131,7 +131,18 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `qua
 (4, 'SharpFocus', 'Lentes diseñados para una visión enfocada y precisa', 55000, NULL, 12, 'Lente_4.PNG'),
 (5, 'OptiGlow', 'Lentes que realzan los colores y brindan una visión vívida', 60000, NULL, 15, 'Lente_5.PNG'),
 (6, 'ClarityMax', 'Lentes de máxima claridad y definición', 70000, NULL, 6, 'Lente_6.PNG'),
-(7, 'EliteVision', 'Lentes de calidad premium para una visión excepcional', 80000, NULL, 3, 'Lente_7.PNG');
+(7, 'EliteVision', 'Lentes de calidad premium para una visión excepcional', 80000, NULL, 3, 'Lente_7.PNG'),
+(8, 'ClearSight', 'Lentes que ofrecen una visión clara y sin distorsiones', 45000, NULL, 10, 'Lente_8.PNG'),
+(9, 'ProGaze', 'Lentes profesionales ideales para trabajos detallados', 90000, NULL, 2, 'Lente_9.PNG'),
+(10, 'UltraSharp', 'Lentes ultra nítidos para una visión de alta definición', 55000, NULL, 7, 'Lente_10.PNG'),
+(11, 'CrystalGaze', '	Lentes cristalinos que ofrecen una mirada clara y nítida', 60000, 54000, 11, 'Lente_11.PNG'),
+(12, 'PrecisionView', 'Lentes diseñados para una visión precisa y detallada', 80000, NULL, 5, 'Lente_12.PNG'),
+(13, 'SuperVision', 'Lentes que proporcionan una visión superior y mejorada', 70000, NULL, 7, 'Lente_13.PNG'),
+(14, 'ClearOptics', 'Lentes con óptica clara y cristalina', 50000, 45000, 14, 'Lente_14.PNG'),
+(15, 'UltraView', 'Lentes de visión ultra amplia y panorámica', 85000, NULL, 3, 'Lente_15.PNG'),
+(16, 'BrilliantSight', '	Lentes que ofrecen una visión brillante y vívida', 65000, 59000, 3, 'Lente_16.PNG'),
+(17, 'MaxiFocus', 'Lentes para una visión máxima y enfocada', 55000, NULL, 8, 'Lente_17.PNG'),
+(18, 'VisionPlus', 'Lentes de alta calidad que ofrecen una visión mejorada', 62000, 56000, 8, 'Lente_18.PNG');
 
 -- --------------------------------------------------------
 
