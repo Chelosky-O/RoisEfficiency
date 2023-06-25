@@ -2,14 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title>Registro</title>
-    <link rel="stylesheet" href="css/register.css">
+    <title>Registrar nueva cuenta</title>
+    <link rel="icon" href="RoisEfficiency\public\images\LOGO-1.jpg">
+    <link rel="stylesheet" href="css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="container">
+    <!--header -->
+    <%- include("header") %>
+    <div class="register-container">
       <div class="title">Registro</div>
-      <div class="content">
+      <div class="content-register">
         <form action="/register" method="post" enctype="multipart/form-data">
           <div class="user-details">
             <div class="input-box">
@@ -83,3 +86,5 @@
     </script>
   </body>
 </html>
+
+

@@ -6,44 +6,61 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Iniciar sesión Óptica Rois</title>
-        <link href="css/login.css" rel="stylesheet" />
+        <title>Inicio de sesión</title>
+        <link rel="icon" href="images/LOGO-1.png"/>
+        <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
-          <div class="login-box">
-            <p>Iniciar sesión</p>
-            <form id="loginForm" method="post" action="/authLogin">
-              <div class="user-box">
-                <input required="" type="text" name="rut">
-                <label>Rut</label>
-              </div>
-              <div class="user-box">
-                <input required="" name="password" type="password">
-                <label>Constraseña</label>
-              </div>
-              <% if (errorMsg) { %>
-                <div style="color: white;"><%= errorMsg %></div>
-              <% } %>
-              <% if (successMsg) { %>
-                <div style="color: white;"><%= successMsg %></div>
-              <% } %>
-              <a href="#" onclick="submitForm()">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Iniciar Sesión
-              </a>
-            </form>
-            <p>¿No tienes una cuenta? <a href="/register" class="a2">¡Regístrate!</a></p>
+      <%- include("header") %>
+          <div class="form-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                        <div class="form-container">
+                            <div class="left-content">
+                                <h3 class="title">Cliente Registrado</h3>
+                                <h4 class="sub-title">Porque tu salud nos importa</h4>
+                            </div>
+                            <div class="right-content">
+                                <h3 class="form-title">Iniciar Sesión</h3>
+                                <form class="form-horizontal" id="loginForm" method="post" action="/authLogin">
+                                    <div class="form-group">
+                                      <label>Rut</label>
+                                      <input type="text" name="rut" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contraseña</label>
+                                        <input type="password" name="password" class="form-control">
+                                    </div>
+                                    <% if (errorMsg) { %>
+                                      <div style="color: black;"><%= errorMsg %></div>
+                                    <% } %>
+                                    <% if (successMsg) { %>
+                                      <div style="color: black;"><%= successMsg %></div>
+                                    <% } %>
+                                    <button class="btn signin"><a href="#" onclick="submitForm()">
+                                      <span></span>
+                                      <span></span>
+                                      <span></span>
+                                      <span></span>
+                                      Iniciar Sesión
+                                    </a></button>
+                                </form>
+                                <span class="signup-link">¿No tienes cuentas? <a href="/register"> Registrate aquí</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
+
           <script>
             function submitForm() {
               document.getElementById("loginForm").submit();
             }
           </script>
     </body>
-    
 </html>
+
