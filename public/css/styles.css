@@ -136,6 +136,11 @@ h2, .h2 {
     font-size: 2rem;
   }
 }
+.header-image {
+  width: 35%;
+  height: auto;
+  margin-right: 10px;
+}
 
 h3, .h3 {
   font-size: calc(1.3rem + 0.6vw);
@@ -10901,3 +10906,4 @@ border-bottom-right-radius: 16px;
   right: 0;
   margin: 0 auto;
 }
+
