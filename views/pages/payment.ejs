@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/carrito.css" rel="stylesheet" />
+
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #ffe4e1;
+                font-family: 'Roboto', sans-serif;
+            }
+            h1 {
+                color: #333;
+                font-size: 2em;
+                margin-bottom: 1em;
+            }
+            #paypal-button-container,
+            #cancel-button-container {
+                margin-top: 1.5em;
+            }
+            .btn {
+                background-color: #ff6347;
+                color: white;
+                padding: 0.75em 1.5em;
+                border-radius: 0.3em;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .btn:hover {
+                background-color: #ff4500;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>El total de su compra es: $<%= total.toLocaleString("es-CL") %></h1>
+        <div id="paypal-button-container"></div>
+        <div id="cancel-button-container">
+            <a href="/" class="btn">Cancelar compra</a>
+        </div>
+        <!-- Replace "test" with your own sandbox Business account app client ID -->
+        <script src="https://www.paypal.com/sdk/js?client-id=Aeg0tGg3hfrEGp0IMRWgaJUpruYEpID_NUXksaEV0wQ7Kqb3RvTDVZqzOWt2P19RNZieLvcN76LNKrRx&currency=CLP"></script>
+        <!-- Set up a container element for the button -->
+        <script>
+          paypal.Buttons({
+            createOrder() {
+              return fetch("/my-server/create-paypal-order", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  cart: [
+                    {
+                      sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
+                      quantity: "YOUR_PRODUCT_QUANTITY",
+                    },
+                  ]
+                })
+              })
+              .then((response) => response.json())
+              .then((order) => order.id);
+            }
+          }).render('#paypal-button-container');
+        </script>
+    </body>
+</html>

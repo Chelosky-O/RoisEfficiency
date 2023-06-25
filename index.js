@@ -58,10 +58,6 @@ app.use(fileUpload())
 
 //////////////////////////////A D M I N///////////////////////////////////////
 
-app.get('/test', function(req,res){
-    res.render('pages/test');
-});
-
 app.get('/adminProducto', function(req,res){
     var con = mysql.createConnection({
         host:"localhost",
@@ -245,13 +241,6 @@ app.post('/modificarProducto', function(req, res) {
     });
 });
 
-
-
-//ver productos de un usuario (POST con GET)
-
-//Actualizar carrito, boton tiene que hacer la compra FAKE
-
-//Acceso index
 app.get('/', function(req,res){
     var con = mysql.createConnection({
         host:"localhost",
@@ -338,7 +327,9 @@ app.post('/authLogin',function(req,res){
             if(result1 && result1.length > 0){
                 req.session.isLoggedIn=true;
                 req.session.user_name=result1[0].primer_nombre;
+                req.session.second_user_name=result1[0].segundo_nombre;
                 req.session.user_lastname=result1[0].primer_apellido;
+                req.session.user_second_lastname=result1[0].segundo_apellido;
                 req.session.user_email=result1[0].email;
                 req.session.user_address=result1[0].direccion;
                 req.session.rut = user_rut;
@@ -492,7 +483,7 @@ app.post('/view_product', function(req,res){
 
 app.get('/checkout', function(req,res){
     var total = req.session.total;
-    res.render('pages/checkout',{total:total,user_name:req.session.user_name,user_lastname:req.session.user_lastname,user_email:req.session.user_email,user_address:req.session.user_address});
+    res.render('pages/checkout',{total:total,user_name:req.session.user_name,user_lastname:req.session.user_lastname,second_user_name:req.session.second_user_name,user_second_lastname:req.session.user_second_lastname,user_email:req.session.user_email,user_address:req.session.user_address});
 });
 
 app.post('/place_order', function(req,res){
@@ -500,7 +491,6 @@ app.post('/place_order', function(req,res){
     var name = req.body.name;
     var email = req.body.email;
     var phone = req.body.phone;
-    var city = req.body.city;
     var address = req.body.address;
     var cost = req.session.total;
     var status = "not paid";
@@ -526,15 +516,15 @@ app.post('/place_order', function(req,res){
     try {
         con.connect(function(err) {
             if (err) throw err;
-            var query = "INSERT INTO orders (cost,name,email,status,city,address,phone,date,product_ids) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            var values = [cost,name,email,status,city,address,phone,date,product_ids_string];
+            var query = "INSERT INTO orders (cost,name,email,status,address,phone,date,product_ids) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            var values = [cost,name,email,status,address,phone,date,product_ids_string];
     
             con.query(query, values, function (err, result) {
                 if (err) {
                     throw err;
                 } else {
-                    //res.redirect('/payment');
-                    res.render('pages/gracias',{name:req.body.name})
+                    res.redirect('/payment');
+                    //res.render('pages/gracias',{name:req.body.name})
                 }
             });
         });
@@ -543,6 +533,11 @@ app.post('/place_order', function(req,res){
     }
     
 
+});
+
+app.get('/payment', function(req,res){
+    var total = req.session.total;
+    res.render('pages/payment',{total:total});
 });
 
 app.get('/profile', function(req,res){
@@ -594,10 +589,7 @@ app.post('/edit_profile',function(req,res){
         receta = './uploads/' + rut + "/";
     }
     
-
     //console.log(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido)
-
-    
     try {
         con.connect(function(err) {
             if (err) throw err;
@@ -623,10 +615,6 @@ app.post('/edit_profile',function(req,res){
         const errorMsg=undefined;
         res.render('pages/register', {errorMsg: errorMsg})
     }
-});
-
-app.get('/payment', function(req,res){
-    res.render('pages/payment');
 });
 
 app.use( express.static( "views" ) );
