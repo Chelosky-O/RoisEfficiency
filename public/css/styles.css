@@ -11196,5 +11196,89 @@ border-bottom-right-radius: 16px;
 }
 
 
+.custom-login-dark {
+  height: 80vh;
+  background: #E1E8EE;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.custom-login-dark form {
+  width: 40%; /* Ajusta el ancho en porcentaje */
+  height: 80%; /* Ajusta la altura en porcentaje */
+  max-width: 90%;
+  background-color: #1e2833;
+  padding: 40px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-login-dark form input[type="file"] {
+  width: 50%;
+}
+
+.custom-login-dark .illustration {
+  text-align: center;
+  padding: 15px 0 20px;
+  font-size: 100px;
+  color: #FFFFFF;
+}
+
+.custom-login-dark form .form-control {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #434a52;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+}
+
+.custom-login-dark form .btn-primary {
+  background: #214a80;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+}
+
+.custom-login-dark form .btn-primary:hover,
+.custom-login-dark form .btn-primary:active {
+  background: #1a3c6c;
+  outline: none;
+}
+
+.custom-login-dark form .forgot {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #6f7a85;
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.custom-login-dark form .forgot:hover,
+.custom-login-dark form .forgot:active {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.custom-login-dark form .btn-primary:active {
+  transform: translateY(1px);
+}
+
+
+
 
 

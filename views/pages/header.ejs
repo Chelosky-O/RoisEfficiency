@@ -27,6 +27,12 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <form class="d-flex align-items-center">
+                <input class="form-control me-2" type="search" placeholder="¿Qué estás buscando?" aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="fas fa-search"></i> <!-- Asegúrate de incluir el icono de búsqueda apropiado -->
+                </button>
+            </form>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <% if(typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
                 <ul class="navbar-nav ms-auto">
@@ -69,21 +75,6 @@
             </div>
         </div>
     </nav>
-    
-        <div class="container-fluid sticky-header2">
-        <div class="row" style="background-color: #F4F4F4; color: black; padding: 2px;">
-            <div class="col text-center" style="max-width: 100%;">
-                <div class="d-flex justify-content-center">
-                    <form class="d-flex align-items-center">
-                        <input class="form-control me-2" type="search" placeholder="¿Qué estás buscando?" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="fas fa-search"></i> <!-- Asegúrate de incluir el icono de búsqueda apropiado -->
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        </div>
 
     <script>
         const scrollToBottom = () => {

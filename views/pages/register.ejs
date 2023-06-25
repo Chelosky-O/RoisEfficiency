@@ -10,7 +10,7 @@
   <body>
     <!--header -->
     <%- include("header") %>
-    <div class="login-dark">
+    <div class="custom-login-dark">
       <h2 class="sr-only">Registro</h2>
       <form action="/register" method="post" enctype="multipart/form-data">
         <div class="illustration"><i class="icon ion-ios-glasses-outline">Registro</i></div>
@@ -50,29 +50,26 @@
               <input class="form-control" type="email" name="email" placeholder="Email" required>
             </div>
             <div class="col">
-              <input class="form-control" type="file" name="file" placeholder="Receta Oftalmologica" required>
+            <input class="form-control" type="password" name="password" placeholder="Contraseña" required>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <input class="form-control" type="password" name="password" placeholder="Contraseña" required>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary btn-block" type="button" onclick="resetFields()">Limpiar</button>
+            <label class="form-control" style="color: #6C757D;">
+              Seleccione receta <input type="file" name="file" required>
+            </label>
           </div>
         </div>
+          <div class="col">
+            <button class="btn btn-primary btn-block" type="button" onclick="resetFields()">Limpiar campos</button>
+            <button class="btn btn-primary btn-block" type="submit">Registrarse</button>
+          </div>
         <% if (errorMsg) { %>
           <div class="error-msg"><%= errorMsg %></div>
         <% } %>
-        <div class="input-box">
-          <button class="btn btn-primary btn-block" type="submit">Registrarse</button>
-        </div>
       </form>
     </div>
-    
-    
-    
 
     <%- include("footer") %>
     <script>
