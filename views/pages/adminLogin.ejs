@@ -2,71 +2,39 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/adminLogin.css">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-    
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<title>ADMINISTRACIÓN ÓPTICAS ROIS</title>
+        <!-- Favicon-->
+        <link rel="icon" href="images/LOGO-1.png"/>
 </head>
-<body>        
-  <form class="form form--signup framed" id="loginForm" method="post" action="/adminAuthLogin">
-    <input type="text" name="rut" required="" placeholder="Rut" class="input input--top" />
-    <input type="password" name="password" placeholder="Contraseña" class="input" />
-    <% if (errorMsg) { %>
-      <div class="error-msg" style="color: rgb(143, 143, 145); font-weight: bold; font-size: larger; visibility: visible;"><%= errorMsg %></div>
-    <% } %>
-    <input type="submit" value="Sign up" class="input input--submit" />
-  </form>
+<body> 
+    <div class="logo-container">
+        <img src="/images/LOGO-1.png" alt="Logo" class="logo-img">
+    </div>
+    
+    <form class="form form--signup framed" id="loginForm" method="post" action="/adminAuthLogin">
+        <div class="input-group">
+            <span class="input-icon">
+                <i class="fas fa-user"></i>
+            </span>
+            <input type="text" name="rut" required placeholder="Rut" class="input input--top" />
+        </div>
+        <div class="input-group">
+            <span class="input-icon">
+                <i class="fas fa-lock"></i>
+            </span>
+            <input type="password" name="password" placeholder="Contraseña" class="input" />
+        </div>
+        <% if (errorMsg) { %>
+        <div class="error-msg"><%= errorMsg %></div>
+        <% } %>
+        <input type="submit" value="Sign up" class="input input--submit" />
+    </form>
 
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3">
-  			<div id="iosBlurBg">
-  				<div id="whiteBg"></div>
-  			</div>
-  			<div id="bottomEnter"></div>
-  			<div id="bottomBlurBg"></div>
-  			<!-- Login Form -->
-  			<div class="loginForm">
-  				<div class="title">
-  					<p>Iniciar Sesión<br><span>Admin</span></p>
-  					<hr>
-  					<hr class="short">
-  				</div>
-  				<form class="form form--signup framed" id="loginForm" method="post" action="/adminAuthLogin"> 
-  					<div class="col-3">
-			        	<input class="effect-2" type="text" name="rut" required="" placeholder="Rut">
-			            <span class="focus-border"></span>
-
-			            <input class="effect-2" type="password" name="password" placeholder="Contraseña">
-			            <span class="focus-border"></span>
-                  <% if (errorMsg) { %>
-                    <div class="error-msg" style="color: rgb(143, 143, 145); font-weight: bold; font-size: larger; visibility: visible;"><%= errorMsg %></div>
-                  <% } %>
-			        </div>
-              
-  				</form>
-  			</div>
-  			<a  type="submit" href="#">
-  				<div class="enterButton">
-	  				<i class="fa fa-lock fa-2x text-white"></i><br>
-	  				<span class="enterText text-white"><input type="submit" value="Sign up" class="input input--submit" />Ingresar</span>
-	  			</div>
-  			</a>
-		</div>
-	</div>
-</div>
-
-
-          <script>
-            function submitForm() {
-              document.getElementById("loginForm").submit();
-            }
-          </script>
-          
-      </div>
+    <script>
+        function submitForm() {
+            document.getElementById("loginForm").submit();
+        }
+    </script>
 </body>
 </html>
