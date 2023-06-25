@@ -11120,9 +11120,9 @@ border-bottom-right-radius: 16px;
 
 
 .login-dark {
-  height:1000px;
+  height:80vh;
   background:#E1E8EE url(../../assets/img/star-sky.jpg);
-  background-size:cover;
+  background-size:100% 100%;
   position:relative;
 }
 
@@ -11158,20 +11158,25 @@ border-bottom-right-radius: 16px;
 }
 
 .login-dark form .btn-primary {
-  background:#214a80;
-  border:none;
-  border-radius:4px;
-  padding:11px;
-  box-shadow:none;
-  margin-top:26px;
-  text-shadow:none;
-  outline:none;
+  background: #214a80;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
 }
 
-.login-dark form .btn-primary:hover, .login-dark form .btn-primary:active {
-  background:#214a80;
-  outline:none;
+.login-dark form .btn-primary:hover,
+.login-dark form .btn-primary:active {
+  background: #1a3c6c;
+  outline: none;
 }
+
 
 .login-dark form .forgot {
   display:block;
