@@ -5,3 +5,8 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+document.addEventListener("keyup", e=>{
+    e.target.matches("buscador")
+    console.log(e.target.value())
+} )
