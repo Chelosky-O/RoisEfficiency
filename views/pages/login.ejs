@@ -9,53 +9,41 @@
         <title>Inicio de sesión</title>
         <link rel="icon" href="images/LOGO-1.png"/>
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
       <%- include("header") %>
-          <div class="form-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-                        <div class="form-container">
-                            <div class="left-content">
-                                <h3 class="title">Cliente Registrado</h3>
-                                <h4 class="sub-title">Porque tu salud nos importa</h4>
-                            </div>
-                            <div class="right-content">
-                                <h3 class="form-title">Iniciar Sesión</h3>
-                                <form class="form-horizontal" id="loginForm" method="post" action="/authLogin">
-                                    <div class="form-group">
-                                      <label>Rut</label>
-                                      <input type="text" name="rut" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Contraseña</label>
-                                        <input type="password" name="password" class="form-control">
-                                    </div>
-                                    <% if (errorMsg) { %>
-                                      <div style="color: black;"><%= errorMsg %></div>
-                                    <% } %>
-                                    <% if (successMsg) { %>
-                                      <div style="color: black;"><%= successMsg %></div>
-                                    <% } %>
-                                    <button class="btn signin"><a href="#" onclick="submitForm()">
-                                      <span></span>
-                                      <span></span>
-                                      <span></span>
-                                      <span></span>
-                                      Iniciar Sesión
-                                    </a></button>
-                                </form>
-                                <span class="signup-link">¿No tienes cuentas? <a href="/register"> Registrate aquí</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
 
+    <div class="login-dark">
+      <h2 class="sr-only">Cliente Registrado</h2>
+        <form class="form-horizontal" id="loginForm" method="post" action="/authLogin">
+          <div class="illustration"><i class="icon ion-ios-glasses-outline"></i></div>
+            <div class="form-group">
+              <input type="text" name="rut" class="form-control" type="email"  placeholder="Rut">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" name="password" placeholder="Contraseña">
+            </div>
+            <% if (errorMsg) { %>
+              <div class="forgot" style="color: white;"><%= errorMsg %></div>
+            <% } %>
+            <% if (successMsg) { %>
+              <div style="color: white;"><%= successMsg %></div>
+            <% } %>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block" type="submit" href="#" onclick="submitForm()">Iniciar Sesión</button>
+            </div><span class="forgot">¿No tienes cuentas? <a href="/register"> Registrate aquí</a></span>
+            </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+            <%- include("footer") %>
           <script>
             function submitForm() {
               document.getElementById("loginForm").submit();
