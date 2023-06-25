@@ -99,11 +99,11 @@
     color: white;
 }
 .deneb_cta .cta_wrapper {
-    padding: 45px 50px 42px;
-    max-width: 970px;
+    padding: 25px 30px 22px;
+    max-width: 800px;
     border-radius: 15px;
     margin: auto;
-    margin-bottom: -135px;
+    margin-bottom: -100px;
     position: relative;
     background-image: -moz-linear-gradient(0deg, #000000 0%, #750d37 100%); /* Cambia los colores del gradiente */
     background-image: -webkit-linear-gradient(0deg, #000000 0%, #750d37 100%); /* Cambia los colores del gradiente */
