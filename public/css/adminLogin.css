@@ -1,99 +1,132 @@
 body {
-	background: rgb(60, 60, 61);
-  }
-  
-.login-box {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 400px;
-	padding: 40px;
-	transform: translate(-50%, -50%);
-	background: rgba(24, 20, 20, 0.987);
-	box-sizing: border-box;
-	box-shadow: 0 15px 25px rgba(0,0,0,.6);
-	border-radius: 10px;
-  }
-  
-  .login-box .user-box {
+	background-color: black;
+	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+#iosBlurBg {
+	resize: horizontal;
 	position: relative;
-  }
-  
-  .login-box .user-box input {
-	width: 100%;
-	padding: 10px 0;
-	font-size: 16px;
-	color: #fff;
-	margin-bottom: 30px;
-	border: none;
-	border-bottom: 1px solid #fff;
-	outline: none;
-	background: transparent;
-  }
-  
-  .login-box .user-box label {
+	/*width: 100%;
+	height: 100vh;*/
+	border-top: 450px solid transparent;
+	border-left: 550px solid rgba(0,0,0,0.04);
+	border-bottom: 450px solid transparent;
+	background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+	/*box-shadow: 1px 1px 25px #999;*/
+}
+
+#whiteBg {
+	resize: horizontal;
 	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 10px 0;
-	font-size: 16px;
+	top: -410px;
+	right: 0;
+	border-top: 410px solid transparent;
+	border-left: 505px solid rgba(255,255,255,1);
+	border-bottom: 410px solid transparent;
+	border-right: 30px solid transparent;
+	background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1));
+}
+
+#bottomEnter{
+	position: absolute;
+	top: 500px;
+	left: 150px;
+	z-index: -2;
+	border-top: 200px solid transparent;
+	border-right: 300px solid #15224a;
+	border-bottom: 150px solid transparent;
+	transform: rotate(-2deg);
+}
+
+#bottomBlurBg{
+	position: absolute;
+	top: 490px;
+	left: 110px;
+	z-index: -1;
+	border-top: 200px solid transparent;
+	border-right: 260px solid rgba(69,138,182,0.4);
+	border-bottom: 120px solid transparent;
+	transform: rotate(10deg);
+}
+
+.enterButton{
+	position: absolute;
+	top: 660px; 
+	left: 330px;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+}
+
+.text-white{
 	color: #fff;
-	pointer-events: none;
-	transition: .5s;
-  }
-  
-  .login-box .user-box input:focus ~ label,
-  .login-box .user-box input:valid ~ label {
-	top: -20px;
-	left: 0;
-	color: #bdb8b8;
-	font-size: 12px;
-  }
-  
-  .login-box form a {
-	position: relative;
-	display: inline-block;
-	padding: 10px 20px;
-	color: #ffffff;
-	font-size: 16px;
-	text-decoration: none;
+}
+
+.enterText{
 	text-transform: uppercase;
-	overflow: hidden;
-	transition: .5s;
-	margin-top: 40px;
-	letter-spacing: 4px
-  }
-  
-  .login-box a:hover {
-	background: #212221;
-	color: #fff;
-	border-radius: 5px;
-	box-shadow: 0 0 5px #eaf2eb,
-				0 0 25px #eaf2eb,
-				0 0 50px #eaf2eb,
-				0 0 100px #eaf2eb;
-  }
-  
-  .login-box a span {
+	font-size: 20px;
+	font-weight: 300;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.loginForm{
 	position: absolute;
-	display: block;
-  }
-  
-  @keyframes btn-anim1 {
-	0% {
-	  left: -100%;
-	}
-  
-	50%,100% {
-	  left: 100%;
-	}
-  }
-  
-  .login-box a span:nth-child(1) {
-	bottom: 2px;
-	left: -100%;
-	width: 100%;
-	height: 2px;
-	background: linear-gradient(90deg, transparent, #58b161);
-	animation: btn-anim1 2s linear infinite;
-  }
+	top: 300px;
+	left: 70px;
+}
+
+.title{
+	 font-weight: 300;
+	 font-size: 24px;
+	 line-height: 1;
+}
+
+.title span{
+	font-weight: 800;
+	/*letter-spacing: 3px;*/
+}
+
+.title hr{
+	width: 150px;
+	border-width: 2px;
+	border-color: #67e2fb; 
+	margin: 0;
+
+}
+
+hr.short{
+	width: 50px;
+	border-width: 2px;
+	border-color: #67e2fb; 
+	float: left;
+	margin: 0;
+
+}
+
+
+/*= input focus effects css
+=========================== */
+:focus{outline: none;}
+
+.col-3{float: left; width: 100%; margin-top: 20px; margin-bottom: 0;} 
+input{margin-top: 15px;font: 15px/24px "Open Sans", sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px; width: 65%;}
+
+input::placeholder{
+	text-transform: uppercase;
+	letter-spacing: 0;
+	font-size: 20px;
+	font-weight: 300;
+	padding-left: 15px;
+}
+
+.effect-2{border: 0; padding: 7px 0; border-bottom: 1px solid #ccc;}
+
+.forget button{
+	margin-top: 50px;
+	border-radius: 0;
+	color: #aaa;
+	margin-left: 50px;
+	font-weight: 700;
+}

@@ -11120,7 +11120,7 @@ border-bottom-right-radius: 16px;
 
 .login-dark {
   height:80vh;
-  background:#E1E8EE;
+  background:#c6c7c4;
   background-size:100% 100%;
   position:relative;
 }
@@ -11128,7 +11128,7 @@ border-bottom-right-radius: 16px;
 .login-dark form {
   max-width:320px;
   width:90%;
-  background-color:#1e2833;
+  background-color:#0b3142;
   padding:40px;
   border-radius:4px;
   transform:translate(-50%, -50%);
