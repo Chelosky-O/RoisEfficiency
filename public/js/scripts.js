@@ -57,4 +57,4 @@ function buscador_interno(){
 
 // -------------------------------------------------------------------------
 
-//CONFIGURACIÓN PÁGINA ADMIN
+

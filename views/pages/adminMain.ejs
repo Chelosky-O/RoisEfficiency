@@ -7,21 +7,24 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   </head>
-    <body> 
+    <body id="body"> 
+
       <header>
         <div class="icon__menu">
-          <i class="fas fa-bars"></i>
+            <i class="fas fa-bars" id="btn_open"></i>
         </div>
       </header>
 
-      <div class="menu__side">
+      <div class="menu__side" id="menu_side">
 
-        <div class="name_page">
+        <div class="name__page">
+          <i class="fas fa-glasses" title="Inicio"></i>
+
           <h4>OPTICAS ROIS</h4>
         </div>
 
         <div class="options__menu">
-          <a href="#"> 
+          <a href="#" class="selected"> 
             <div class="option">
               <i class="fas fa-home" title="Inicio"></i>
               <h4>Inicio</h4>
@@ -49,35 +52,13 @@
             </div>
           </a>
 
-
-
         </div>
-
 
       </div>
 
 
 
-
+      <script src="js/admin.js"></script>
     </body>
-
-      <script src="js/script.js"></script>
 </html>
 
-
-<h1>Bienvenid@, <%= admin_name %></h1>
-<div class="container">
-<div class="main">
-    <div class="up">
-      <button class="card1" onclick="location.href='/adminInventario'">Inventario</button>
-      <button class="card2" onclick="location.href='/adminEscaneo'">Escanear</button>
-    </div>
-    <div class="down">
-      <button class="card3" onclick="location.href='/adminProducto'">Añadir Producto</button>
-      <button class="card4" onclick="location.href=''">Aún Nada</button>
-    </div>
-  </div>
-</div>
-<% if (typeof msg !== 'undefined') { %>
-    <p><%= msg %></p>
-<% } %>
