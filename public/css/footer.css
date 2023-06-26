@@ -105,9 +105,9 @@
     margin: auto;
     margin-bottom: -100px;
     position: relative;
-    background-image: -moz-linear-gradient(0deg, #000000 0%, #750d37 100%); /* Cambia los colores del gradiente */
-    background-image: -webkit-linear-gradient(0deg, #000000 0%, #750d37 100%); /* Cambia los colores del gradiente */
-    background-image: -ms-linear-gradient(0deg, #000000 0%, #750d37 100%); /* Cambia los colores del gradiente */
+    background-image: -moz-linear-gradient(0deg, #231f20 0%, #750d37 100%); /* Cambia los colores del gradiente */
+    background-image: -webkit-linear-gradient(0deg, #231f20 0%, #750d37 100%); /* Cambia los colores del gradiente */
+    background-image: -ms-linear-gradient(0deg, #231f20 0%, #750d37 100%); /* Cambia los colores del gradiente */
     box-shadow: 2.5px 4.33px 15px 0px #750d37; /* Cambia el color de la sombra */
     z-index: 1;
 }
