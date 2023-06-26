@@ -65,3 +65,19 @@
 </html>
 
 
+<h1>Bienvenid@, <%= admin_name %></h1>
+<div class="container">
+<div class="main">
+    <div class="up">
+      <button class="card1" onclick="location.href='/adminInventario'">Inventario</button>
+      <button class="card2" onclick="location.href='/adminEscaneo'">Escanear</button>
+    </div>
+    <div class="down">
+      <button class="card3" onclick="location.href='/adminProducto'">Añadir Producto</button>
+      <button class="card4" onclick="location.href=''">Aún Nada</button>
+    </div>
+  </div>
+</div>
+<% if (typeof msg !== 'undefined') { %>
+    <p><%= msg %></p>
+<% } %>
