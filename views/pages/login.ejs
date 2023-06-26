@@ -9,83 +9,43 @@
         <title>Inicio de sesión</title>
         <link rel="icon" href="images/LOGO-1.png"/>
         <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link href="css/login.css" rel="stylesheet" />
     </head>
     <body>
       <%- include("header") %>
 
-    <div class="login-dark" style="background-color: white;">
-      <h2 class="sr-only">Cliente Registrado</h2>
-        <form class="form-horizontal" id="loginForm" method="post" action="/authLogin">
-          <div class="illustration"><i class="icon ion-ios-glasses-outline"></i></div>
-            <div class="form-group">
-              <input type="text" name="rut" class="form-control" type="email"  placeholder="Rut">
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="password" name="password" placeholder="Contraseña">
-            </div>
-            <% if (errorMsg) { %>
-              <div class="forgot" style="color: white;"><%= errorMsg %></div>
-            <% } %>
-            <% if (successMsg) { %>
-              <div style="color: white;"><%= successMsg %></div>
-            <% } %>
-            <div class="form-group">
-              <button class="btn btn-primary btn-block" type="submit" href="#" onclick="submitForm()">Iniciar Sesión</button>
-            </div><span class="forgot">¿No tienes cuenta? <a href="/register"> Registrate aquí</a></span>
-            </form>
-    </div>
-
-
     <div class="overlay">
-      <form class="formulario">
-        <div class="con1">
-        <header class="head-form1 cabezera">
-            <h2 class="dos">Log In</h2>
-            <p class="textoc">login here using your username and password</p>
-        </header>
-        <br>
-        <div class="field-set">
-            <!--   user name -->
-              <span class="input-item1">
-                <i class="fa fa-user-circle"></i>
-              </span>
-              <!--   user name Input-->
-              <input class="form-input1 entrada" id="txt-input1" type="text" placeholder="@UserName" required>
+      <form class="mi-clase" method="post" action="/authLogin">
+         <div class="con">
+         <header class="head-form">
+            <h2 style="font-family: 'Abel', sans-serif;">Inicia sesión</h2>
+            <p style="font-family: 'Abel', sans-serif;">Inicia sesión aquí con tu RUT y tu contraseña</p>
+         </header>
+         <br>
+         <div class="field-set">
+               <span class="input-item">
+                 <i class="fa fa-user-circle"></i>
+               </span>
+               <input class="form-input" name="rut" id="txt-input" type="text" placeholder="Rut" required>
             <br>
-                <!--   Password -->
             <span class="input-item">
               <i class="fa fa-key"></i>
-            </span>
-            <!--   Password Input-->
-            <input class="form-input entrada" type="password" placeholder="Password" id="pwd"  name="password" required>
-      <!--      Show/hide password  -->
-          <span>
-              <i class="fa fa-eye" aria-hidden="true"  type="button" id="ojo"></i>
-          </span>
+             </span>
+            <input class="form-input" type="password" name="password" placeholder="Contraseña" required>
+           <span>
+              <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
+           </span>
             <br>
-      <!--        buttons -->
-      <!--      button LogIn -->
-            <button class="log-in boton"> Log In </button>
-        </div>
-      <!--   other buttons -->
-        <div class="other">
-      <!--      Forgot Password button-->
-            <button class="btn submits1 frgt-pass1 boton">Forgot Password</button>
-      <!--     Sign Up button -->
-            <button class="btn submits1 sign-up1 boton">Sign Up 
-      <!--         Sign Up font icon -->
+            <button class="btn login-boton" type="submit" href="#" onclick="submitForm()"> Iniciar sesión </button>
+         </div>
+         <div class="other">
+            <button class="btn submits sign-up login-boton" href="/register">Registrarse
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             </button>
-        </div>
+         </div>
         </div>
       </form>
       </div>
-
-
-    
 
             <%- include("footer") %> 
             <script src="js/script.js"></script>
