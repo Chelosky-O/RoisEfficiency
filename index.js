@@ -132,6 +132,18 @@ app.get('/adminMain', function(req, res) {
     }
 });
 
+app.get('/adminCerrarSesion', function(req, res) {
+    if (req.session.adminIsLoggedIn === true) {
+        req.session.adminIsLoggedIn=false;
+                req.session.admin_name=undefined;
+                req.session.admin_rut = undefined;
+                req.session.admin_password = undefined;
+                res.redirect('/admin');
+    } else {
+        res.redirect('/admin');
+    }
+});
+
 
 app.post('/adminAuthLogin',function(req,res){
     var admin_rut = req.body.rut;
