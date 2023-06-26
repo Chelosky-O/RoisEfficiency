@@ -474,14 +474,12 @@ app.post('/view_product', function(req,res){
         database:"RoisEfficiency"
     });
 
-    con.query("SELECT * FROM products WHERE id = ?", [id], (err, result) => {
+    con.query("SELECT * FROM products", (err, result) => {
         if (err) throw err;
         res.render('pages/producto', { id_producto: id, result: result,isLoggedIn:req.session.isLoggedIn,user_rut:req.session.rut,user_name:req.session.user_name});
       });
     
 });
-
-// Asegúrate de llamar a esta función después de que el DOM esté completamente cargado.
 
 app.get('/checkout', function(req,res){
     var total = req.session.total;

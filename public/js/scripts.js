@@ -68,38 +68,3 @@ function buscador_interno(){
     }
 }
 
-
-function setupSearchResults() {
-    const searchResults = document.querySelectorAll('#box-search a');
-  
-    searchResults.forEach(result => {
-      result.addEventListener('click', function(event) {
-        event.preventDefault();
-  
-        const productId = this.getAttribute('data-product-id');
-  
-        fetch('/view_product', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              id: productId
-            })
-          })
-          .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-          })
-          .then(data => {
-            // Aquí puedes manejar la respuesta del servidor.
-            // Por ejemplo, podrías redirigir al usuario a la página del producto.
-            window.location.href = 'pages/producto/' + productId; // Actualiza esta URL con la URL correcta.
-          });
-        
-      });
-    });
-  }
-  
