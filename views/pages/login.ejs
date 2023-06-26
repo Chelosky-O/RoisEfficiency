@@ -26,12 +26,12 @@
                <span class="input-item">
                  <i class="fa fa-user-circle"></i>
                </span>
-               <input class="form-input" name="rut" id="txt-input" type="text" placeholder="Rut" required>
+               <input class="form-input" name="rut" id="txt-input" type="text" placeholder="Rut" >
             <br>
             <span class="input-item">
               <i class="fa fa-key"></i>
              </span>
-            <input class="form-input" type="password" name="password" id="pwd" placeholder="Contraseña" required>
+            <input class="form-input" type="password" name="password" id="pwd" placeholder="Contraseña" >
            <span>
               <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
            </span>
@@ -43,6 +43,9 @@
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             </button>
          </div>
+         <% if (errorMsg){%>
+          <p style="font-family: 'Abel', sans-serif; color: black; text-align: justify;"><%=errorMsg%></p>
+        <% }%>
         </div>
       </form>
       </div>
