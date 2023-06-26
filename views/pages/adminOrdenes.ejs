@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Órdenes</title>
+    <link rel="stylesheet" href="css/adminInventario.css">
+</head>
+<body>
+    <h1>Admin Órdenes</h1>
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Costo</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Fecha</th>
+                <th>ID de Productos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < result.length; i++) { %>
+                <tr>
+                    <td><%= result[i].id %></td>
+                    <td><%= result[i].cost %></td>
+                    <td><%= result[i].name %></td>
+                    <td><%= result[i].email %></td>
+                    <td><%= result[i].status %></td>
+                    <td><%= result[i].address %></td>
+                    <td><%= result[i].phone %></td>
+                    <td><%= result[i].date %></td>
+                    <td><%= result[i].product_ids %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

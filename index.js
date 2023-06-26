@@ -180,6 +180,24 @@ app.get('/adminInventario', function(req,res){
     
 });
 
+app.get('/adminOrdenes', function(req,res){
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+    if (req.session.adminIsLoggedIn === true){
+        con.query("SELECT * FROM orders",(err,result)=>{
+                res.render('pages/adminOrdenes',{result:result});
+        });
+    }
+    else{
+        res.redirect('/admin'); 
+    }
+    
+});
+
 app.get('/adminEscaneo', function(req,res){
     if (req.session.adminIsLoggedIn === true){
             res.render('pages/adminEscaneo',{msgerror:undefined});
@@ -192,6 +210,11 @@ app.get('/adminEscaneo', function(req,res){
 app.get('/adminModificacion', function(req, res) {
     if (req.session.adminIsLoggedIn === true) {
         const scannedText = req.query.text; // Obtener el valor escaneado del query string
+        if(scannedText.length==0){
+            res.render('pages/adminEscaneo', { msgerror: "Escanea o escribe el nombre del producto" });
+        }
+        else{
+
         var con = mysql.createConnection({
             host: "localhost",
             user: "root",
@@ -210,9 +233,12 @@ app.get('/adminModificacion', function(req, res) {
                 }
             }
         });
-    } else {
+    }
+    } 
+    else {
         res.redirect('/admin');
     }
+    
 });
 
 app.post('/modificarProducto', function(req, res) {
