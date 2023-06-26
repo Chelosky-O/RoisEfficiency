@@ -39,47 +39,50 @@
     </div>
 
 
-    <div class='box1'>
-      <div class='box-form1'>
-        <div class='box-login-tab'></div>
-        <div class='box-login-title'>
-          <div class='i i-login'></div><h2 class="H2">LOGIN</h2>
+    <div class="overlay">
+      <form class="formulario">
+        <div class="con1">
+        <header class="head-form1 cabezera">
+            <h2 class="dos">Log In</h2>
+            <p class="textoc">login here using your username and password</p>
+        </header>
+        <br>
+        <div class="field-set">
+            <!--   user name -->
+              <span class="input-item1">
+                <i class="fa fa-user-circle"></i>
+              </span>
+              <!--   user name Input-->
+              <input class="form-input1 entrada" id="txt-input" type="text" placeholder="@UserName" required>
+            <br>
+                <!--   Password -->
+            <span class="input-item">
+              <i class="fa fa-key"></i>
+            </span>
+            <!--   Password Input-->
+            <input class="form-input entrada" type="password" placeholder="Password" id="pwd"  name="password" required>
+      <!--      Show/hide password  -->
+          <span>
+              <i class="fa fa-eye" aria-hidden="true"  type="button" id="ojo"></i>
+          </span>
+            <br>
+      <!--        buttons -->
+      <!--      button LogIn -->
+            <button class="log-in boton"> Log In </button>
         </div>
-        <div class='box-login1'>
-          <div class='fieldset-body' id='login_form'>
-            <button onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></button>
-              <p class='field'>
-              <label for='user'>E-MAIL</label>
-              <input type='text' id='user' name='user' title='Username' />
-              <span id='valida' class='i i-warning'></span>
-            </p>
-              <p class='field'>
-              <label for='pass'>PASSWORD</label>
-              <input type='password' id='pass' name='pass' title='Password' />
-              <span id='valida' class='i i-close'></span>
-            </p>
-    
-              <label class='checkbox'>
-                <input type='checkbox' value='TRUE' title='Keep me Signed in' /> Keep me Signed in
-              </label>
-    
-              <input type='submit' id='do_login' value='GET STARTED' title='Get Started' />
-          </div>
+      <!--   other buttons -->
+        <div class="other">
+      <!--      Forgot Password button-->
+            <button class="btn submits frgt-pass boton">Forgot Password</button>
+      <!--     Sign Up button -->
+            <button class="btn submits sign-up1 boton">Sign Up 
+      <!--         Sign Up font icon -->
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </button>
         </div>
+        </div>
+      </form>
       </div>
-      <div class='box-info'>
-                  <p><button onclick="closeLoginInfo();" class='b b-info i i-left' title='Back to Sign In'></button><h3>Need Help?</h3>
-        </p>
-                  <div class='line-wh'></div>
-                  <button onclick="" class='b-support' title='Forgot Password?'> Forgot Password?</button>
-        <button onclick="" class='b-support' title='Contact Support'> Contact Support</button>
-                  <div class='line-wh'></div>
-        <button onclick="" class='b-cta' title='Sign up now!'> CREATE ACCOUNT</button>
-              </div>
-    </div>
-
-
-
 
 
     

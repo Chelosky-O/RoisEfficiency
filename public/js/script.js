@@ -1,53 +1,26 @@
-$(document).ready(function() {
-    $("#do_login").click(function() { 
-       closeLoginInfo();
-       $(this).parent().find('span').css("display","none");
-       $(this).parent().find('span').removeClass("i-save");
-       $(this).parent().find('span').removeClass("i-warning");
-       $(this).parent().find('span').removeClass("i-close");
-       
-        var proceed = true;
-        $("#login_form input").each(function(){
-            
-            if(!$.trim($(this).val())){
-                $(this).parent().find('span').addClass("i-warning");
-            	$(this).parent().find('span').css("display","block");  
-                proceed = false;
-            }
-        });
-       
-        if(proceed) //everything looks good! proceed...
-        {
-            $(this).parent().find('span').addClass("i-save");
-            $(this).parent().find('span').css("display","block");
-        }
-    });
-    
-    //reset previously results and hide all message on .keyup()
-    $("#login_form input").keyup(function() { 
-        $(this).parent().find('span').css("display","none");
-    });
- 
-  openLoginInfo();
-  setTimeout(closeLoginInfo, 1000);
-});
+// Show/hide password onClick of button using Javascript only
 
-function openLoginInfo() {
-    $(document).ready(function(){ 
-    	$('.b-form').css("opacity","0.01");
-      $('.box-form').css("left","-37%");
-      $('.box-info').css("right","-37%");
-    });
+// https://stackoverflow.com/questions/31224651/show-hide-password-onclick-of-button-using-javascript-only
+
+function show() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'text');
 }
 
-function closeLoginInfo() {
-    $(document).ready(function(){ 
-    	$('.b-form').css("opacity","1");
-    	$('.box-form').css("left","0px");
-      $('.box-info').css("right","-5px"); 
-    });
+function hide() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'password');
 }
 
-$(window).on('resize', function(){
-      closeLoginInfo();
-});
+var pwShown = 0;
+
+document.getElementById("eye").addEventListener("click", function () {
+    if (pwShown == 0) {
+        pwShown = 1;
+        show();
+    } else {
+        pwShown = 0;
+        hide();
+    }
+}, false);
+
