@@ -38,7 +38,7 @@
                                 <span>$<%= item.price %></span>
                             <% } %>
                         </div>
-                        <p class="lead"><%= item.description %></p>
+                        <p class="lead" style="color: black;"><%= item.description %></p>
                         <div class="d-flex">
                             <form action="/add_to_cart" method="post">
                                 <input type="hidden" name="id" value="<%= item.id %>">
