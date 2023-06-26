@@ -15,6 +15,37 @@
     </head>
     <body>
     <%- include("header") %>
+
+    <div id="ctn-bars-search">
+      <input type="text" id="inputSearch" placeholder="¿Qué estás buscando?"> </input>
+    </div>
+
+    <ul id="box-search">
+      <li><a href="#"><i class="fas fa-search"></i>
+        PHANTER</a>
+      </li>
+      <li><a href="#"><i class="fas fa-search"></i>
+        Lente</a>
+      </li>
+      <li><a href="#"><i class="fas fa-search"></i>
+        Optisalud</a>
+      </li>
+      <li><a href="#"><i class="fas fa-search"></i>
+        Lente de Descanso</a>
+      </li>
+      <li><a href="#"><i class="fas fa-search"></i>
+        So Long</a>
+      </li>
+      <li><a href="#"><i class="fas fa-search"></i>
+        PANTHER 2</a>
+      </li>
+    </ul>
+
+<div id="cover-ctn-search">
+  
+</div>
+
+
         <!-- Header-->
         <header class="py-3">
           <div class="container">
@@ -41,7 +72,7 @@
                                       </div>
 
                                       <!-- Product details-->
-                                      <div class="card-body p-4 d-flex flex-column align-items-center" id="productos">
+                                      <div class="card-body p-4 d-flex flex-column align-items-center">
                                         <!-- Product name-->
                                         <h5 class="fw-bolder"><%= item.name %></h5>
                                         <!-- Product price-->
@@ -56,7 +87,7 @@
                                             <div>
                                               <form action="/add_to_cart" method="post">
                                                 <input type="hidden" name="id" value="<%= item.id %>">
-                                                <input type="hidden" name="name" value="<%= item.name %>">
+                                                <input type="hidden" id="name" name="name" value="<%= item.name %>">
                                                 <input type="hidden" name="price" value="<%= item.price %>">
                                                 <input type="hidden" name="sale_price" value="<%= item.sale_price %>">
                                                 <input type="hidden" name="quantity" value="1">
