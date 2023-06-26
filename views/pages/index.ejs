@@ -19,63 +19,14 @@
     <div id="ctn-bars-search">
       <input type="text" id="inputSearch" placeholder="¿Qué estás buscando?"> </input>
     </div>
-
     <ul id="box-search">
-      <li><a href="#" data-product-id="1"><i class="fas fa-search"></i>
-        VistaClara</a>
-      </li>
-      <li><a href="#" data-product-id="2"><i class="fas fa-search"></i>
-        Brillioptic</a>
-      </li>
-      <li><a href="#" data-product-id="3"><i class="fas fa-search"></i>
-        CrystalView</a>
-      </li>
-      <li><a href="#" data-product-id="4"><i class="fas fa-search"></i>
-        SharpFocus</a>
-      </li>
-      <li><a href="#" data-product-id="5"><i class="fas fa-search"></i>
-        OptiGlow</a>
-      </li>
-      <li><a href="#" data-product-id="6"><i class="fas fa-search"></i>
-        ClarityMax</a>
-      </li>
-      <li><a href="#" data-product-id="7"><i class="fas fa-search"></i>
-        EliteVision</a>
-      </li>
-      <li><a href="#" data-product-id="8"><i class="fas fa-search"></i>
-        ClearSight</a>
-      </li>
-      <li><a href="#" data-product-id="9"><i class="fas fa-search"></i>
-        ProGaze</a>
-      </li>
-      <li><a href="#" data-product-id="10"><i class="fas fa-search"></i>
-        UltraSharp</a>
-      </li>
-      <li><a href="#" data-product-id="11"><i class="fas fa-search"></i>
-        CrystalGaze</a>
-      </li>
-      <li><a href="#" data-product-id="12"><i class="fas fa-search"></i>
-        PrecisionView</a>
-      </li>
-      <li><a href="#" data-product-id="13"><i class="fas fa-search"></i>
-        SuperVision</a>
-      </li>
-      <li><a href="#" data-product-id="14"><i class="fas fa-search"></i>
-        ClearOptics</a>
-      </li>
-      <li><a href="#" data-product-id="15"><i class="fas fa-search"></i>
-        UltraView</a>
-      </li>
-      <li><a href="#" data-product-id="16"><i class="fas fa-search"></i>
-        BrilliantSight</a>
-      </li>
-      <li><a href="#" data-product-id="17"><i class="fas fa-search"></i>
-        MaxiFocus</a>
-      </li>
-      <li><a href="#" data-product-id="18"><i class="fas fa-search"></i>
-        VisionPlus</a>
-      </li>
-    </ul>
+      <% result.forEach(function(item) { %>
+        <li><a href="/ver_producto?id=<%= item.id %>" data-product-id="<%= item.id %>"><i class="fas fa-search"></i>
+          <%= item.name %></a>
+        </li>
+      <% }) %>
+    </ul>  
+    
 
 <div id="cover-ctn-search">
   
@@ -147,6 +98,42 @@
             </div>
         </section>
         <%- include("footer") %>
+
+        <script>
+          // Obtener todos los elementos de enlace de la lista
+          const links = document.querySelectorAll('#box-search a');
+        
+          // Función que se ejecutará cuando se haga clic en un enlace
+          const handleClick = (event) => {
+            event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+        
+            const productId = event.currentTarget.getAttribute('data-product-id'); // Obtener el ID del producto
+        
+            // Crear un formulario oculto
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/view_product';
+        
+            // Crear un campo de entrada oculto para enviar el ID del producto
+            const productIdInput = document.createElement('input');
+            productIdInput.type = 'hidden';
+            productIdInput.name = 'id';
+            productIdInput.value = productId;
+        
+            // Agregar el campo de entrada al formulario
+            form.appendChild(productIdInput);
+        
+            // Agregar el formulario al documento y enviarlo
+            document.body.appendChild(form);
+            form.submit();
+          };
+        
+          // Agregar el evento de clic a cada enlace de la lista
+          links.forEach(link => {
+            link.addEventListener('click', handleClick);
+          });
+        </script>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
