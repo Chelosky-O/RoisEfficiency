@@ -465,7 +465,6 @@ app.post('/edit_product_quantity', function(req,res){
 
 app.get('/ver_producto', function(req, res){
     var id = req.query.id; // Obtener el ID de los parámetros de la URL
-
     // Redireccionar al método POST utilizando un formulario oculto
     res.send(`
         <form id="postForm" method="post" action="/view_product">
@@ -480,7 +479,6 @@ app.get('/ver_producto', function(req, res){
 
 
 app.post('/view_product', function(req,res){
-    console.log(2)
     var id = req.body.id;
 
     var con = mysql.createConnection({
