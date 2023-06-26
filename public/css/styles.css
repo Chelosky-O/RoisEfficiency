@@ -11285,12 +11285,16 @@ border-bottom-right-radius: 16px;
 /*Buscador*/
 #ctn-bars-search{
   position: fixed;
-  top: 80px;
+  top: 100px;
   width: 100%;
   background-color: white;
-  padding: 22px;
+  padding: 34px;
   z-index: 9;
-  top: -100px;
+  top: -10px;
+  transition: all 600ms;
+  margin: 0;
+  box-sizing: border-box;
+  padding-bottom: 5px;
 }
 
 #ctn-bars-search input{
@@ -11312,6 +11316,7 @@ border-bottom-right-radius: 16px;
   overflow: hidden;
   list-style-type: none; /* Oculta los puntos de la lista */
   padding: 0; /* Elimina el padding predeterminado de la lista */
+  display: none;
 }
 
 #box-search li a{
@@ -11338,4 +11343,5 @@ position: fixed;
 left: 0;
 background: rgb(0, 0, 0, 0.5);
 z-index: 7;
+display: none;
 }

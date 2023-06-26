@@ -23,6 +23,10 @@
   color: black;
   background-color: transparent;
 }
+.barra-principal{
+  z-index: 10;
+  position: relative;
+}
 
   h1 {
     font-size: 40px;
