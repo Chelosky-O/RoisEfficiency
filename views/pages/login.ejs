@@ -38,11 +38,10 @@
             <br>
             <button class="btn login-boton" type="submit" href="#" onclick="submitForm()"> Iniciar sesión </button>
          </div>
-         <div class="other">
-            <button class="btn submits sign-up login-boton" href="/register">Registrarse
+          <a style="width: 74%; margin-left: 0.5%;" href="/register" class="btn submits sign-up login-boton">
+            Registrarse
             <i class="fa fa-user-plus" aria-hidden="true"></i>
-            </button>
-         </div>
+          </a>
          <% if (errorMsg){%>
           <p style="font-family: 'Abel', sans-serif; color: black; text-align: justify;"><%=errorMsg%></p>
         <% }%>
