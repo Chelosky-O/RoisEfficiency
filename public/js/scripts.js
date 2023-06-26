@@ -1,23 +1,13 @@
-/*!
-* Start Bootstrap - Shop Item v5.0.6 (https://startbootstrap.com/template/shop-item)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-item/blob/master/LICENSE)
-*/
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
-
-//BUscador
-//ejecutandose
+//CONFIGURACION BUSCADOR
+//Ejecutables
 document.getElementById("icon-search").addEventListener("click", mostrar_buscador);
 document.getElementById("cover-ctn-search").addEventListener("click", ocultar_buscador);
-
 
 //Variables a utilizar
 bars_search = document.getElementById("ctn-bars-search");
 cover_ctn_search = document.getElementById("cover-ctn-search");
 inputSearch = document.getElementById("inputSearch");
 box_search =document.getElementById("box-search");
-
 
 //Funcion mostrar el buscador
 function mostrar_buscador(){
@@ -30,8 +20,6 @@ function mostrar_buscador(){
     }
 }
 
-
-
 //funcion para ocultar buscado
 function ocultar_buscador(){
     bars_search.style.top = "-10px";
@@ -42,7 +30,6 @@ function ocultar_buscador(){
 }
 
 //Creando filtrado de busqueda
-
 document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
 
 function buscador_interno(){
@@ -68,3 +55,6 @@ function buscador_interno(){
     }
 }
 
+// -------------------------------------------------------------------------
+
+//CONFIGURACIÓN PÁGINA ADMIN
