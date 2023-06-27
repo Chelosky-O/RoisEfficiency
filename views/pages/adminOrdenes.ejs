@@ -81,7 +81,9 @@
 
       <main>
         <h1 style="font-size: 70px; text-align: center;">Órdenes</h1>
-    <table class="inventory-table">
+        <input style="width: 80%; height: 2vw; text-align: start; font-size: larger; margin-left: 10%;" type="text" id="search" placeholder="Buscar por ID">
+  
+        <table class="inventory-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -131,7 +133,6 @@
       </script>
       <script>
         // Cuando se haga clic en una celda de estado...
-        // Cuando se haga clic en una celda de estado...
         document.querySelectorAll(".status-cell").forEach(cell => {
             cell.addEventListener("click", function(event) {
                 // Solo proceder si el estado es "NO PAGADO"
@@ -161,6 +162,30 @@
         });
       </script>
       
+      <script>
+        // Obtiene el elemento input
+        var input = document.getElementById('search');
+        
+        // Función para ejecutar la búsqueda
+        input.onkeyup = function() {
+            var filter = input.value.toUpperCase();
+            var rows = document.querySelector(".inventory-table tbody").rows;
+            
+            for (var i = 0; i < rows.length; i++) {
+                var id = rows[i].cells[0].textContent;
+                if (id.indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+        </script>
+        <script>
+          setInterval(function() {
+              location.reload();
+          }, 10000);
+      </script>
     </body>
 </html>
 
