@@ -235,8 +235,32 @@ app.get('/adminOrdenes', function(req,res){
     else{
         res.redirect('/admin'); 
     }
-    
 });
+
+app.post('/actStatusOrder', function(req, res) {
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.connect(function(err) {
+        if (err) throw err;
+
+        var query = "UPDATE orders SET status = 'PAGADO' WHERE id = ? AND status = 'NO PAGADO'";
+
+        con.query(query, [req.body.id], function (err, result) {
+            if (err) {
+                res.status(500).send("Hubo un error al actualizar el estado de la orden");
+                throw err;
+            } else {
+                res.send("Estado de la orden actualizado con éxito");
+            }
+        });
+    });
+});
+
 
 app.get('/adminEscaneo', function(req,res){
     if (req.session.adminIsLoggedIn === true){
