@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2023 a las 19:39:53
+-- Tiempo de generación: 27-06-2023 a las 21:25:42
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -155,7 +155,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `direccion`, `receta`, `password`) VALUES
-('Iván', 'Andrés', 'Cáceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'undefined', './uploads/20707065-3/', '123');
+('Iván', 'Andrés', 'Cáceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'Amalia Armstrong 7541, La Cisterna', './uploads/20707065-3/receta.png', '123');
 
 --
 -- Índices para tablas volcadas
