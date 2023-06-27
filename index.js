@@ -248,15 +248,110 @@ app.post('/actStatusOrder', function(req, res) {
     con.connect(function(err) {
         if (err) throw err;
 
-        var query = "UPDATE orders SET status = 'PAGADO' WHERE id = ? AND status = 'NO PAGADO'";
+        var orderId = req.body.id;
 
-        con.query(query, [req.body.id], function (err, result) {
+        con.beginTransaction(function(err) {
             if (err) {
-                res.status(500).send("Hubo un error al actualizar el estado de la orden");
+                res.status(500).send("Error al iniciar la transacción");
                 throw err;
-            } else {
-                res.send("Estado de la orden actualizado con éxito");
             }
+
+            var query = "SELECT product_ids FROM orders WHERE id = ?";
+
+            con.query(query, [orderId], function(err, result) {
+                if (err) {
+                    return con.rollback(function() {
+                        res.status(500).send("Error al obtener los IDs de los productos");
+                        throw err;
+                    });
+                }
+
+                var productIds = result[0].product_ids.split(',');
+                var zeroQuantityFlag = false;
+
+                for (var i = 0; i < productIds.length; i++) {
+                    var query = "SELECT quantity FROM products WHERE id = ?";
+
+                    con.query(query, [productIds[i]], function(err, result) {
+                        if (err) {
+                            return con.rollback(function() {
+                                res.status(500).send("Error al obtener la cantidad de producto");
+                                throw err;
+                            });
+                        }
+
+                        if (result[0].quantity == 0) {
+                            zeroQuantityFlag = true;
+                        }
+                    });
+                }
+
+                if (zeroQuantityFlag) {
+                    var refundQuery = "UPDATE orders SET status = 'REEMBOLSO POR FALTA DE STOCK' WHERE id = ?";
+
+                    con.query(refundQuery, [orderId], function(err, result) {
+                        if (err) {
+                            return con.rollback(function() {
+                                res.status(500).send("Error al actualizar el estado de la orden a REEMBOLSO POR FALTA DE STOCK");
+                                throw err;
+                            });
+                        }
+
+                        return con.rollback(function() {
+                            res.send("No se puede actualizar la orden porque la cantidad de producto es 0");
+                        });
+                    });
+                } else {
+                    var query = "UPDATE orders SET status = 'PAGADO' WHERE id = ? AND status = 'NO PAGADO'";
+
+                    con.query(query, [orderId], function(err, result) {
+                        if (err) {
+                            return con.rollback(function() {
+                                res.status(500).send("Error al actualizar el estado de la orden");
+                                throw err;
+                            });
+                        }
+
+                        var completedUpdates = 0;
+
+                        for (var i = 0; i < productIds.length; i++) {
+                            var query = "UPDATE products SET quantity = quantity - 1 WHERE id = ? AND quantity > 0";
+
+                            con.query(query, [productIds[i]], function(err, result) {
+                                if (err) {
+                                    return con.rollback(function() {
+                                        res.status(500).send("Error al actualizar la cantidad del producto");
+                                        throw err;
+                                    });
+                                }
+
+                                // Si la cantidad no se actualizó (es decir, habría sido 0), revertimos la transacción
+                                if (result.affectedRows == 0) {
+                                    return con.rollback(function() {
+                                        res.send("No se puede actualizar la orden porque resultaría en una cantidad de producto negativa");
+                                    });
+                                } else {
+                                    completedUpdates++;
+
+                                    if (completedUpdates == productIds.length) {
+                                        // Si todas las actualizaciones fueron exitosas, realizamos los cambios
+                                        con.commit(function(err) {
+                                            if (err) {
+                                                return con.rollback(function() {
+                                                    res.status(500).send("Error al realizar los cambios");
+                                                    throw err;
+                                                });
+                                            }
+
+                                            res.send("Estado de la orden y cantidades de productos actualizados con éxito");
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         });
     });
 });
