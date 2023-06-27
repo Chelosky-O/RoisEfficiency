@@ -12,13 +12,13 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/perfil.css" rel="stylesheet" />
+        <link href="css/login.css" rel="stylesheet" />
     </head>
     <body>
 
         <!-- Navigation-->
         <%- include("header") %>
-        
-        
+      
         <header style="justify-content: center;"> 
           <div class="alert alert-info alert-dismissable" style="margin-top: 1%;">
             <a class="panel-close close" data-dismiss="alert">×</a> 
@@ -27,110 +27,50 @@
           </div>
         </header>
                 
-        
         <div class="body-profile">
-        <form>
-          <label for="first-name">Primer Nombre:</label>
-          <input type="text" id="first-name" name="first-name" required>
-        
-          <label for="last-name">Apellido:</label>
-          <input type="text" id="last-name" name="last-name" required><br><br>
+        <form class="cuerpo" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
+          <h2 style="margin-bottom: 3%;">Editar perfil</h2>
 
-          <label for="first-name">Primer Nombre:</label>
-          <input type="text" id="first-name" name="first-name" required>
+          <div class="container-nombres">
+            <label for="first-name">Primer nombre:</label>
+            <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="first-name" name="primer_nombre" value="<%= result[0].primer_nombre %>">
+          </div>  
+
+          <label for="last-name">Segundo nombre:</label>
+          <span><i class="fa fa-user-circle"></i></span>
+          <input type="text" id="last-name" name="segundo_nombre" value="<%= result[0].segundo_nombre %>"><br><br>
         
-          <label for="last-name">Apellido:</label>
-          <input type="text" id="last-name" name="last-name" required><br><br>
+
+          <label for="first-name">Primer apellido:</label>
+          <span><i class="fa fa-user-circle"></i></span>
+          <input type="text" id="first-name" name="primer_apellido" value="<%= result[0].primer_apellido %>">
+      
+          <label for="last-name">Segundo apellido:</label>
+          <span><i class="fa fa-user-circle"></i></span>
+          <input type="text" id="last-name" name="segundo_apellido" value="<%= result[0].segundo_apellido %>"><br><br>
         
-          <label for="field1">Campo 1:</label>
-          <input type="text" id="field1" name="field1"><br><br>
+          <label for="field1">Email:</label>
+          <span><i class="fa fa-user-circle"></i></span>
+          <input type="mail" id="field1" name="email" value="<%= result[0].email %>">
         
-          <label for="field2">Campo 2:</label>
-          <input type="text" id="field2" name="field2"><br><br>
+          <label for="field2">Dirección:</label>
+          <span><i class="fa fa-user-circle"></i></span>
+          <input type="text" id="field2" name="direccion" value="<%= result[0].direccion %>"><br><br>
+
+          <label for="field4">Contraseña:</label>
+          <span><i class="fa fa-key"></i></span>
+          <input type="password" id="field4" name="password" value="<%= result[0].password %>">
         
-          <label for="field3">Campo 3:</label>
-          <input type="text" id="field3" name="field3"><br><br>
-        
-          <label for="field4">Campo 4:</label>
-          <input type="text" id="field4" name="field4"><br><br>
-        
-          <label for="field5">Campo 5:</label>
-          <input type="text" id="field5" name="field5"><br><br>
-        
-          <input type="submit" value="Enviar">
+          <label for="field3">Receta:</label>
+          <input type="file" id="field3" name="file"><br><br>
+      
+          <div class="container-botones">
+            <button class="btn login-boton" type="submit">Guardar Cambios</button> 
+            <button class="btn login-boton" type="reset" onclick="">Cancelar</button>
+          </div>
         </form>
       </div>
-        
-
-
-                
-          <form class="form-horizontal" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
-            <h1 style="margin-top: 1%;">Editar perfil</h1>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Primer Nombre:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" name="primer_nombre" value="<%= result[0].primer_nombre %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Segundo Nombre:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" name="segundo_nombre" value="<%= result[0].segundo_nombre %>">
-              </div><br><br>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Primer Apellido:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" name="primer_apellido" value="<%= result[0].primer_apellido %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Segundo Apellido:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" name="segundo_apellido" value="<%= result[0].segundo_apellido %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Email:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" name="email" value="<%= result[0].email %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Direccion:</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" name="direccion" value="<%= result[0].direccion %>">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-3 control-label">Receta:</label>
-              <div class="col-md-8">
-                  <input type="file" name="file" class="form-control">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Password:</label>
-              <div class="col-md-8">
-                <input class="form-control" type="password" name="password" value="<%= result[0].password %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Confirm password:</label>
-              <div class="col-md-8">
-                <input class="form-control" type="password" value="<%= result[0].password %>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label"></label>
-              <div class="col-md-8">
-                <input type="submit" class="btn btn-primary" value="Guardar Cambios">
-                <span></span>
-                <input type="reset" class="btn btn-default" value="Cancelar">
-              </div>
-            </div>
-          </form>
-
-        
         <!-- Footer-->
         <%- include("footer") %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
