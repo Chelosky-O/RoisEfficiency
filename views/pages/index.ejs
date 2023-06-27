@@ -250,13 +250,13 @@
                           <img src="images/<%= item.image %>" alt="images" style="max-height: 400px; max-width: 300px;">
                         </div>
                         <!-- Product details-->
-                        <div class="namePrice  flex-column align-items-center">
+                        <div class="namePrice flex-column align-items-center">
                           <!-- Product name-->
                           <h3 class="product-name" data-product-id="<%= item.id %>"><%= item.name %></h3>
                           <!-- Product price-->
                           <% if(item.sale_price){ %>
-                            <span>$<strong><%=item.sale_price.toLocaleString() %></strong></span>
-                            <span style="text-decoration: line-through; font-size: medium;">$<strong><%=item.price.toLocaleString() %></strong></span>
+                            <span style="text-decoration: line-through; font-size: small; margin-top: -6%; ">$<strong><%=item.price.toLocaleString() %></strong></span>
+                            <span style="margin-top: -2%;"><strong>$<%=item.sale_price.toLocaleString() %></strong></span>
 
                           <% } else { %>
                             <span>$<strong><%= item.price.toLocaleString() %></strong></span>
