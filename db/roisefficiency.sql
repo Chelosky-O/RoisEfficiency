@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2023 a las 01:17:11
+-- Tiempo de generación: 27-06-2023 a las 19:39:53
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,18 +61,6 @@ CREATE TABLE `orders` (
   `date` datetime NOT NULL,
   `product_ids` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `orders`
---
-
-INSERT INTO `orders` (`id`, `cost`, `name`, `email`, `status`, `address`, `phone`, `date`, `product_ids`) VALUES
-(6, 30000.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '+56988388509', '2023-06-24 20:58:55', '1'),
-(7, 24990.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '1234567890', '2023-06-24 21:05:48', '3'),
-(8, 30000.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '1234567890', '2023-06-24 21:11:34', '1'),
-(9, 27990.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '1234567890', '2023-06-24 21:13:03', '2'),
-(10, 24990.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '123', '2023-06-24 21:15:47', '3'),
-(11, 27990.00, 'Ivan Andres Caceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'not paid', 'Mi Casita SIIIIII', '123', '2023-06-24 21:36:57', '2');
 
 -- --------------------------------------------------------
 
@@ -167,10 +155,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `direccion`, `receta`, `password`) VALUES
-('prueba', 'prueba', 'prueba', 'prueba', '15616115-5', 'asd@asd.com', 'asd', '', '123'),
-('Ivan', 'Andres', 'Caceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'Mi Casita SIIIIII', 'No tengo porque nunca he tenido lentes', '123'),
-('prueba2', 'p', 'p', 'p', '20707065-4', 'pruebaaa@prueba.com', 'lol', '', '123'),
-('SIMA', 'uban', 'muñoz', 'cáceres', '21199140-2', 'sima@gmail.com', 'Amalia Armstrong 7541', '', 'poto');
+('Iván', 'Andrés', 'Cáceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'undefined', './uploads/20707065-3/', '123');
 
 --
 -- Índices para tablas volcadas
@@ -210,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `orders_items`

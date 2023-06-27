@@ -773,60 +773,78 @@ app.get('/profile', function(req,res){
     
 });
 
-app.post('/edit_profile',function(req,res){
+app.post('/edit_profile', function(req, res) {
     var con = mysql.createConnection({
-        host:"localhost",
-        user:"root",
-        password:"",
-        database:"RoisEfficiency"
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "RoisEfficiency"
     });
-    
+
     var primer_nombre = req.body.primer_nombre;
     var segundo_nombre = req.body.segundo_nombre;
     var primer_apellido = req.body.primer_apellido;
     var segundo_apellido = req.body.segundo_apellido;
     var rut = req.session.rut;
     var email = req.body.email;
-    var direccion = req.body.direccion;    
-    var password = req.body.password;
-    var receta = "";
+    var direccion = req.body.direccion;
+    var current_password = req.body.current_password;
+    var repeat_current_password = req.body.repeat_current_password;
+    var new_password = req.body.new_password || current_password;
 
-    if (req.files){
-        let EDFile = req.files.file;
-        const path = './uploads/' + rut;
-        
-        fs.rmSync(path, {recursive: true})
-
-        fs.mkdir(path, { recursive: true }, (err) => {
-            if (err) throw err;
-        });
-
-        EDFile.mv(path+"/"+EDFile.name);
-        receta = path+"/";
-    }else{
-        receta = './uploads/' + rut + "/";
-    }
-    
-    //console.log(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido)
     try {
         con.connect(function(err) {
             if (err) throw err;
-            var sql = 'UPDATE users SET primer_nombre="'+primer_nombre+'", segundo_nombre="'+segundo_nombre+'", primer_apellido="'+primer_apellido+'", segundo_apellido="'+segundo_apellido+'", email="'+email+'", direccion="'+direccion+'", receta="'+receta+'", password="'+password+'" WHERE rut="'+rut+'"';
-            con.query(sql, function (err, result) {
-                if (err) {
-                  if (err.code === 'ER_DUP_ENTRY') {
-                    const errorMsg = 'ERROR';
-                    res.render('pages/login', {errorMsg: errorMsg});
-                  } else {
-                    throw err;
-                  }
+
+            // fetch the existing password and receta from DB
+            con.query('SELECT password, receta FROM users WHERE rut="'+rut+'"', function (err, result) {
+                if (err) throw err;
+                var stored_password = result[0].password;
+                var stored_receta = result[0].receta;
+
+                // compare the existing password with the provided current password
+                if(stored_password != current_password){
+                    const errorMsg = 'La contraseña actual no coincide.';
+                    res.render('pages/login', { errorMsg: errorMsg });
+                } else if(current_password != repeat_current_password){
+                    const errorMsg = 'Las contraseñas proporcionadas no coinciden.';
+                    res.render('pages/login', { errorMsg: errorMsg });
                 } else {
-                  const successMsg = 'Se han actualizado correctamente los datos.';
-                  const errorMsg = undefined;
-                  res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
+                    var receta = "";
+
+                    if (req.files){
+                        let EDFile = req.files.file;
+                        const path = './uploads/' + rut;
+                        
+                        fs.rmSync(path, {recursive: true})
+
+                        fs.mkdir(path, { recursive: true }, (err) => {
+                            if (err) throw err;
+                        });
+
+                        EDFile.mv(path+"/"+EDFile.name);
+                        receta = path+"/";
+                    } else {
+                        receta = stored_receta; // keep the existing receta if no new one is provided
+                    }
+
+                    var sql = 'UPDATE users SET primer_nombre="'+primer_nombre+'", segundo_nombre="'+segundo_nombre+'", primer_apellido="'+primer_apellido+'", segundo_apellido="'+segundo_apellido+'", email="'+email+'", direccion="'+direccion+'", receta="'+receta+'", password="'+new_password+'" WHERE rut="'+rut+'"';
+                    con.query(sql, function (err, result) {
+                        if (err) {
+                          if (err.code === 'ER_DUP_ENTRY') {
+                            const errorMsg = 'ERROR';
+                            res.render('pages/login', {errorMsg: errorMsg});
+                          } else {
+                            throw err;
+                          }
+                        } else {
+                          const successMsg = 'Se han actualizado correctamente los datos.';
+                          const errorMsg = undefined;
+                          res.render('pages/login', {errorMsg: errorMsg, successMsg:successMsg});
+                        }
+                    });
                 }
-              });
-              
+            });
         });
     } catch (err) {
         console.error(err);
@@ -834,5 +852,6 @@ app.post('/edit_profile',function(req,res){
         res.render('pages/register', {errorMsg: errorMsg})
     }
 });
+
 
 app.use( express.static( "views" ) );
