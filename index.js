@@ -20,7 +20,8 @@ mysql.createConnection({
 
 var app = express();
 
-app.use(express.static('public'));
+app.use( express.static( "public" ) );
+app.use( '/uploads' , express.static( 'uploads' ) );
 
 app.set('view engine', 'ejs');
 
@@ -368,13 +369,19 @@ app.post('/register',function(req,res){
 
     let EDFile = req.files.file;
     const path = './uploads/' + rut;
+    const newFileName = "receta" + require('path').extname(EDFile.name);  // Renamed file
 
     fs.mkdir(path, { recursive: true }, (err) => {
         if (err) throw err;
     });
 
-    EDFile.mv(path+"/"+EDFile.name);
-    receta = path+"/";
+    EDFile.mv(path+"/"+newFileName, function(err) {  // Use new file name here
+        if (err) {
+          console.error("File could not be moved: ", err);
+          throw err;
+        }
+    });
+    receta = path+"/"+newFileName;  // Use new file name here
 
     try {
         con.connect(function(err) {
@@ -394,8 +401,7 @@ app.post('/register',function(req,res){
                   const successMsg = undefined;
                   res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
                 }
-              });
-              
+            });
         });
     } catch (err) {
         console.error(err);
@@ -403,6 +409,7 @@ app.post('/register',function(req,res){
         res.render('pages/register', {errorMsg: errorMsg})
     }
 });
+
 
 
 app.post('/authLogin',function(req,res){
@@ -759,6 +766,7 @@ app.post('/send-email', async function(req, res) {
     }
 });
 app.get('/profile', function(req,res){
+    if(req.session.isLoggedIn==true){
     var con = mysql.createConnection({
         host:"localhost",
         user:"root",
@@ -770,7 +778,10 @@ app.get('/profile', function(req,res){
         if (err) throw err;
         res.render('pages/profile', {result: result,isLoggedIn:req.session.isLoggedIn,user_rut:req.session.rut,user_name:req.session.user_name});
       });
-    
+    }
+    else{
+        res.redirect('/');
+    }
 });
 
 app.post('/edit_profile', function(req, res) {
@@ -815,15 +826,16 @@ app.post('/edit_profile', function(req, res) {
                     if (req.files){
                         let EDFile = req.files.file;
                         const path = './uploads/' + rut;
-                        
-                        fs.rmSync(path, {recursive: true})
+                        const newFileName = "receta" + path.extname(EDFile.name);
+
+                        fs.rmSync(path, {recursive: true});
 
                         fs.mkdir(path, { recursive: true }, (err) => {
                             if (err) throw err;
                         });
 
-                        EDFile.mv(path+"/"+EDFile.name);
-                        receta = path+"/";
+                        EDFile.mv(path+"/"+newFileName);
+                        receta = path+"/"+newFileName;
                     } else {
                         receta = stored_receta; // keep the existing receta if no new one is provided
                     }
