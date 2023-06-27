@@ -2,7 +2,7 @@
 <html>
   <head>
       <link rel="stylesheet" href="css/adminMain.css">
-      <title>Inicio Administración</title>
+      <title>Añadir Nuevo Producto</title>
       <link rel="stylesheet" type="text/css" href="css/adminModificacion.css">
       <link rel="icon" href="images/LOGO-1.png"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -70,39 +70,41 @@
       </div>
 
       <main>
-        <h1>Administración - Añadir</h1>
+        <h1 style="text-align: center;">Añadir Nuevo Producto</h1>
 
     <table class="product-table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Sale Price</th>
-                <th>Quantity</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Precio Oferta</th>
+                <th>Cantidad</th>
                 <th>Imagen</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <form action="/addProduct" method="post" enctype="multipart/form-data">
-
                 <tr>
                     <td><input name="id" readonly value="<%= result[0]['max(id)']+1 %>"></td>
                     <td><input type="text" id="productName" name="productName" placeholder="Nombre" required></td>
                     <td><input type="text" id="description" name="description" placeholder="Texto " required></td>
-                    <td><input type="text" id="price" name="price" placeholder="$" required></td>
-                    <td><input type="text" id="salePrice" name="salePrice" placeholder="$"></td>
-                    <td><input type="text" id="quantity" name="quantity" placeholder="Cantidad" required></td>
+                    <td><input type="number" id="price" name="price" placeholder="$" required></td>
+                    <td><input type="number" id="salePrice" name="salePrice" placeholder="$"></td>
+                    <td><input type="number" id="quantity" name="quantity" placeholder="Cantidad" required></td>
                     <td>
-                        <input type="file" id="imageInput" name="file" class="form-control">
+                        <input type="file" id="imageInput" name="file" class="form-control" required>
+                    </td>
+                    <td>
+                      <input style="background-color: green;" type="submit" value="Añadir Producto">
                     </td>
                 </tr>
-                <input type="submit" value="Añadir Producto">
             </form>
         </tbody>
     </table>
-    <div align="right">
+    <div style="margin-left: 65%;">
         <img id="imagePreview" src="#" alt="Vista previa de imagen" style="max-width: 400px; max-height: 400px; display: none;">
     </div>
       </main>

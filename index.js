@@ -83,17 +83,15 @@ app.post('/addProduct', function(req, res) {
     var salePrice = req.body.salePrice;
     var quantity = req.body.quantity;
     var imagen = "";
-    if (req.body.salePrice == ''){
+    if (req.body.salePrice == null || req.body.salePrice==0){
         salePrice = null;
     } 
 
     let EDFile = req.files.file;
     const path = './public/images';
 
-    
     imagen = EDFile.name;
     EDFile.mv(path+"/"+imagen);
-
 
     var con = mysql.createConnection({
         host: "localhost",
@@ -102,17 +100,43 @@ app.post('/addProduct', function(req, res) {
         database: "RoisEfficiency"
     });
     
-    var query = "INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `quantity`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    con.query(query, [id, productName, description, price, salePrice, quantity, imagen], function(err, result) {
+    // Verifica si el ID o el productName ya existen en la base de datos
+    var checkQuery = "SELECT `id`, `name` FROM `products` WHERE `id` = ? OR `name` = ?";
+    con.query(checkQuery, [id, productName], function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/adminMain');
         } else {
-            req.session.msgact = productName + " Añadido Correctamente";
-            res.redirect('/adminMain');
-        }    
+            // Si el ID o el productName ya existen, redirige al administrador con un mensaje de error
+            if (result.length > 0) {
+                let errMsg = "El ";
+                if (result[0].id == id) {
+                    errMsg += "ID '" + id + "'";
+                }
+                if (result[0].name == productName) {
+                    errMsg += (errMsg == "El " ? "" : " y el ") + "nombre de producto '" + productName + "'";
+                }
+                errMsg += " ya existe en la base de datos. Por favor, elige otro.";
+                req.session.msgact = errMsg;
+                res.redirect('/adminMain');
+            } else {
+                // Si no existen, procede con la inserción
+                var insertQuery = "INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `quantity`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                con.query(insertQuery, [id, productName, description, price, salePrice, quantity, imagen], function(err, result) {
+                    if (err) {
+                        console.log(err);
+                        res.redirect('/adminMain');
+                    } else {
+                        req.session.msgact = "Haz añadido correctamente el producto '" + productName + "', el codigo QR asociado es:";
+                        res.redirect('/adminMain');
+                    }    
+                });
+            }
+        }
     });
 });
+
+
 
 app.get('/admin', function(req,res){
     req.session.adminIsLoggedIn=undefined;
