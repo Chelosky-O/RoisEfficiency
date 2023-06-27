@@ -238,11 +238,10 @@
           </header>
 
         <!-- Catálogo con los productos-->
-            <div class="container" style="margin-bottom: 5%;">
               <div class="header1">
                 <h1 style="padding: 30px;">Catálogo de lentes</h1>
               </div>
-                <div class="products">
+                <div class="products" style="margin-bottom: 5%;">
                     <% result.forEach(function(item) {
                       if(item.quantity>0){ %>
                       <div class=" product product-name" data-product-id="<%= item.id %>">
@@ -281,7 +280,6 @@
                         </div>
                     <% }}) %>
                 </div>
-            </div>
 
         <%- include("footer") %>
 

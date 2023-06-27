@@ -32,15 +32,14 @@
     color: var(--textColor);
 }
 .products{
-    width: 120%;
-    margin-left: -10%;
+    width: 100%;
     align-self: center;
-    height: 70%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
 }
+
 .product{
     position: relative;
     background-color: var(--sectionBack);
@@ -110,8 +109,4 @@
 }
 .bay button:hover{
     transform: scale(1.1);
-}
-
-main{
-    padding: 10%;
 }
