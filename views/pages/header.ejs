@@ -60,6 +60,19 @@
                 <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">Hola <%= user_name %>, edita tu perfil aquí! &#128075;</a>
             </li>
             <li class="nav-item">
+                <button class="nav-link btn" onclick="location.href='#bottom'">
+                    <i class="fas fa-question-circle"></i> 
+                <span class="text" style="color: black;">Nosotros</span>
+                </button>
+            </li>
+            <li id="ctn-icon-serch">
+                <button class="nav-link btn" id="icon-search">
+                    <i class="fas fa-search"></i>
+                <span class="text" style="color: black;">Búsqueda</span>
+                </button>
+                
+            </li>
+            <li class="nav-item">
                 <form class="d-flex" action="/logout" method="post">
                 <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;" value="Cerrar sesión" />
                 </form>

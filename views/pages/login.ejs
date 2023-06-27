@@ -53,16 +53,16 @@
           </li>
           </ul>
           <% } else { %>
-          <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-              <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">Hola <%= user_name %>, edita tu perfil aquí! &#128075;</a>
-          </li>
-          <li class="nav-item">
-              <form class="d-flex" action="/logout" method="post">
-              <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;" value="Cerrar sesión" />
-              </form>
-          </li>
-          </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">Hola <%= user_name %>, edita tu perfil aquí! &#128075;</a>
+                </li>
+                <li class="nav-item">
+                    <form class="d-flex" action="/logout" method="post">
+                    <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;" value="Cerrar sesión" />
+                    </form>
+                </li>
+                </ul>
           <% } %>
       </div>
       </div>
