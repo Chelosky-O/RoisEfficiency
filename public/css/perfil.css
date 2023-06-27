@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
 
-.body-profile{
+.body-profile {
     background-color: #750D37;
-    width: 50%;
-    padding: 40px;
+    width: 45%;
     margin-left: 25%;
-    height: 30%;
+    /* Ajusta el valor según tu preferencia */
     border-radius: 5px;
     margin: 2% auto;
     box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
@@ -14,8 +13,9 @@
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: black;
-
+    max-height: 30%;
 }
+
 
 .cuerpo form{
     position: relative;
@@ -64,12 +64,14 @@ h2{
     width: 50%;
     height: 50px;
     margin-top: 2%;
-    padding: 10px;
+    padding: 5px;
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #5E6472;
     outline: none;
     border: none;
+    margin-right: -30px;
+    margin-left: -30px;
     border-radius: 0px 5px 5px 0px;
     transition: 0.2s linear; 
 }
@@ -77,11 +79,10 @@ h2{
 .cuerpo span {
     background: #fff;
     color: #333;
-    padding: 3px 0px 3px 5px;
     border-radius: 5px 0px 0px 5px;
-    margin-right: -5px; /* Ajusta este valor según sea necesario */
+    margin-right: -30px; /* Ajusta este valor según sea necesario */
     line-height: 50px; /* Establece la misma altura que el input */
-    padding-right: 10px;
+    padding-right: 7%;
 }
 
 button .change-boton {
@@ -123,6 +124,7 @@ button .change-boton :hover {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    padding: 0px;
 }
 
 .container-botones button {
@@ -132,7 +134,10 @@ button .change-boton :hover {
 .container-input {
     position: relative;
     margin-bottom: 20px;
-  }
+    align-items: center;
+    justify-content: center;
+    left: 25%;
+}
   
   .container-input .input-label {
     position: absolute;
@@ -144,6 +149,7 @@ button .change-boton :hover {
     position: relative;
     display: flex;
     align-items: center;
+    width: 50%;
   }
   
   .container-input .input-container span {
