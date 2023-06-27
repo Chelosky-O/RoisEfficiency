@@ -91,9 +91,9 @@
                     <td><input name="id" readonly value="<%= result[0]['max(id)']+1 %>"></td>
                     <td><input type="text" id="productName" name="productName" placeholder="Nombre" required></td>
                     <td><input type="text" id="description" name="description" placeholder="Texto " required></td>
-                    <td><input type="number" id="price" name="price" placeholder="$" required></td>
-                    <td><input type="number" id="salePrice" name="salePrice" placeholder="$"></td>
-                    <td><input type="number" id="quantity" name="quantity" placeholder="Cantidad" required></td>
+                    <td><input type="number" id="price" name="price" placeholder="$" required min="1"></td>
+                    <td><input type="number" id="salePrice" name="salePrice" placeholder="$" min="1"></td>
+                    <td><input type="number" id="quantity" name="quantity" placeholder="Cantidad" required min="0""></td>
                     <td>
                         <input type="file" id="imageInput" name="file" class="form-control" required>
                     </td>
