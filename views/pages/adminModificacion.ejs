@@ -69,7 +69,7 @@
       </div>
 
       <main>
-        <h1>Administración - Modificación</h1>
+        <h1 style="text-align: center;">Administración - Modificación</h1>
         <table class="product-table">
             <thead>
                 <tr>
@@ -81,39 +81,49 @@
                     <th>Quantity</th>
                     <th>Image</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
+              <% for (var i = 0; i < product.length; i++) { %>
                 <form action="/modificarProducto" method="post">
-                    <% for (var i = 0; i < product.length; i++) { %>
-                        <tr>
-                            <td><%= product[i].id %></td>
-                            <td><%= product[i].name %></td>
-                            <td><%= product[i].description %></td>
-                            <td>
-                                <input type="text" id="price" name="price" value="<%= product[i].price %>" required>
-                            </td>
-                            <td>
-                                <input type="text" id="salePrice" name="salePrice" value="<%= product[i].sale_price %>" >
-                            </td>
-                            <td>
-                                <input type="text" id="quantity" name="quantity" value="<%= product[i].quantity %>" required>
-                                
-                            </td>
-                            <td><%= product[i].image %></td>
-                            <td><input type="submit" value="Actualizar Producto"></td>
-                            <input type="hidden" name="productName" value="<%= product[i].name %>">
-                            
-                        </tr>
-                    <% } %>
-                    
-                    
-                </form>
+                  <tr>
+                      <td><%= product[i].id %></td>
+                      <td><%= product[i].name %></td>
+                      <td><%= product[i].description %></td>
+                      <td>
+                          <input type="text" id="price" name="price" value="<%= product[i].price %>" required>
+                      </td>
+                      <td>
+                          <input type="text" id="salePrice" name="salePrice" value="<%= product[i].sale_price %>" >
+                      </td>
+                      <td>
+                        <input type="number" id="quantity" name="quantity" value="<%= product[i].quantity %>" min="0" max="100" required>
+                      </td>
+                      <td><%= product[i].image %></td>
+                      <input type="hidden" name="productName" value="<%= product[i].name %>">
+                      <td><input style="background-color: red; padding: 1%;" type="submit" value="Actualizar Producto"></td>
+                      <td>
+                          <button style="background-color: red; padding: 1%;" type="button" onclick="confirmarEliminacion(this.form)">Eliminar Producto</button>
+                      </td>
+                  </tr>
+              </form>
+            <% } %>
+            
+            
             </tbody>
         </table>
       </main>
 
       <script src="js/admin.js"></script>
+
+      <script>
+        function confirmarEliminacion(form) {
+            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                form.submit();
+            }
+        }
+    </script>
       
     </body>
 </html>

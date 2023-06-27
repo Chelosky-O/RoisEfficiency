@@ -258,7 +258,10 @@ app.post('/modificarProducto', function(req, res) {
     var price = req.body.price;
     var salePrice = req.body.salePrice;
     var quantity = req.body.quantity;
-
+    
+    if (salePrice === "0") {
+        salePrice = null;
+    }
     var con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -278,6 +281,32 @@ app.post('/modificarProducto', function(req, res) {
         }
     });
 });
+
+
+app.post('/eliminarProducto', function(req, res) {
+    var productName = req.body.productName;
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "RoisEfficiency"
+    });
+
+    var query = "DELETE FROM products WHERE name = ?";
+
+    con.query(query, productName, function(err, result) {
+        if (err) {
+            console.log(err);
+            res.redirect('/adminEscaneo');
+        } else {
+            req.session.msgact = productName + " eliminado correctamente";
+            res.redirect('/adminMain');
+        }
+    });
+});
+
+
 
 app.get('/', function(req,res){
     var con = mysql.createConnection({
