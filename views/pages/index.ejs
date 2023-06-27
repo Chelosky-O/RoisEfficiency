@@ -255,8 +255,8 @@
                           <h3><%= item.name %></h3>
                           <!-- Product price-->
                           <% if(item.sale_price){ %>
-                            <span style="text-decoration: line-through;">$<strong><%=item.price.toLocaleString() %></strong></span>
                             <span>$<strong><%=item.sale_price.toLocaleString() %></strong></span>
+                            <span style="text-decoration: line-through; font-size: medium;">$<strong><%=item.price.toLocaleString() %></strong></span>
 
                           <% } else { %>
                             <span>$<strong><%= item.price.toLocaleString() %></strong></span>
