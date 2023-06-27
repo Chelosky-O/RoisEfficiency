@@ -598,7 +598,7 @@ app.post('/place_order', function(req,res){
     var phone = req.body.phone;
     var address = req.body.address;
     var cost = req.session.total;
-    var status = "not paid";
+    var status = "NO PAGADO";
     var date = new Date();
     var product_ids = [];
 
@@ -629,7 +629,6 @@ app.post('/place_order', function(req,res){
                     throw err;
                 } else {
                     res.redirect('/payment');
-                    //res.render('pages/gracias',{name:req.body.name})
                 }
             });
         });
@@ -642,7 +641,8 @@ app.post('/place_order', function(req,res){
 
 app.get('/payment', function(req,res){
     var total = req.session.total;
-    res.render('pages/payment',{total:total});
+    var email = req.session.user_email;
+    res.render('pages/payment',{total:total, email:email});
 });
 
 app.get('/profile', function(req,res){

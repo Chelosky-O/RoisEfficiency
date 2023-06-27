@@ -5,14 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
-        <!-- Favicon-->
+        <title>Confirmación de orden</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/carrito.css" rel="stylesheet" />
-
         <style>
             body {
                 display: flex;
@@ -49,34 +45,6 @@
     </head>
     <body>
         <h1>El total de su compra es: $<%= total.toLocaleString("es-CL") %></h1>
-        <div id="paypal-button-container"></div>
-        <div id="cancel-button-container">
-            <a href="/" class="btn">Cancelar compra</a>
-        </div>
-        <!-- Replace "test" with your own sandbox Business account app client ID -->
-        <script src="https://www.paypal.com/sdk/js?client-id=Aeg0tGg3hfrEGp0IMRWgaJUpruYEpID_NUXksaEV0wQ7Kqb3RvTDVZqzOWt2P19RNZieLvcN76LNKrRx&currency=CLP"></script>
-        <!-- Set up a container element for the button -->
-        <script>
-          paypal.Buttons({
-            createOrder() {
-              return fetch("/my-server/create-paypal-order", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  cart: [
-                    {
-                      sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                      quantity: "YOUR_PRODUCT_QUANTITY",
-                    },
-                  ]
-                })
-              })
-              .then((response) => response.json())
-              .then((order) => order.id);
-            }
-          }).render('#paypal-button-container');
-        </script>
+        <h1><%= email %></h1>
     </body>
 </html>

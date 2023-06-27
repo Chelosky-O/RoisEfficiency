@@ -70,7 +70,7 @@
       </div>
 
       <main>
-        <h1 style="color: #750d37; font-size: 28px; text-align: center;">Admin Órdenes</h1>
+        <h1 style="font-size: 70px; text-align: center;">Órdenes</h1>
     <table class="inventory-table">
         <thead>
             <tr>
@@ -87,17 +87,18 @@
         </thead>
         <tbody>
             <% for(var i = 0; i < result.length; i++) { %>
-                <tr>
-                    <td><%= result[i].id %></td>
-                    <td><%= result[i].cost %></td>
-                    <td><%= result[i].name %></td>
-                    <td><%= result[i].email %></td>
-                    <td><%= result[i].status %></td>
-                    <td><%= result[i].address %></td>
-                    <td><%= result[i].phone %></td>
-                    <td><%= result[i].date %></td>
-                    <td><%= result[i].product_ids %></td>
-                </tr>
+              <tr>
+                <td style="text-align: center;"><%= result[i].id %></td>
+                <td style="text-align: center;"><%= result[i].cost %></td>
+                <td style="text-align: center;"><%= result[i].name %></td>
+                <td style="text-align: center;"><%= result[i].email %></td>
+                <td style="text-align: center;"><%= result[i].status %></td>
+                <td style="text-align: center;"><%= result[i].address %></td>
+                <td style="text-align: center;"><%= result[i].phone %></td>
+                <td style="text-align: center;"><%= result[i].date %></td>
+                <td style="text-align: center;"><%= result[i].product_ids %></td>
+            </tr>
+            
             <% } %>
         </tbody>
     </table>
