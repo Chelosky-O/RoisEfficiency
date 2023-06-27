@@ -4,23 +4,21 @@
     background-color: #750D37;
     width: 45%;
     margin-left: 25%;
-    /* Ajusta el valor según tu preferencia */
     border-radius: 5px;
     margin: 2% auto;
     box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
-    padding: 2%;
+    padding: 1%;
     background-image: linear-gradient(-200deg,#d5c7bc 50%, #750d37 50%);
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: black;
-    max-height: 30%;
 }
-
 
 .cuerpo form{
     position: relative;
     justify-content: center;
     align-items: center;
+    padding: 1%;
 }
 
 h2{
@@ -60,18 +58,22 @@ h2{
     cursor: pointer;
 }
 
+.cuerpo{
+    margin: 0;
+}
 .cuerpo input {
-    width: 50%;
+    width: 40%;
     height: 50px;
-    margin-top: 2%;
-    padding: 5px;
+    padding-top: 3.6%;
+    padding-bottom: 4.6%;
+    height: 10%;
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #5E6472;
     outline: none;
     border: none;
     margin-right: -30px;
-    margin-left: -30px;
+    margin-left: -25px;
     border-radius: 0px 5px 5px 0px;
     transition: 0.2s linear; 
 }
@@ -79,10 +81,13 @@ h2{
 .cuerpo span {
     background: #fff;
     color: #333;
+    padding-left: 2%;
     border-radius: 5px 0px 0px 5px;
-    margin-right: -30px; /* Ajusta este valor según sea necesario */
-    line-height: 50px; /* Establece la misma altura que el input */
     padding-right: 7%;
+    padding-top: 3%;
+    padding-bottom: 4.5%;
+    height: 8%;
+    margin: 0;
 }
 
 button .change-boton {
@@ -133,30 +138,27 @@ button .change-boton :hover {
 
 .container-input {
     position: relative;
-    margin-bottom: 20px;
-    align-items: center;
-    justify-content: center;
     left: 25%;
+    
 }
-  
-  .container-input .input-label {
+
+.container-input .input-label {
     position: absolute;
     top: 0;
     left: 0;
-  }
-  
-  .container-input .input-container {
+}
+
+.container-input .input-container {
     position: relative;
     display: flex;
     align-items: center;
     width: 50%;
-  }
-  
-  .container-input .input-container span {
+}
+
+.container-input .input-container span {
     margin-right: 10px;
-  }
-  
-  .container-input .input-container input {
+}
+
+.container-input .input-container input {
     width: 100%;
-  }
-  
+}

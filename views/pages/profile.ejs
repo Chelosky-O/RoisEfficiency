@@ -29,58 +29,58 @@
                 
         <div class="body-profile">
         <form class="cuerpo" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
-          <h2 style="margin-bottom: 3%;">Editar perfil</h2>
+          <h2 style="margin-bottom: 1%;">Editar perfil</h2>
 
-          <div class="container-input">
+          <div class="container-input" style="margin-bottom: -4%;">
             <label for="first-name">Primer nombre:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="first-name" name="primer_nombre" value="<%= result[0].primer_nombre %>">
+              <input type="text" id="first-name" name="primer_nombre" value="<%= result[0].primer_nombre %>" required>
             </div>
           
             <label for="last-name">Segundo nombre:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-            <input type="text" id="last-name" name="segundo_nombre" value="<%= result[0].segundo_nombre %>"><br><br>
+            <input type="text" id="last-name" name="segundo_nombre" value="<%= result[0].segundo_nombre %>" required><br><br>
             </div>
             
             <label for="first-name">Primer apellido:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="first-name" name="primer_apellido" value="<%= result[0].primer_apellido %>">
+              <input type="text" id="first-name" name="primer_apellido" value="<%= result[0].primer_apellido %>" required>
             </div>
             
             <label for="last-name">Segundo apellido:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="last-name" name="segundo_apellido" value="<%= result[0].segundo_apellido %>"><br><br>
+              <input type="text" id="last-name" name="segundo_apellido" value="<%= result[0].segundo_apellido %>" required><br><br>
             </div>
             
             <label for="field1">Email:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-            <input type="mail" id="field1" name="email" value="<%= result[0].email %>">
+            <input type="mail" id="field1" name="email" value="<%= result[0].email %>" required>
             </div>
             
             <label for="field2">Dirección:</label>
             <div class="input-container">
               <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="field2" name="direccion" value="<%= result[0].direccion %>"><br><br>
+              <input type="text" id="field2" name="direccion" value="<%= result[0].direccion %>" required><br><br>
             </div>
           
             <label for="field4">Contraseña:</label>
             <div class="input-container">
               <span><i class="fa fa-key"></i></span>
-              <input type="password" id="field4" name="password" value="<%= result[0].password %>">
+              <input type="password" id="field4" name="password" value="<%= result[0].password %>" required>
             </div>
             
             <label for="field3">Receta:</label>
-            <div class="input-container">
-              <input type="file" id="field3" name="file"><br><br>
+            <div class="input-container" style="left: 10%;">
+              <input type="file" id="field3" name="file" required><br><br>
             </div>
         </div>
       
-          <div class="container-botones">
+          <div class="container-botones" style="margin-top: -1%; margin-bottom: -5%;">
             <button class="btn login-boton" type="submit">Guardar Cambios</button> 
             <button class="btn login-boton" type="reset" onclick="">Cancelar</button>
           </div>

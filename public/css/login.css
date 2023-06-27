@@ -105,7 +105,7 @@ input:focus {
 /* buttons  */
 button.login-boton {
     display: inline-block;
-    color: #252537;
+    color: black;
   
     width: 280px;
     height: 50px;
@@ -132,23 +132,17 @@ button.login-boton {
     margin-left: 2%;
 }
 
-/*       Forgot Password button FAF3DD  */
-.frgt-pass {background: transparent;}
-
 /*     Sign Up button  */
 .sign-up {background: whitesmoke;}
-
 
 /* buttons hover */
 button.login-boton :hover {
     transform: translatey(3px);
     box-shadow: none;
+    animation: ani9 0.4s ease-in-out infinite alternate;
+    
 }
 
-/* buttons hover Animation */
-button.login-boton :hover {
-    animation: ani9 0.4s ease-in-out infinite alternate;
-}
 @keyframes ani9 {
     0% {
         transform: translateY(3px);
@@ -157,5 +151,4 @@ button.login-boton :hover {
         transform: translateY(5px);
     }
 }
-
 
