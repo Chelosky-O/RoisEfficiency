@@ -1,81 +1,385 @@
-.custom-login-dark {
-  height: 80vh;
-  background: #E1E8EE;
-  background-size: 100% 100%;
+@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+.clearfix {
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+		visibility: hidden;
+		height: 0;
+	}
+}
+.form_wrapper {
+	background: #fff;
+	width: 500px;
+	max-width: 100%;
+	box-sizing: border-box;
+	padding: 25px;
+	margin: 8% auto 0;
+	position: relative;
+	z-index: 1;
+	border-top: 5px solid #f5ba1a;
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-transition: none;
+    transition: none;
+    -webkit-animation: expand 0.8s 0.6s ease-out forwards;
+    animation: expand 0.8s 0.6s ease-out forwards;
+    opacity: 0;}
+
+.form_wrapper h1 {
+		font-size: 1.5em;
+		line-height: 1.5em;
+		margin: 0;
+}
+	.title_container {
+		text-align: center;
+		padding-bottom: 15px;
+	}
+	h3 {
+		font-size: 1.1em;
+		font-weight: normal;
+		line-height: 1.5em;
+		margin: 0;
+	}
+    label {
+        font-size: 12px;
+    }
+	.row1 {
+		margin: 10px -15px;
+		>div {
+			padding: 0 15px;
+			box-sizing: border-box;
+		}
+	}
+	.col_half {
+		width: 50%;
+		float: left;
+	}
+	.input_field {
+		position: relative;
+		margin-bottom: 20px;
+    -webkit-animation: bounce 0.6s ease-out;
+    animation: bounce 0.6s ease-out;
+		>span {
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: #333;
+			height: 100%;
+			border-right: 1px solid #cccccc;
+			text-align: center;
+			width: 30px;
+			>i {
+				padding-top: 10px;
+			}
+		}
+	}
+	.textarea_field {
+		>span {
+			>i {
+				padding-top: 10px;
+			}
+		}
+	}
+	input {
+    &[type="text"], &[type="email"], &[type="password"] {
+      width: 100%;
+      padding: 8px 10px 9px 35px;
+      height: 35px;
+      border: 1px solid #cccccc;
+      box-sizing: border-box;
+      outline: none;
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      transition: all 0.30s ease-in-out;
+    }
+    &[type="text"]:hover, &[type="email"]:hover, &[type="password"]:hover {
+      background: #fafafa;
+    }
+   
+    &[type="submit"] {
+		background: #f5ba1a;
+		height: 35px;
+		line-height: 35px;
+		width: 100%;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		color: #fff;
+		font-size: 1.1em;
+		margin-bottom: 10px;
+		-webkit-transition: all 0.30s ease-in-out;
+		-moz-transition: all 0.30s ease-in-out;
+		-ms-transition: all 0.30s ease-in-out;
+		transition: all 0.30s ease-in-out;
+	}    
+    &[type="checkbox"], &[type="radio"] {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+  }
+
+.form_container1 {
+	.row {
+		.col_half.last {
+			border-left: 1px solid #cccccc;
+		}
+	}
+}
+
+@-webkit-keyframes expand {
+	0% { -webkit-transform: scale3d(1,0,1); opacity:0; }
+	50% { -webkit-transform: scale3d(1,1.2,1); }
+	100% { -webkit-transform: scale3d(1,1,1); opacity:1; }
+}
+
+@keyframes expand {
+	0% { -webkit-transform: scale3d(1,0,1); transform: scale3d(1,0,1); opacity:0; }
+	50% { -webkit-transform: scale3d(1,1.2,1); transform: scale3d(1,1.2,1); }
+	100% { -webkit-transform: scale3d(1,1,1); transform: scale3d(1,1,1); opacity:1; }
+}
+
+@-webkit-keyframes bounce {
+	0% { -webkit-transform: translate3d(0,-25px,0); opacity:0; }
+	50% { -webkit-transform: translate3d(0,10px,0); }
+	100% { -webkit-transform: translate3d(0,0,0); opacity: 1; }
+}
+
+@keyframes bounce {
+	0% { -webkit-transform: translate3d(0,-25px,0); transform: translate3d(0,-25px,0); opacity:0; }
+	50% { -webkit-transform: translate3d(0,10px,0); transform: translate3d(0,10px,0); }
+	100% { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); opacity: 1; }
+}
+
+
+.input_field label{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+
+.mi-clase {
+  
+  min-height: 500px;
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+  padding: 2%;
+  background-image: linear-gradient(-210deg,#d5c7bc 50%, #750d37 50%);
+}
+
+#eye {
+  background: #fff;
+  color: #333;
+
+  margin: 5.9px 0 0 0;
+  margin-left: -20px;
+  padding: 15px 9px 19px 0px;
+  border-radius: 0px 5px 5px 0px;
+
+  float: right;
   position: relative;
-}
-
-.custom-login-dark form {
-  width: 40%; /* Ajusta el ancho en porcentaje */
-  height: 80%; /* Ajusta la altura en porcentaje */
-  max-width: 90%;
-  background-color: #1e2833;
-  padding: 40px;
-  border-radius: 4px;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  color: #fff;
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
-}
-
-.custom-login-dark form input[type="file"] {
-  width: 50%;
-}
-
-.custom-login-dark .illustration {
-  text-align: center;
-  padding: 15px 0 20px;
-  font-size: 100px;
-  color: #FFFFFF;
-}
-
-.custom-login-dark form .form-control {
-  background: none;
-  border: none;
-  border-bottom: 1px solid #434a52;
-  border-radius: 0;
-  box-shadow: none;
-  outline: none;
-  color: inherit;
-}
-
-.custom-login-dark form .btn-primary {
-  background: #214a80;
-  border: none;
-  border-radius: 4px;
-  padding: 11px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  margin-top: 26px;
-  text-shadow: none;
-  outline: none;
-  transition: background-color 0.3s ease;
+  right: 1%;
+  top: -.2%;
+  z-index: 5;
+  
   cursor: pointer;
-  color: #fff;
 }
 
-.custom-login-dark form .btn-primary:hover,
-.custom-login-dark form .btn-primary:active {
-  background: #1a3c6c;
+button.register-boton {
+  display: inline-block;
+  color: #252537;
+
+  width: 280px;
+  height: 50px;
+
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 5px;
+  
   outline: none;
-}
+  border: none;
 
-.custom-login-dark form .forgot {
-  display: block;
+  cursor: pointer;
   text-align: center;
-  font-size: 12px;
-  color: #6f7a85;
-  opacity: 0.9;
-  text-decoration: none;
+  transition: all 0.2s linear;
+  
+  margin: 7% auto;
+  letter-spacing: 0.05em;
 }
 
-.custom-login-dark form .forgot:hover,
-.custom-login-dark form .forgot:active {
-  opacity: 1;
-  text-decoration: none;
+
+/*-------------------------------------------*/
+/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+/* End Fonts */
+/* Start Global rules */
+form.mi-clase {
+    width: 450px;
+    min-height: 500px;
+    height: auto;
+    border-radius: 5px;
+    margin: 2% auto;
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    padding: 2%;
+    background-image: linear-gradient(-210deg,#d5c7bc 50%, #750d37 50%);
 }
 
-.custom-login-dark form .btn-primary:active {
-  transform: translateY(1px);
+/* Contenedor del formulario */
+form.mi-clase .con {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
+
+
+/* the header form form */
+header.head-form {
+    margin: 2% auto 10% auto;
+    text-align: center;
+}
+/* Login title form form */
+header.head-form h2 {
+    font-size: 250%;
+    font-family: 'Playfair Display', serif;
+    color: #3e403f;
+}
+/*  A welcome message or an explanation of the login form */
+header.head-form p {letter-spacing: 0.05em; color: black;}
+
+
+
+/* //////////////////////////////////////////// */
+/* //////////////////////////////////////////// */
+
+
+.input-item {
+    background: #fff;
+    color: #333;
+    padding: 14.5px 0px 15px 9px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+
+
+/* Show/hide password Font Icon */
+#eye {
+    background: #fff;
+    color: #333;
+  
+    margin: 5.9px 0 0 0;
+    margin-left: -20px;
+    padding: 15px 9px 19px 0px;
+    border-radius: 0px 5px 5px 0px;
+  
+    float: right;
+    position: relative;
+    right: 1%;
+    top: -.2%;
+    z-index: 5;
+    
+    cursor: pointer;
+}
+/* inputs form  */
+input[class="form-input"]{
+    width: 240px;
+    height: 50px;
+  
+    margin-top: 2%;
+    padding: 15px;
+    
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #5E6472;
+  
+    outline: none;
+    border: none;
+  
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.2s linear;
+    
+}
+input[id="txt-input"] {width: 250px;}
+/* focus  */
+input:focus {
+    transform: translateX(-2px);
+    border-radius: 5px;
+}
+
+/* //////////////////////////////////////////// */
+/* //////////////////////////////////////////// */
+
+/* input[type="text"] {min-width: 250px;} */
+/* buttons  */
+button.login-boton {
+    display: inline-block;
+    color: #252537;
+  
+    width: 280px;
+    height: 50px;
+  
+    padding: 0 20px;
+    background: #fff;
+    border-radius: 5px;
+    
+    outline: none;
+    border: none;
+  
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s linear;
+    
+    margin: 7% auto;
+    letter-spacing: 0.05em;
+}
+/* Submits */
+.submits {
+    width: 48%;
+    display: inline-block;
+    float: left;
+    margin-left: 2%;
+}
+
+/*       Forgot Password button FAF3DD  */
+.frgt-pass {background: transparent;}
+
+/*     Sign Up button  */
+.sign-up {background: whitesmoke;}
+
+
+/* buttons hover */
+button.login-boton :hover {
+    transform: translatey(3px);
+    box-shadow: none;
+}
+
+/* buttons hover Animation */
+button.login-boton :hover {
+    animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+    0% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+
