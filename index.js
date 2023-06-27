@@ -648,7 +648,7 @@ app.get('/payment', async function(req, res){
         service: 'gmail',
         auth: {
             user: 'ivan.caceres_s@mail.udp.cl',
-            pass: 'IAMVAL2021'
+            pass: ''
         }
     });
     let mailOptions = {
