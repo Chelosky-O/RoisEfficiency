@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2023 a las 23:00:57
+-- Tiempo de generación: 28-06-2023 a las 01:33:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -67,37 +67,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `cost`, `name`, `email`, `status`, `address`, `phone`, `date`, `product_ids`) VALUES
-(39, 50000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'NO PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 16:54:28', '1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `orders_items`
---
-
-CREATE TABLE `orders_items` (
-  `id` bigint(11) NOT NULL,
-  `order_id` bigint(11) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `product_price` decimal(8,2) NOT NULL,
-  `product_image` varchar(255) NOT NULL,
-  `product_quantity` int(11) NOT NULL,
-  `order_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `payments`
---
-
-CREATE TABLE `payments` (
-  `id` bigint(11) NOT NULL,
-  `order_id` bigint(11) NOT NULL,
-  `transaction_id` text NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(41, 75000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 17:16:31', '3'),
+(43, 205000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 17:41:28', '7,7,8'),
+(44, 80000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 18:50:03', '7'),
+(45, 80000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'REEMBOLSO POR FALTA DE STOCK', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 18:50:16', '7'),
+(46, 80000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 19:28:45', '7'),
+(47, 80000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'REEMBOLSO POR FALTA DE STOCK', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 19:29:13', '7');
 
 -- --------------------------------------------------------
 
@@ -126,8 +101,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `sale_price`, `qua
 (4, 'SharpFocus', 'Lentes diseñados para una visión enfocada y precisa', 55000, NULL, 12, 'Lente_4.PNG'),
 (5, 'OptiGlow', 'Lentes que realzan los colores y brindan una visión vívida', 60000, NULL, 15, 'Lente_5.PNG'),
 (6, 'ClarityMax', 'Lentes de máxima claridad y definición', 70000, NULL, 6, 'Lente_6.PNG'),
-(7, 'EliteVision', 'Lentes de calidad premium para una visión excepcional', 80000, NULL, 3, 'Lente_7.PNG'),
-(8, 'ClearSight', 'Lentes que ofrecen una visión clara y sin distorsiones', 45000, NULL, 10, 'Lente_8.PNG'),
+(7, 'EliteVision', 'Lentes de calidad premium para una visión excepcional', 80000, NULL, 10, 'Lente_7.PNG'),
+(8, 'ClearSight', 'Lentes que ofrecen una visión clara y sin distorsiones', 45000, NULL, 9, 'Lente_8.PNG'),
 (9, 'ProGaze', 'Lentes profesionales ideales para trabajos detallados', 90000, NULL, 2, 'Lente_9.PNG'),
 (10, 'UltraSharp', 'Lentes ultra nítidos para una visión de alta definición', 55000, NULL, 7, 'Lente_10.PNG'),
 (11, 'CrystalGaze', '	Lentes cristalinos que ofrecen una mirada clara y nítida', 60000, 54000, 11, 'Lente_11.PNG'),
@@ -176,18 +151,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `orders_items`
---
-ALTER TABLE `orders_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `payments`
---
-ALTER TABLE `payments`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -203,19 +166,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT de la tabla `orders_items`
---
-ALTER TABLE `orders_items`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `payments`
---
-ALTER TABLE `payments`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

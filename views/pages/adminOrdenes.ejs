@@ -16,6 +16,9 @@
     .status-nopagado {
         color: red;
     }
+    .status-reembolsado {
+        color: rgb(0, 26, 255);
+    }
 
   </style>
     <body id="body"> 
@@ -127,6 +130,9 @@
             // Si el estado es "NO PAGADO", agregar la clase "status-nopagado"
             else if (cell.innerText == "NO PAGADO") {
                 cell.classList.add("status-nopagado");
+            }
+            else if (cell.innerText == "REEMBOLSO POR FALTA DE STOCK") {
+                cell.classList.add("status-reembolsado");
             }
         });
         };
