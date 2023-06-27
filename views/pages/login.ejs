@@ -78,6 +78,7 @@
         <br>
         <div class="field-set">
             <span class="input-item" style="padding-top: 4.8%; padding-bottom: 5.6%;">
+<<<<<<< HEAD
                 <i class="fa fa-user-circle"></i>
             </span>
             <input class="form-input" name="rut" id="txt-input" type="text" placeholder="Rut" >
@@ -91,6 +92,28 @@
         </span>
         <br>
         <button class="btn login-boton" type="submit" href="#" onclick="submitForm()"> Iniciar sesión </button>
+=======
+              <i class="fa fa-key"></i>
+             </span>
+            <input class="form-input" type="password" name="password" id="pwd" placeholder="Contraseña" >
+           <span>
+              <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
+           </span>
+            <br>
+            <button class="btn login-boton" type="submit" href="#" onclick="submitForm()"> Iniciar sesión </button>
+         </div>
+          <a style="width: 74%; margin-left: 0.5%;" href="/register" class="btn submits sign-up ">
+            Nuevo usuario
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </a>
+          <a style="width: 74%; margin-left: 0.5%; margin-top: 1%;" href="/olvidePassword" class="btn submits sign-up ">
+            Olvidé mi contraseña
+            <i class="fa Example of key fa-key" aria-hidden="true"></i>
+          </a>
+         <% if (errorMsg){%>
+          <p style="font-family: 'Abel', sans-serif; color: #d5c7bc; text-align: justify; margin-top: 10%;"><%=errorMsg%></p>
+        <% }%>
+>>>>>>> 0dfa8c0fd53df7082feaf8dfba711dfa1b07e6ac
         </div>
         <a style="width: 74%; margin-left: 0.5%;" href="/register" class="btn submits sign-up ">
             Nuevo usuario

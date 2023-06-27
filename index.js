@@ -8,6 +8,8 @@ const multer  = require('multer');
 const fileUpload = require('express-fileupload');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+global.gmail = "ivan.caceres_s@mail.udp.cl"
+global.gmailPassword = "IAMVAL2021";
 
 mysql.createConnection({
     host:"localhost",
@@ -418,10 +420,11 @@ app.post('/authLogin',function(req,res){
         con.query("SELECT * FROM users WHERE rut=? and password=?", [user_rut, user_password],(err,result1)=>{
             if(result1 && result1.length > 0){
                 req.session.isLoggedIn=true;
-                req.session.user_name=result1[0].primer_nombre;
-                req.session.second_user_name=result1[0].segundo_nombre;
-                req.session.user_lastname=result1[0].primer_apellido;
-                req.session.user_second_lastname=result1[0].segundo_apellido;
+                req.session.user_name = result1[0].primer_nombre;
+                req.session.second_user_name = result1[0].segundo_nombre;
+                req.session.user_lastname = result1[0].primer_apellido;
+                req.session.user_second_lastname = result1[0].segundo_apellido;
+                req.session.user_complete_name = `${req.session.user_name} ${req.session.second_user_name} ${req.session.user_lastname} ${req.session.user_second_lastname}`;
                 req.session.user_email=result1[0].email;
                 req.session.user_address=result1[0].direccion;
                 req.session.rut = user_rut;
@@ -449,6 +452,66 @@ app.get('/login', function(req,res){
     const errorMsg=undefined;
     const successMsg=undefined;
     res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
+});
+
+app.get('/olvidePassword', function(req,res){
+    const errorMsg=undefined;
+    const successMsg=undefined;
+    res.render('pages/olvidePassword', {errorMsg: errorMsg,successMsg:successMsg});
+});
+
+app.post('/reestablecerPassword', async function(req,res){
+    var rut = req.body.rut;
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.query('SELECT * FROM users WHERE rut = ?', [rut], async function (error, results, fields) {
+        if (error) {
+            res.render('pages/olvidePassword', {errorMsg: "Error de base de datos.", successMsg: undefined});
+        } else {
+            if (results.length > 0) {
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: global.gmail,
+                        pass: global.gmailPassword
+                    }
+                });
+
+                let email = results[0].email;
+                let pass = results[0].password;
+                let mailOptions = {
+                    from: global.gmail,
+                    to: email,
+                    subject: 'Restablecimiento de contraseña',
+                    html: `
+                        <h1>Restablecimiento de contraseña</h1>
+                        <p>Se ha solicitado un restablecimiento de contraseña para su cuenta.</p>
+                        <p>A continuación, le proporcionamos su contraseña actual:</p>
+                        <h2>${pass}</h2>
+                        <p>Le recomendamos cambiar esta contraseña por una nueva tan pronto como inicie sesión en su cuenta.</p>
+                        <p>Si usted no solicitó este restablecimiento de contraseña, por favor ignore este correo electrónico.</p>
+                        <p>Si necesita ayuda o tiene alguna pregunta, no dude en ponerse en contacto con nuestro equipo de soporte.</p>
+                        <p>Atentamente,</p>
+                        <p>OpticaRois</p>
+                    `
+                };
+                
+                try {
+                    let info = await transporter.sendMail(mailOptions);
+                    res.render('pages/olvidePassword', {errorMsg: "Se envió la contraseña al correo asociado a la cuenta: " + email, successMsg: undefined});
+                } catch (error) {
+                    res.render('pages/olvidePassword', {errorMsg: "No fue posible reestablecer la contraseña porque el email es inválido.", successMsg: undefined});
+                }
+            } else {
+                res.render('pages/olvidePassword', {errorMsg: "Este RUT no está registrado en la base de datos.", successMsg: undefined});
+            }
+        }
+    });
 });
 
 app.get('/register', function(req,res){
@@ -640,33 +703,61 @@ app.post('/place_order', function(req,res){
 
 });
 
-app.get('/payment', async function(req, res){
+// Manejador de la ruta GET /payment para renderizar la página de pago
+app.get('/payment', function(req, res){
     var total = req.session.total;
     var email = req.session.user_email;
+
+    var msg = "";
+
+    res.render('pages/payment', { total: total, email: email, msg: msg});
+});
+
+// Manejador de la ruta POST /send-email para enviar el correo electrónico
+app.post('/send-email', async function(req, res) {
+    var total = req.session.total;
+    var email = req.session.user_email;
+    var nombreCompleto = req.session.user_complete_name;
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'ivan.caceres_s@mail.udp.cl',
-            pass: ''
+            user: global.gmail,
+            pass: global.gmailPassword
         }
     });
     let mailOptions = {
-        from: 'ivan.caceres_s@mail.udp.cl',
+        from: global.gmail,
         to: email,
         subject: 'Confirmación de orden',
-        text: `El total de su compra es: $${total.toLocaleString("es-CL")}. Se enviaron los datos de transferencia al correo asociado a su cuenta, una vez se reciba la transferencia se procederá con el envío de los productos.`
+        html: `
+            <h1>Estimado(a) ${nombreCompleto},</h1>
+            <p>Gracias por su compra en OpticaRois. Adjuntamos los detalles de su orden y los datos de transferencia:</p>
+            <h2>Detalles de la orden:</h2>
+            <p>El total de su compra es: $${total.toLocaleString("es-CL")}</p>
+            <h2>Datos de transferencia:</h2>
+            <ul>
+                <li>RUT: XX.XXX.XXX-X</li>
+                <li>Tipo de cuenta: CUENTA CORRIENTE</li>
+                <li>Número de cuenta: 0000123456789</li>
+                <li>Banco: BANCO ROIS</li>
+                <li>Correo de contacto: opticaroistransferencias@gmail.com</li>
+            </ul>
+            <p>Una vez recibamos la transferencia, procederemos con el envío de los productos.</p>
+            <p>Si tiene alguna consulta o necesita ayuda adicional, no dude en ponerse en contacto con nosotros. Estaremos encantados de ayudarle.</p>
+            <p>Atentamente,</p>
+            <p>OpticaRois</p>
+        `
     };
+    
+
     try {
         let info = await transporter.sendMail(mailOptions);
-        var msg = "Se enviaron los datos de transferencia al correo asociado a su cuenta, una vez se reciba la transferencia se procederá con el envío de los productos."
+        res.send("Correo enviado exitosamente");
     } catch (error) {
-        var msg = "Hubo un error enviando el correo, verifique su email"
+        res.status(500).send("Hubo un error enviando el correo. Verifique su email");
     }
-
-    res.render('pages/payment',{total:total, email:email,msg:msg});
 });
-
 app.get('/profile', function(req,res){
     var con = mysql.createConnection({
         host:"localhost",
@@ -682,60 +773,78 @@ app.get('/profile', function(req,res){
     
 });
 
-app.post('/edit_profile',function(req,res){
+app.post('/edit_profile', function(req, res) {
     var con = mysql.createConnection({
-        host:"localhost",
-        user:"root",
-        password:"",
-        database:"RoisEfficiency"
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "RoisEfficiency"
     });
-    
+
     var primer_nombre = req.body.primer_nombre;
     var segundo_nombre = req.body.segundo_nombre;
     var primer_apellido = req.body.primer_apellido;
     var segundo_apellido = req.body.segundo_apellido;
     var rut = req.session.rut;
     var email = req.body.email;
-    var direccion = req.body.direccion;    
-    var password = req.body.password;
-    var receta = "";
+    var direccion = req.body.direccion;
+    var current_password = req.body.current_password;
+    var repeat_current_password = req.body.repeat_current_password;
+    var new_password = req.body.new_password || current_password;
 
-    if (req.files){
-        let EDFile = req.files.file;
-        const path = './uploads/' + rut;
-        
-        fs.rmSync(path, {recursive: true})
-
-        fs.mkdir(path, { recursive: true }, (err) => {
-            if (err) throw err;
-        });
-
-        EDFile.mv(path+"/"+EDFile.name);
-        receta = path+"/";
-    }else{
-        receta = './uploads/' + rut + "/";
-    }
-    
-    //console.log(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido)
     try {
         con.connect(function(err) {
             if (err) throw err;
-            var sql = 'UPDATE users SET primer_nombre="'+primer_nombre+'", segundo_nombre="'+segundo_nombre+'", primer_apellido="'+primer_apellido+'", segundo_apellido="'+segundo_apellido+'", email="'+email+'", direccion="'+direccion+'", receta="'+receta+'", password="'+password+'" WHERE rut="'+rut+'"';
-            con.query(sql, function (err, result) {
-                if (err) {
-                  if (err.code === 'ER_DUP_ENTRY') {
-                    const errorMsg = 'ERROR';
-                    res.render('pages/login', {errorMsg: errorMsg});
-                  } else {
-                    throw err;
-                  }
+
+            // fetch the existing password and receta from DB
+            con.query('SELECT password, receta FROM users WHERE rut="'+rut+'"', function (err, result) {
+                if (err) throw err;
+                var stored_password = result[0].password;
+                var stored_receta = result[0].receta;
+
+                // compare the existing password with the provided current password
+                if(stored_password != current_password){
+                    const errorMsg = 'La contraseña actual no coincide.';
+                    res.render('pages/login', { errorMsg: errorMsg });
+                } else if(current_password != repeat_current_password){
+                    const errorMsg = 'Las contraseñas proporcionadas no coinciden.';
+                    res.render('pages/login', { errorMsg: errorMsg });
                 } else {
-                  const successMsg = 'Se han actualizado correctamente los datos.';
-                  const errorMsg = undefined;
-                  res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
+                    var receta = "";
+
+                    if (req.files){
+                        let EDFile = req.files.file;
+                        const path = './uploads/' + rut;
+                        
+                        fs.rmSync(path, {recursive: true})
+
+                        fs.mkdir(path, { recursive: true }, (err) => {
+                            if (err) throw err;
+                        });
+
+                        EDFile.mv(path+"/"+EDFile.name);
+                        receta = path+"/";
+                    } else {
+                        receta = stored_receta; // keep the existing receta if no new one is provided
+                    }
+
+                    var sql = 'UPDATE users SET primer_nombre="'+primer_nombre+'", segundo_nombre="'+segundo_nombre+'", primer_apellido="'+primer_apellido+'", segundo_apellido="'+segundo_apellido+'", email="'+email+'", direccion="'+direccion+'", receta="'+receta+'", password="'+new_password+'" WHERE rut="'+rut+'"';
+                    con.query(sql, function (err, result) {
+                        if (err) {
+                          if (err.code === 'ER_DUP_ENTRY') {
+                            const errorMsg = 'ERROR';
+                            res.render('pages/login', {errorMsg: errorMsg});
+                          } else {
+                            throw err;
+                          }
+                        } else {
+                          const successMsg = 'Se han actualizado correctamente los datos.';
+                          const errorMsg = undefined;
+                          res.render('pages/login', {errorMsg: errorMsg, successMsg:successMsg});
+                        }
+                    });
                 }
-              });
-              
+            });
         });
     } catch (err) {
         console.error(err);
@@ -743,5 +852,6 @@ app.post('/edit_profile',function(req,res){
         res.render('pages/register', {errorMsg: errorMsg})
     }
 });
+
 
 app.use( express.static( "views" ) );
