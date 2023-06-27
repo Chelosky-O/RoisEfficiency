@@ -91,9 +91,11 @@
     color: var(--starColor);
 }
 .bay{
-    position: absolute;
-    bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    bottom: 10px;
     right: 20px;
+    padding-top: 10px;
 }
 .bay button{
     padding: 10px 20px;
