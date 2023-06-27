@@ -237,7 +237,7 @@ app.get('/adminOrdenes', function(req,res){
     }
 });
 
-app.post('/actStatusOrder', function(req, res) {
+app.post('/actStatusOrder', async function(req, res) {
     var con = mysql.createConnection({
         host:"localhost",
         user:"root",
@@ -250,7 +250,7 @@ app.post('/actStatusOrder', function(req, res) {
 
         var orderId = req.body.id;
 
-        con.beginTransaction(function(err) {
+        con.beginTransaction(async function(err) {
             if (err) {
                 res.status(500).send("Error al iniciar la transacción");
                 throw err;
@@ -258,7 +258,7 @@ app.post('/actStatusOrder', function(req, res) {
 
             var query = "SELECT product_ids FROM orders WHERE id = ?";
 
-            con.query(query, [orderId], function(err, result) {
+            con.query(query, [orderId], async function(err, result) {
                 if (err) {
                     return con.rollback(function() {
                         res.status(500).send("Error al obtener los IDs de los productos");
@@ -272,33 +272,61 @@ app.post('/actStatusOrder', function(req, res) {
                 for (var i = 0; i < productIds.length; i++) {
                     var query = "SELECT quantity FROM products WHERE id = ?";
 
-                    con.query(query, [productIds[i]], function(err, result) {
-                        if (err) {
-                            return con.rollback(function() {
-                                res.status(500).send("Error al obtener la cantidad de producto");
-                                throw err;
-                            });
-                        }
+                    await new Promise((resolve, reject) => {
+                        con.query(query, [productIds[i]], function(err, result) {
+                            if (err) {
+                                reject(err);
+                            }
 
-                        if (result[0].quantity == 0) {
-                            zeroQuantityFlag = true;
-                        }
+                            if (result[0].quantity == 0) {
+                                zeroQuantityFlag = true;
+                            }
+
+                            resolve();
+                        });
+                    }).catch((err) => {
+                        return con.rollback(function() {
+                            res.status(500).send("Error al obtener la cantidad de producto");
+                            throw err;
+                        });
                     });
+
+                    if(zeroQuantityFlag) break;
                 }
 
                 if (zeroQuantityFlag) {
-                    var refundQuery = "UPDATE orders SET status = 'REEMBOLSO POR FALTA DE STOCK' WHERE id = ?";
-
-                    con.query(refundQuery, [orderId], function(err, result) {
+                    con.rollback(function(err) {
                         if (err) {
-                            return con.rollback(function() {
-                                res.status(500).send("Error al actualizar el estado de la orden a REEMBOLSO POR FALTA DE STOCK");
-                                throw err;
-                            });
+                            res.status(500).send("Error al realizar el rollback");
+                            throw err;
                         }
+                        con.end(function(err) {
+                            if (err) {
+                                res.status(500).send("Error al cerrar la conexión");
+                                throw err;
+                            }
 
-                        return con.rollback(function() {
-                            res.send("No se puede actualizar la orden porque la cantidad de producto es 0");
+                            var refundCon = mysql.createConnection({
+                                host:"localhost",
+                                user:"root",
+                                password:"",
+                                database:"RoisEfficiency"
+                            });
+
+                            refundCon.connect(function(err) {
+                                if (err) throw err;
+                                var refundQuery = "UPDATE orders SET status = 'REEMBOLSO POR FALTA DE STOCK' WHERE id = ?";
+
+                                refundCon.query(refundQuery, [orderId], function(err, result) {
+                                    if (err) {
+                                        res.status(500).send("Error al actualizar el estado de la orden a REEMBOLSO POR FALTA DE STOCK");
+                                        throw err;
+                                    }
+
+                                    res.send("No se puede actualizar la orden porque la cantidad de producto es 0");
+                                    refundCon.end();
+                                });
+                            });
                         });
                     });
                 } else {
