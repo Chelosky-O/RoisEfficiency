@@ -83,7 +83,82 @@
 
 
 
+  <div class="body-profile">
+    <form class="cuerpo" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
+      <h2 style="margin-bottom: 1%;">Editar perfil</h2>
 
+      <div class="container-input" style="margin-bottom: -4%;">
+        <label for="first-name">Primer nombre:</label>
+        <div class="input-container">
+            <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="first-name" name="primer_nombre" value="" required>
+        </div>
+    
+        <label for="last-name">Segundo nombre:</label>
+        <div class="input-container">
+            <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="last-name" name="segundo_nombre" value="" required>
+        </div>
+    
+        <label for="first-name">Primer apellido:</label>
+        <div class="input-container">
+            <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="first-name" name="primer_apellido" value="" required>
+        </div>
+    
+        <label for="last-name">Segundo apellido:</label>
+        <div class="input-container">
+            <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="last-name" name="segundo_apellido" value="" required>
+        </div>
+    
+        <label for="field1">Email:</label>
+        <div class="input-container">
+            <span><i class="fa fa-envelope"></i></span>
+            <input type="mail" id="field1" name="email" value="" required>
+        </div>
+    
+        <label for="current-password">Contraseña actual:</label>
+        <div class="input-container">
+            <span><i class="fa fa-key"></i></span>
+            <input type="password" id="current-password" name="current_password" required>
+        </div>
+
+        <label for="repeat-password">Repetir contraseña actual:</label>
+        <div class="input-container">
+            <span><i class="fa fa-key"></i></span>
+            <input type="password" id="repeat-password" name="repeat_current_password" required>
+        </div>
+        <div id="password-error" style="color: red;"></div>
+
+        <label for="new-password">Nueva contraseña:</label>
+        <div class="input-container">
+            <span><i class="fa fa-key"></i></span>
+            <input type="password" id="new-password" name="new_password">
+        </div>
+
+        <label for="field3">Receta:</label>
+        <div class="input-container" style="left: 10%;">
+            <input style="color: black;" type="file" id="field3" name="file"><br><br>
+        </div>
+        
+        <label for="recipe-image">Imagen de la receta:</label>
+        <div class="image-container" style="width: 150px; height: 150px; margin-left: 16.5%;">
+          <img id="recipe-image" src="" alt="Imagen de la receta" style="width:140px;height:140px; cursor: pointer;">
+      </div>
+      
+        <div id="popup" style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5);">
+          <img id="popup-image" style="display: block; max-width: 80%; max-height: 80%; margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
+        </div>
+      
+    </div>
+  
+      <div class="container-botones" style="margin-top: -1%; margin-bottom: -5%;">
+        <button class="btn login-boton" type="submit">Guardar Cambios</button> 
+        <button class="btn login-boton" onclick="returnar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 
 
 
