@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2023 a las 21:25:42
+-- Tiempo de generación: 27-06-2023 a las 23:00:57
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -61,6 +61,13 @@ CREATE TABLE `orders` (
   `date` datetime NOT NULL,
   `product_ids` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `cost`, `name`, `email`, `status`, `address`, `phone`, `date`, `product_ids`) VALUES
+(39, 50000.00, 'Iván Andrés Cáceres Satorres', 'ivan.caceres_s@mail.udp.cl', 'NO PAGADO', 'AMALIA ARMSTRONG 7541, LA CISTERNA', '+56988388509', '2023-06-27 16:54:28', '1');
 
 -- --------------------------------------------------------
 
@@ -155,6 +162,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `rut`, `email`, `direccion`, `receta`, `password`) VALUES
+('Tobías', 'Matías', 'Guerrero', 'Cheuquepan', '20637552-3', 'tobias.guerrero_c@mail.udp.cl', 'La Giralda 0497, Quilicura', './uploads/20637552-3/receta.png', '2'),
 ('Iván', 'Andrés', 'Cáceres', 'Satorres', '20707065-3', 'ivan.caceres_s@mail.udp.cl', 'Amalia Armstrong 7541, La Cisterna', './uploads/20707065-3/receta.png', '123');
 
 --
@@ -195,7 +203,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `orders_items`

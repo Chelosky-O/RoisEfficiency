@@ -658,8 +658,12 @@ app.post('/view_product', function(req,res){
 });
 
 app.get('/checkout', function(req,res){
+    if(req.session.isLoggedIn == true){
     var total = req.session.total;
     res.render('pages/checkout',{total:total,user_name:req.session.user_name,user_lastname:req.session.user_lastname,second_user_name:req.session.second_user_name,user_second_lastname:req.session.user_second_lastname,user_email:req.session.user_email,user_address:req.session.user_address});
+    }else{
+        res.redirect('/');
+    }
 });
 
 app.post('/place_order', function(req,res){
@@ -699,33 +703,76 @@ app.post('/place_order', function(req,res){
                 if (err) {
                     throw err;
                 } else {
-                    res.redirect('/payment');
+                    var newId = result.insertId;
+                    res.redirect('/payment?id=' + newId);
                 }
             });
         });
     } catch (err) {
         console.error(err);
     }
-    
-
 });
+
 
 // Manejador de la ruta GET /payment para renderizar la página de pago
 app.get('/payment', function(req, res){
-    var total = req.session.total;
-    var email = req.session.user_email;
+    if(req.session.isLoggedIn == true){
+        var total = req.session.total;
+        var email = req.session.user_email;
+        var ordenCompra = req.query.id;
+        var msg = "";
 
-    var msg = "";
+        if (!ordenCompra) {
+            msg = "No se proporcionó ningún ID de pedido.";
+        }
 
-    res.render('pages/payment', { total: total, email: email, msg: msg});
+        res.render('pages/payment', { total: total, email: email, msg: msg, ordenCompra: ordenCompra });
+    }else{
+        res.redirect('/');
+    }
 });
 
-// Manejador de la ruta POST /send-email para enviar el correo electrónico
+app.post('/cancelarOrden', function(req, res) {
+    var ordenCompra = req.body.ordenCompra;
+    
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        password:"",
+        database:"RoisEfficiency"
+    });
+
+    con.connect(function(err) {
+        if (err) throw err;
+
+        var query = "DELETE FROM orders WHERE id = ?";
+
+        con.query(query, [ordenCompra], function (err, result) {
+            if (err) {
+                throw err;
+            } else {
+                // Modificar la sesión y establecer los valores a sus valores predeterminados
+                req.session.isLoggedIn = false;
+                req.session.rut = undefined;
+                req.session.password = undefined;
+
+                // Mensaje de error
+                var errorMsg = "La orden de compra ha sido cancelada exitosamente. Ha sido desconectado de su cuenta por seguridad.";
+
+                // Renderizar la página de login nuevamente con los mensajes
+                res.render('pages/login', { errorMsg: errorMsg, successMsg: undefined });
+            }
+        });
+    });
+});
+
+
+
 app.post('/send-email', async function(req, res) {
     var total = req.session.total;
     var email = req.session.user_email;
     var nombreCompleto = req.session.user_complete_name;
-
+    var ordenCompra = req.body.ordenCompra;
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -741,6 +788,7 @@ app.post('/send-email', async function(req, res) {
             <h1>Estimado(a) ${nombreCompleto},</h1>
             <p>Gracias por su compra en OpticaRois. Adjuntamos los detalles de su orden y los datos de transferencia:</p>
             <h2>Detalles de la orden:</h2>
+            <p>Orden de compra: #${ordenCompra}</p>
             <p>El total de su compra es: $${total.toLocaleString("es-CL")}</p>
             <h2>Datos de transferencia:</h2>
             <ul>
@@ -751,13 +799,13 @@ app.post('/send-email', async function(req, res) {
                 <li>Correo de contacto: opticaroistransferencias@gmail.com</li>
             </ul>
             <p>Una vez recibamos la transferencia, procederemos con el envío de los productos.</p>
+            <p>Responda este correo correo con el comprobante y la orden de compra #${ordenCompra}</p>
             <p>Si tiene alguna consulta o necesita ayuda adicional, no dude en ponerse en contacto con nosotros. Estaremos encantados de ayudarle.</p>
             <p>Atentamente,</p>
             <p>OpticaRois</p>
         `
     };
     
-
     try {
         let info = await transporter.sendMail(mailOptions);
         res.send("Correo enviado exitosamente");
@@ -765,6 +813,8 @@ app.post('/send-email', async function(req, res) {
         res.status(500).send("Hubo un error enviando el correo. Verifique su email");
     }
 });
+
+
 app.get('/profile', function(req,res){
     if(req.session.isLoggedIn==true){
     var con = mysql.createConnection({

@@ -199,6 +199,19 @@
       }
       </script>
   
+      <script>
+        output.addEventListener('keydown', (event) => {
+  // Si la tecla presionada es 'Enter'
+  if (event.keyCode === 13) {
+    // Previene la acción por defecto de la tecla Enter (un salto de línea en este caso)
+    event.preventDefault();
+    // Realiza la misma acción que el botón de modificar
+    const textValue = output.value;
+    window.location.href = `/adminModificacion?text=${encodeURIComponent(textValue)}`;
+  }
+});
+
+      </script>
       <script src="js/admin.js"></script>
       
     </body>
