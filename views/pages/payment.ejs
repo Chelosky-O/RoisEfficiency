@@ -48,15 +48,17 @@
     </style>
 </head>
 <body>
-    <h1>El total de su compra es: $<%= total.toLocaleString("es-CL") %></h1>
-    <h1><%= email %></h1>
-    <form id="paymentForm" method="POST" action="/send-email">
-        <!-- Agrega los campos del formulario para los datos de pago -->
-        <!-- ... -->
-        <button type="submit" class="btn">Realizar Pago</button>
+    <h1>El total de su compra es de: $<%= total.toLocaleString("es-CL") %></h1>
+    <!-- Formulario para enviar email -->
+    <form id="paymentForm" method="POST" action="/send-email" style="width: 100px; height: 30px; margin-left: -10%;">
+        <input type="hidden" id="ordenCompra" name="ordenCompra" value="<%= ordenCompra %>">
+        <button type="submit" class="btn" style="background-color: green;">Realizar Pago</button>
     </form>
-    <h1 class="center-text"><%= msg %></h1>
-    <a href="/" class="link">Volver al inicio</a>
+    <!-- Formulario para cancelar orden -->
+    <form id="cancelOrderForm" method="POST" action="/cancelarOrden" style="margin-top: -1.6%; margin-left: 10%; width: 100px; height: 30px;">
+        <input type="hidden" id="ordenCompraCancel" name="ordenCompra" value="<%= ordenCompra %>">
+        <button type="submit" class="btn" style="background-color: red;">Cancelar Orden</button>
+    </form>
 
     <script>
         document.getElementById("paymentForm").addEventListener("submit", function(event) {
@@ -65,19 +67,52 @@
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/send-email", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+            // Obtén el valor de ordenCompra del formulario
+            var ordenCompra = document.getElementById("ordenCompra").value;
+    
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Maneja la respuesta exitosa del servidor
                         alert("Correo enviado exitosamente");
+                        // Redirige al usuario a la página de inicio después de realizar la compra
+                        window.location.href = "/";
                     } else {
                         // Maneja el error del servidor
                         alert("Hubo un error enviando el correo. Verifique su email");
                     }
                 }
             };
-            xhr.send(); // Envía la solicitud al servidor
+            
+            // Envía la solicitud al servidor, incluyendo el valor de ordenCompra
+            xhr.send("ordenCompra=" + ordenCompra);
+        });
+        // Script para cancelar orden
+        document.getElementById("cancelOrderForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/cancelarOrden", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        var ordenCompra = document.getElementById("ordenCompraCancel").value;
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    alert("Orden de compra cancelada con éxito");
+                    // Redirige al usuario a la página de inicio de sesión después de cancelar la orden
+                    window.location.href = "/login";
+                } else {
+                    alert("Hubo un error al cancelar la orden. Por favor, inténtalo de nuevo");
+                }
+            }
+        };
+        
+        xhr.send("ordenCompra=" + ordenCompra);
         });
     </script>
+    
 </body>
 </html>

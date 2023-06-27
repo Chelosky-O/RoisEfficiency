@@ -8,6 +8,16 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   </head>
+  <style>
+    .status-pagado {
+    color: green;
+    }
+
+    .status-nopagado {
+        color: red;
+    }
+
+  </style>
     <body id="body"> 
 
       <header>
@@ -92,19 +102,64 @@
                 <td style="text-align: center;">$<%= result[i].cost.toLocaleString() %></td>
                 <td style="text-align: center;"><%= result[i].name %></td>
                 <td style="text-align: center;"><%= result[i].email %></td>
-                <td style="text-align: center;"><%= result[i].status %></td>
+                <td class="status-cell" id="status-<%= result[i].id %>" style="text-align: center; cursor: pointer;"><%= result[i].status %></td>
                 <td style="text-align: center;"><%= result[i].address %></td>
                 <td style="text-align: center;"><%= result[i].phone %></td>
                 <td style="text-align: center;"><%= result[i].date %></td>
                 <td style="text-align: center;"><%= result[i].product_ids %></td>
             </tr>
-            
             <% } %>
         </tbody>
     </table>
       </main>
 
       <script src="js/admin.js"></script>
+      <script>
+        window.onload = function() {
+        // Recorrer todas las celdas de estado
+        document.querySelectorAll(".status-cell").forEach(cell => {
+            // Si el estado es "PAGADO", agregar la clase "status-pagado"
+            if (cell.innerText == "PAGADO") {
+                cell.classList.add("status-pagado");
+            }
+            // Si el estado es "NO PAGADO", agregar la clase "status-nopagado"
+            else if (cell.innerText == "NO PAGADO") {
+                cell.classList.add("status-nopagado");
+            }
+        });
+        };
+      </script>
+      <script>
+        // Cuando se haga clic en una celda de estado...
+        // Cuando se haga clic en una celda de estado...
+        document.querySelectorAll(".status-cell").forEach(cell => {
+            cell.addEventListener("click", function(event) {
+                // Solo proceder si el estado es "NO PAGADO"
+                if (this.innerText == "NO PAGADO") {
+                    // Obtén el ID de la orden a partir del atributo ID del elemento.
+                    var id = this.id.split("-")[1];
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/actStatusOrder", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                alert("Estado de la orden actualizado con éxito");
+                                // Cambia el estado visualmente a "PAGADO"
+                                cell.innerText = "PAGADO";
+                                cell.classList.remove("status-nopagado");
+                                cell.classList.add("status-pagado");
+                            } else {
+                                alert("Hubo un error al actualizar el estado de la orden");
+                            }
+                        }
+                    };
+                    xhr.send("id=" + id);
+                }
+            });
+        });
+      </script>
       
     </body>
 </html>
