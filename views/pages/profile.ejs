@@ -31,39 +31,54 @@
         <form class="cuerpo" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
           <h2 style="margin-bottom: 3%;">Editar perfil</h2>
 
-          <div class="container-nombres">
+          <div class="container-input">
             <label for="first-name">Primer nombre:</label>
-            <span><i class="fa fa-user-circle"></i></span>
-            <input type="text" id="first-name" name="primer_nombre" value="<%= result[0].primer_nombre %>">
-          </div>  
-
-          <label for="last-name">Segundo nombre:</label>
-          <span><i class="fa fa-user-circle"></i></span>
-          <input type="text" id="last-name" name="segundo_nombre" value="<%= result[0].segundo_nombre %>"><br><br>
-        
-
-          <label for="first-name">Primer apellido:</label>
-          <span><i class="fa fa-user-circle"></i></span>
-          <input type="text" id="first-name" name="primer_apellido" value="<%= result[0].primer_apellido %>">
-      
-          <label for="last-name">Segundo apellido:</label>
-          <span><i class="fa fa-user-circle"></i></span>
-          <input type="text" id="last-name" name="segundo_apellido" value="<%= result[0].segundo_apellido %>"><br><br>
-        
-          <label for="field1">Email:</label>
-          <span><i class="fa fa-user-circle"></i></span>
-          <input type="mail" id="field1" name="email" value="<%= result[0].email %>">
-        
-          <label for="field2">Dirección:</label>
-          <span><i class="fa fa-user-circle"></i></span>
-          <input type="text" id="field2" name="direccion" value="<%= result[0].direccion %>"><br><br>
-
-          <label for="field4">Contraseña:</label>
-          <span><i class="fa fa-key"></i></span>
-          <input type="password" id="field4" name="password" value="<%= result[0].password %>">
-        
-          <label for="field3">Receta:</label>
-          <input type="file" id="field3" name="file"><br><br>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+              <input type="text" id="first-name" name="primer_nombre" value="<%= result[0].primer_nombre %>">
+            </div>
+          
+            <label for="last-name">Segundo nombre:</label>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+            <input type="text" id="last-name" name="segundo_nombre" value="<%= result[0].segundo_nombre %>"><br><br>
+            </div>
+            
+            <label for="first-name">Primer apellido:</label>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+              <input type="text" id="first-name" name="primer_apellido" value="<%= result[0].primer_apellido %>">
+            </div>
+            
+            <label for="last-name">Segundo apellido:</label>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+              <input type="text" id="last-name" name="segundo_apellido" value="<%= result[0].segundo_apellido %>"><br><br>
+            </div>
+            
+            <label for="field1">Email:</label>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+            <input type="mail" id="field1" name="email" value="<%= result[0].email %>">
+            </div>
+            
+            <label for="field2">Dirección:</label>
+            <div class="input-container">
+              <span><i class="fa fa-user-circle"></i></span>
+              <input type="text" id="field2" name="direccion" value="<%= result[0].direccion %>"><br><br>
+            </div>
+          
+            <label for="field4">Contraseña:</label>
+            <div class="input-container">
+              <span><i class="fa fa-key"></i></span>
+              <input type="password" id="field4" name="password" value="<%= result[0].password %>">
+            </div>
+            
+            <label for="field3">Receta:</label>
+            <div class="input-container">
+              <input type="file" id="field3" name="file"><br><br>
+            </div>
+        </div>
       
           <div class="container-botones">
             <button class="btn login-boton" type="submit">Guardar Cambios</button> 

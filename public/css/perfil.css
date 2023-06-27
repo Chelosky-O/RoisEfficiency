@@ -5,7 +5,7 @@
     width: 50%;
     padding: 40px;
     margin-left: 25%;
-    height: auto;
+    height: 30%;
     border-radius: 5px;
     margin: 2% auto;
     box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
@@ -23,11 +23,9 @@
     align-items: center;
 }
 
-
 h2{
     color: black;
 }
-
 
 .alert {
     position: relative;
@@ -63,48 +61,42 @@ h2{
 }
 
 .cuerpo input {
-    width: 30%;
+    width: 50%;
     height: 50px;
     margin-top: 2%;
-    padding: 25px;
+    padding: 10px;
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #5E6472;
     outline: none;
     border: none;
     border-radius: 0px 5px 5px 0px;
-    transition: 0.2s linear;
-    
-  }
-  
-  .cuerpo span {
+    transition: 0.2s linear; 
+}
+
+.cuerpo span {
     background: #fff;
     color: #333;
-    padding: 14.5px 0px 14px 9px;
+    padding: 3px 0px 3px 5px;
     border-radius: 5px 0px 0px 5px;
     margin-right: -5px; /* Ajusta este valor según sea necesario */
     line-height: 50px; /* Establece la misma altura que el input */
     padding-right: 10px;
-  }
+}
 
 button .change-boton {
     display: inline-block;
     color: #252537;
-  
     width: 280px;
     height: 50px;
-  
     padding: 0 20px;
     background: #fff;
     border-radius: 5px;
-    
     outline: none;
     border: none;
-  
     cursor: pointer;
     text-align: center;
     transition: all 0.2s linear;
-    
     margin: 7% auto;
     letter-spacing: 0.05em;
 }
@@ -131,9 +123,34 @@ button .change-boton :hover {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.container-botones button {
+    margin: 0 5px;
+}
+
+.container-input {
+    position: relative;
+    margin-bottom: 20px;
   }
   
-  .container-botones button {
-    margin: 0 5px;
+  .container-input .input-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .container-input .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .container-input .input-container span {
+    margin-right: 10px;
+  }
+  
+  .container-input .input-container input {
+    width: 100%;
   }
   
