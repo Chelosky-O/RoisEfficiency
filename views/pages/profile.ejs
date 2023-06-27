@@ -5,36 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Item - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <title>Editar perfil usuario</title>
+        <link rel="icon" href="images/LOGO-1.png"/>
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/perfil.css" rel="stylesheet" />
     </head>
     <body>
 
         <!-- Navigation-->
         <%- include("header") %>
         
-        <div class="container">
-            <h1>Edit Profile</h1>
-              <hr>
-            <div class="row">
-              <!-- left column -->
-              <div class="col-md-3">
-                
-              </div>
+        
               
-              <!-- edit form column -->
-              <div class="col-md-9 personal-info">
-                <div class="alert alert-info alert-dismissable">
+                <div class="alert alert-info alert-dismissable" style="margin-top: 2%;">
                   <a class="panel-close close" data-dismiss="alert">×</a> 
-                  <i class="fa fa-coffee"></i>
-                  This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Verifica cuidadosamente los <strong>cambios</strong> antes de <strong>guardar</strong>, ya que esto puede afectar tu información.
                 </div>
-                <h3>Cambiar Informacion Personal</h3>
+                
+                
+                <h1 style="margin-top: 1%;">Edit Profile</h1>
                 
                 <form class="form-horizontal" action="edit_profile" method="post" enctype="multipart/form-data" role="form">
                   <div class="form-group">
@@ -101,13 +94,21 @@
                     </div>
                   </div>
                 </form>
-              </div>
-          </div>
-        </div>
-        <hr>
 
+        
         <!-- Footer-->
         <%- include("footer") %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+          $(document).ready(function() {
+            $(".panel-close").click(function() {
+            $(this).closest(".alert").fadeOut();
+            });
+          });
+        </script>
+
+        <script src="js/script.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
