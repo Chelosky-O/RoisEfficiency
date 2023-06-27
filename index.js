@@ -390,8 +390,8 @@ app.post('/register',function(req,res){
                     throw err;
                   }
                 } else {
-                  const successMsg = 'Te has registrado correctamente, ahora inicia sesión.';
-                  const errorMsg = undefined;
+                  const errorMsg = 'Te has registrado correctamente, ahora inicia sesión.';
+                  const successMsg = undefined;
                   res.render('pages/login', {errorMsg: errorMsg,successMsg:successMsg});
                 }
               });
