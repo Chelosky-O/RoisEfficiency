@@ -90,7 +90,7 @@ app.post('/addProduct', function(req, res) {
     let EDFile = req.files.file;
     const path = './public/images';
 
-    imagen = EDFile.name;
+    imagen = "Lente_" + id + EDFile.name.substring(EDFile.name.lastIndexOf('.')).toUpperCase();
     EDFile.mv(path+"/"+imagen);
 
     var con = mysql.createConnection({
