@@ -166,7 +166,7 @@
 .deneb_cta .cta_wrapper .button_box .deneb_btn:focus {
     box-shadow: 2.5px 4.33px 15px 0px rgba(0, 0, 0, 0.15);
 }
-h4{
+.widget_title h4{
     color: white;
 }
 p{

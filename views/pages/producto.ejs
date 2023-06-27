@@ -70,133 +70,130 @@
         <% }) %>
     
 
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Productos relacionados</h2>
-                <div id="related-products-carousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <% for(let i = 0; i < 16; i += 4) { %>
-                            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-                                <div class="row">
-                                    <% for(let j = 0; j < 4; j++) { %>
-                                        <% if(result[i + j] && result[i + j].id != id_producto) { %>
-                                            <div class="col mb-5">
-                                                <div class="card h-100">
-                                                    <!-- Sale badge-->
-                                                    <div class="badge bg-dark text-white position-absolute top-0 start-0">Sale</div>
-                                                    <!-- Product image-->
-                                                    <img class="card-img-top" width="200" height="200" src="images/<%= result[i + j].image %>" alt="..." />
-                                                    <!-- Product details-->
-                                                    <div class="card-body p-4">
-                                                        <div class="text-center">
-                                                            <!-- Product name-->
-                                                            <h5 class="fw-bolder"><%= result[i + j].name %></h5>
-                                                            <!-- Product reviews-->
-                                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                            </div>
-                                                            <!-- Product price-->
-                                                            <% if(result[i + j].sale_price){ %>
-                                                                <span class="text-decoration-line-through">$<%= result[i + j].price %></span>
-                                                                <span>$<%= result[i + j].sale_price %></span>
-                                                            <% } else { %>
-                                                                <span>$<%= result[i + j].price %></span>
-                                                            <% } %>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Product actions-->
-                                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                        <form action="/add_to_cart" method="post">
-                                                            <input type="hidden" name="id" value="<%= result[i + j].id %>">
-                                                            <input id="name" type="hidden" name="name" value="<%= result[i + j].name %>">
-                                                            <input type="hidden" name="price" value="<%= result[i + j].price %>">
-                                                            <input type="hidden" name="sale_price" value="<%= result[i + j].sale_price %>">
-                                                            <input type="hidden" name="quantity" value="1">
-                                                            <input type="hidden" name="image" value="<%= result[i + j].image %>">
-                                                            <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
-                                                        </form>
-                                                    </div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Productos relacionados</h2>
+        <div id="related-products-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <% for(let i = 0; i < 16; i += 4) { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <div class="row">
+                            <% for(let j = 0; j < 4; j++) { %>
+                                <% if(result[i + j] && result[i + j].id != id_producto) { %>
+                                    <div class="col mb-5">
+                                        <div class="card h-100">
+                                        <!-- Sale badge-->
+                                        <div class="badge bg-dark text-white position-absolute top-0 start-0">Sale</div>
+                                        <!-- Product image-->
+                                        <img class="card-img-top" width="200" height="200" src="images/<%= result[i + j].image %>" alt="..." />
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- Product name-->
+                                                <h5 class="fw-bolder"><%= result[i + j].name %></h5>
+                                                <!-- Product reviews-->
+                                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
                                                 </div>
+                                                <!-- Product price-->
+                                                <% if(result[i + j].sale_price){ %>
+                                                    <span class="text-decoration-line-through">$<%= result[i + j].price %></span>
+                                                    <span>$<%= result[i + j].sale_price %></span>
+                                                <% } else { %>
+                                                    <span>$<%= result[i + j].price %></span>
+                                                <% } %>
                                             </div>
-                                        <% } %>
-                                    <% } %>
-                                </div>
-                            </div>
-                        <% } %>
+                                        </div>
+                                        <!-- Product actions-->
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <form action="/add_to_cart" method="post">
+                                                <input type="hidden" name="id" value="<%= result[i + j].id %>">
+                                                <input id="name" type="hidden" name="name" value="<%= result[i + j].name %>">
+                                                <input type="hidden" name="price" value="<%= result[i + j].price %>">
+                                                <input type="hidden" name="sale_price" value="<%= result[i + j].sale_price %>">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input type="hidden" name="image" value="<%= result[i + j].image %>">
+                                                <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: -3%;">
-                        <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
-                          <span style="color: black;">Anterior</span>
-                        </button>
-                        <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
-                          <span style="color: black;">Siguiente</span>
-                        </button>
-                      </div>
-                      
-                </div>
+                <% } %>
             </div>
-        </section>
-        
-        
-        
-        
+            <div style="display: flex; justify-content: space-between; margin-top: -3%;">
+                <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
+                <span style="color: black;">Anterior</span>
+                </button>
+                <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
+                <span style="color: black;">Siguiente</span>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</section>
+    
 
         <!-- Footer-->
         <%- include("footer") %>
         <script>
             // Obtener todos los elementos con la clase "product-name"
             var productNames = document.getElementsByClassName("product-name");
-          
+        
             // Agregar un controlador de eventos de clic a cada elemento
             for (var i = 0; i < productNames.length; i++) {
-              productNames[i].addEventListener("click", function() {
+                productNames[i].addEventListener("click", function() {
                 // Obtener el ID del producto desde el atributo "data-product-id"
                 var productId = this.getAttribute("data-product-id");
-          
-                // Redirigir al usuario al detalle del producto
-                window.location.href = "/ver_producto?id=" + productId;
-              });
+    
+            // Redirigir al usuario al detalle del producto
+            window.location.href = "/ver_producto?id=" + productId;
+            });
             }
-          </script> 
+        </script> 
 
         <script>
             // Obtener todos los elementos de enlace de la lista
             const links = document.querySelectorAll('#box-search a');
-          
+        
             // Función que se ejecutará cuando se haga clic en un enlace
             const handleClick = (event) => {
               event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-          
+        
               const productId = event.currentTarget.getAttribute('data-product-id'); // Obtener el ID del producto
-          
+        
               // Crear un formulario oculto
-              const form = document.createElement('form');
-              form.method = 'POST';
-              form.action = '/view_product';
-          
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/view_product';
+        
               // Crear un campo de entrada oculto para enviar el ID del producto
-              const productIdInput = document.createElement('input');
-              productIdInput.type = 'hidden';
-              productIdInput.name = 'id';
-              productIdInput.value = productId;
-          
+            const productIdInput = document.createElement('input');
+            productIdInput.type = 'hidden';
+            productIdInput.name = 'id';
+            productIdInput.value = productId;
+        
               // Agregar el campo de entrada al formulario
-              form.appendChild(productIdInput);
-          
+            form.appendChild(productIdInput);
+        
               // Agregar el formulario al documento y enviarlo
-              document.body.appendChild(form);
-              form.submit();
+            document.body.appendChild(form);
+            form.submit();
             };
-          
+        
             // Agregar el evento de clic a cada enlace de la lista
             links.forEach(link => {
-              link.addEventListener('click', handleClick);
+            link.addEventListener('click', handleClick);
             });
-          </script>
+        </script>
 
         <script src="js/scripts.js"></script>
         <!-- Bootstrap core JS-->
