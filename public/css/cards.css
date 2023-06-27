@@ -103,7 +103,7 @@
     background-color: var(--textColor);
     color: var(--sectionBack);
     font-size: 18px;
-    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
     cursor: pointer;
     transition: .5s;
 }

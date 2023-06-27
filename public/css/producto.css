@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700;900&family=Raleway:wght@100;300;500;700&display=swap');
 :root{
     --bodyBack: white;
     --textColor: black;
     --starColor: #750d37;
     --sectionBack: #f7f6f9;
+}
+
+.box{
+    width: 80%;
+    margin: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .product-card {
@@ -19,21 +28,27 @@
 }
 
 .product-card img {
-    width: 40%;
+    width: 50%;
     height: auto;
     margin-right: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
 }
 
-.product-card h2{
+.card-img-top{
+    position: relative;
+    margin-top: 45px;
+    margin-left: 20px;
+}
+
+.display-5 h2{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 26px;
+    font-size: 20px;
     opacity: .9;
     text-transform: uppercase;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     text-align: center;
-    margin: 0;
+    
 }
 
 .product-card p{
@@ -44,26 +59,59 @@
     line-height: 23px;
     color: black;
     padding: 15px;
+    margin-left: 20px;
 }
 
 .small{
     font-size: 15px;
     display: block;
+    margin-top: -1%;
+    margin-left: 1%;
 }
-.product-card button{
-    padding: 10px 20px;
+
+.d-flex{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.d-flex button{
+    padding: 20px 60px;
     border-radius: 7px;
     border: none;
     background-color: var(--textColor);
     color: var(--sectionBack);
     font-size: 18px;
-    text-transform: capitalize;
     cursor: pointer;
+    
     transition: .5s;
+    margin-bottom: -20%;
 }
 
-.product-card button:hover{
+.d-flex button:hover{
     transform: scale(1.1);
 }
+
+.fs-5{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fs-5 span{
+    margin-top: 1%;
+    font-size: 1.5em;
+    color: var(--starColor);
+    font-family: 'Raleway', sans-serif;
+    margin-left: 34px;
+    margin-right: -30px;
+}
+.fs-5 p{
+    margin-top: 5%;
+    font-size: 1.5em;
+    color: var(--starColor);
+    font-family: 'Raleway', sans-serif;
+    margin-left: 20px;
+}
+
 
 
