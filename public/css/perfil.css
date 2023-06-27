@@ -141,8 +141,7 @@ button .change-boton :hover {
 
 .container-input {
     position: relative;
-    left: 25%;
-    
+    left: 24%;   
 }
 
 .container-input .input-label {
