@@ -7,12 +7,11 @@
     --sectionBack: #f7f6f9;
 }
 *{
-  
     font-family: 'Raleway', sans-serif;
 }
 .nbody{
     background-color: var(--bodyBack);
-    min-height: 100vh;
+    min-height: 10%;
     display: grid;
     place-content: center;
 }
@@ -84,6 +83,7 @@
 .product p{
     font-size: 18px;
     line-height: 25px;
+    color: black;
 }
 .stars svg{
     font-size: 1.3em;
