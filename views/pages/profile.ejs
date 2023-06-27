@@ -76,19 +76,25 @@
             
             <label for="field3">Receta:</label>
             <div class="input-container" style="left: 10%;">
-              <input type="file" id="field3" name="file" required><br><br>
+              <input style="color: black;" type="file" id="field3" name="file" required><br><br>
             </div>
         </div>
       
           <div class="container-botones" style="margin-top: -1%; margin-bottom: -5%;">
             <button class="btn login-boton" type="submit">Guardar Cambios</button> 
-            <button class="btn login-boton" type="reset" onclick="">Cancelar</button>
+            <button class="btn login-boton" onclick="returnar()">Cancelar</button>
           </div>
         </form>
       </div>
         <!-- Footer-->
         <%- include("footer") %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+          function returnar() {
+          window.location.href = "/";
+          }
+        </script>
 
         <script>
           $(document).ready(function() {
