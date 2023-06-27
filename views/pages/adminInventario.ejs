@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Inventario</title>
+    <title>Inventario</title>
     <link rel="icon" href="images/LOGO-1.png"/>
     <link rel="stylesheet" href="css/adminMain.css">
     <link rel="stylesheet" href="css/adminInventario.css">
@@ -71,7 +71,10 @@
       </div>
 
     <main> 
-    <h1>Admin Inventario</h1>
+    <h1 style="font-size: 70px;">Inventario</h1>
+    
+    <input style="width: 80%; height: 2vw; text-align: start; font-size: larger;" type="text" id="search" placeholder="Buscar por nombre">
+  
     <table class="inventory-table">
         <thead>
             <tr>
@@ -81,7 +84,7 @@
                 <th>Precio</th>
                 <th>Precio Oferta</th>
                 <th>Cantidad</th>
-                <th>QR Code</th> <!-- Añadido la cabecera del código QR -->
+                <th>QR Code</th>
             </tr>
         </thead>
         <tbody>
@@ -90,20 +93,41 @@
                     <td><%= result[i].id %></td>
                     <td><%= result[i].name %></td>
                     <td><%= result[i].description %></td>
-                    <td><%= result[i].price %></td>
-                    <td><%= result[i].sale_price %></td>
+                    <td>$<%= result[i].price.toLocaleString() %></td>
+                    <%if(result[i].sale_price == null){%>
+                    <td>N/A</td>
+                    <%}else{%>
+                    <td>$<%= result[i].sale_price.toLocaleString() %></td>
+                    <%}%>
                     <td><%= result[i].quantity %></td>
                     <td>
-                        <!-- Generamos el código QR -->
                         <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<%= encodeURIComponent(result[i].name) %>&choe=UTF-8" alt="QR Code" />
                     </td>
-                    <!-- <td><img src="<%= result[i].image %>" alt="Product Image" width="100"></td>  -->
-                    <!-- <td><%= result[i].image %></td> -->
                 </tr>
             <% } %>
         </tbody>
     </table>
 </main>  
 <script src="js/admin.js"></script>
+<script>
+  // Obtiene el elemento input
+  var input = document.getElementById('search');
+  
+  // Función para ejecutar la búsqueda
+  input.onkeyup = function() {
+      var filter = input.value.toUpperCase();
+      var rows = document.querySelector(".inventory-table tbody").rows;
+      
+      for (var i = 0; i < rows.length; i++) {
+          var name = rows[i].cells[1].textContent;
+          if (name.toUpperCase().indexOf(filter) > -1) {
+              rows[i].style.display = "";
+          } else {
+              rows[i].style.display = "none";
+          }
+      }
+  }
+  </script>
+  
 </body>
 </html>
