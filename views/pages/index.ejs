@@ -237,17 +237,17 @@
           </header>
 
         <!-- Catálogo con los productos-->
-            <div style="width: 100%;" class="container">
+            <div class="container">
               <div class="header1">
                 <h1 style="padding: 30px;">Catálogo de lentes</h1>
               </div>
                 <div class="products">
                     <% result.forEach(function(item) {
                       if(item.quantity>0){ %>
-                      <div class=" product" style="height: 100%;">
+                      <div class=" product">
                         <!-- Product image-->
                         <div>
-                          <img src="images/<%= item.image %>" alt="images" style="max-height: 100%; max-width: 100%;">
+                          <img src="images/<%= item.image %>" alt="images" style="max-height: 400px; max-width: 300px;">
                         </div>
                         <!-- Product details-->
                         <div class="namePrice  flex-column align-items-center">

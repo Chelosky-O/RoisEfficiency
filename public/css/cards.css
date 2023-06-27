@@ -45,7 +45,7 @@
     position: relative;
     background-color: var(--sectionBack);
     width: 350px;
-    height: 100%;
+    height: 450px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
     display: flex;
     flex-direction: column;
