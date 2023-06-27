@@ -6,6 +6,7 @@ var session = require('express-session');
 const { redirect, render } = require('express/lib/response');
 const multer  = require('multer');
 const fileUpload = require('express-fileupload');
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 
 mysql.createConnection({
@@ -639,10 +640,31 @@ app.post('/place_order', function(req,res){
 
 });
 
-app.get('/payment', function(req,res){
+app.get('/payment', async function(req, res){
     var total = req.session.total;
     var email = req.session.user_email;
-    res.render('pages/payment',{total:total, email:email});
+
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'ivan.caceres_s@mail.udp.cl',
+            pass: 'IAMVAL2021'
+        }
+    });
+    let mailOptions = {
+        from: 'ivan.caceres_s@mail.udp.cl',
+        to: email,
+        subject: 'Confirmación de orden',
+        text: `El total de su compra es: $${total.toLocaleString("es-CL")}. Se enviaron los datos de transferencia al correo asociado a su cuenta, una vez se reciba la transferencia se procederá con el envío de los productos.`
+    };
+    try {
+        let info = await transporter.sendMail(mailOptions);
+        var msg = "Se enviaron los datos de transferencia al correo asociado a su cuenta, una vez se reciba la transferencia se procederá con el envío de los productos."
+    } catch (error) {
+        var msg = "Hubo un error enviando el correo, verifique su email"
+    }
+
+    res.render('pages/payment',{total:total, email:email,msg:msg});
 });
 
 app.get('/profile', function(req,res){

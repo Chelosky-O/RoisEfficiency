@@ -89,7 +89,7 @@
             <% for(var i = 0; i < result.length; i++) { %>
               <tr>
                 <td style="text-align: center;"><%= result[i].id %></td>
-                <td style="text-align: center;"><%= result[i].cost %></td>
+                <td style="text-align: center;">$<%= result[i].cost.toLocaleString() %></td>
                 <td style="text-align: center;"><%= result[i].name %></td>
                 <td style="text-align: center;"><%= result[i].email %></td>
                 <td style="text-align: center;"><%= result[i].status %></td>
