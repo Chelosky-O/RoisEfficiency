@@ -65,12 +65,24 @@
           </ul>
           <% } else { %>
           <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-              <button class="nav-link btn" onclick="redirectToProfile()">
-                  <i class="fas fa-user"></i> 
-              <span class="text" style="color: black;">Mi cuenta</span>
-              </button>
-          </li>
+            <li class="nav-item">
+                <div class="dropdown">
+                  <button class="nav-link btn" onclick="toggleDropdown()">
+                    <i class="fas fa-user"></i>
+                    <span class="text" style="color: black;">Mi cuenta</span>
+                  </button>
+                  <div id="dropdown-menu" class="dropdown-menu">
+                    <div class="menu-item">
+                      <i class="fas fa-user-edit"></i>
+                      <a href="/profile">Editar perfil</a>
+                    </div>
+                    <div class="menu-item">
+                      <i class="fas fa-receipt"></i>
+                      <a href="/orders">Ver pedidos</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
           <li class="nav-item">
               <button class="nav-link btn" onclick="location.href='#bottom'">
                   <i class="fas fa-question-circle"></i> 
@@ -180,9 +192,25 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
-          function returnar() {
-          window.location.href = "/";
-          }
+            function toggleDropdown() {
+              var dropdownMenu = document.getElementById('dropdown-menu');
+              dropdownMenu.classList.toggle('show');
+            }
+            
+            var dropdownLinks = document.querySelectorAll('#dropdown-menu a');
+            dropdownLinks.forEach(function(link) {
+              link.addEventListener('click', function() {
+                var dropdownMenu = document.getElementById('dropdown-menu');
+                dropdownMenu.classList.remove('show');
+              });
+            });
+            </script>
+
+
+        <script>
+        function returnar() {
+        window.location.href = "/";
+        }
         </script>
 
         <script>
