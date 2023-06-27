@@ -90,17 +90,17 @@
         <tbody>
             <% for(var i = 0; i < result.length; i++) { %>
                 <tr>
-                    <td><%= result[i].id %></td>
-                    <td><%= result[i].name %></td>
-                    <td><%= result[i].description %></td>
-                    <td>$<%= result[i].price.toLocaleString() %></td>
+                    <td style="text-align: center;"><%= result[i].id %></td>
+                    <td style="text-align: center;"><%= result[i].name %></td>
+                    <td style="text-align: center;"><%= result[i].description %></td>
+                    <td style="text-align: center;">$<%= result[i].price.toLocaleString() %></td>
                     <%if(result[i].sale_price == null){%>
-                    <td>N/A</td>
+                    <td style="text-align: center;">N/A</td>
                     <%}else{%>
-                    <td>$<%= result[i].sale_price.toLocaleString() %></td>
+                    <td style="text-align: center;">$<%= result[i].sale_price.toLocaleString() %></td>
                     <%}%>
-                    <td><%= result[i].quantity %></td>
-                    <td>
+                    <td style="text-align: center;"><%= result[i].quantity %></td>
+                    <td style="text-align: center;">
                         <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<%= encodeURIComponent(result[i].name) %>&choe=UTF-8" alt="QR Code" />
                     </td>
                 </tr>
