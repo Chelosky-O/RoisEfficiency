@@ -32,7 +32,8 @@
     color: var(--textColor);
 }
 .products{
-    width: 100%;
+    width: 120%;
+    margin-left: -10%;
     align-self: center;
     height: 70%;
     display: flex;
