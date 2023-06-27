@@ -6,9 +6,7 @@
     --starColor: #750d37;
     --sectionBack: #f7f6f9;
 }
-*{
-    font-family: 'Raleway', sans-serif;
-}
+
 .nbody{
     background-color: var(--bodyBack);
     min-height: 10%;
@@ -75,15 +73,18 @@
     font-size: 2em;
     text-transform: capitalize;
     color: var(--textColor);
+    font-family: 'Raleway', sans-serif;
 }
 .namePrice span{
     font-size: 1.5em;
     color: var(--starColor);
+    font-family: 'Raleway', sans-serif;
 }
 .product p{
     font-size: 18px;
     line-height: 25px;
     color: black;
+    font-family: 'Raleway', sans-serif;
 }
 .stars svg{
     font-size: 1.3em;
@@ -103,7 +104,7 @@
     background-color: var(--textColor);
     color: var(--sectionBack);
     font-size: 18px;
-    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
     cursor: pointer;
     transition: .5s;
 }

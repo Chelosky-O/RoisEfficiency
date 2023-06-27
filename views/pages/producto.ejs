@@ -21,59 +21,38 @@
 
         <div id="ctn-bars-search">
             <input type="text" id="inputSearch" placeholder="¿Qué estás buscando?"> </input>
-          </div>
-          <ul id="box-search">
-            <% result.forEach(function(item) { if(item.quantity>0){%>
-      
-              <li><a href="/ver_producto?id=<%= item.id %>" data-product-id="<%= item.id %>"><i class="fas fa-search"></i>
-                <%= item.name %></a>
-              </li>
-            <% }}) %>
-          </ul>  
-          
-      
-      <div id="cover-ctn-search"></div>
-          
+        </div>
+        <ul id="box-search">
+        <% result.forEach(function(item) { if(item.quantity>0){%>
+    
+            <li><a href="/ver_producto?id=<%= item.id %>" data-product-id="<%= item.id %>"><i class="fas fa-search"></i>
+            <%= item.name %></a>
+            </li>
+        <% }}) %>
+        </ul>  
+        
+    
+    <div id="cover-ctn-search"></div>
+        
         <% result.forEach(function(item) { %>
             <% if(item.id == id_producto){ %>
 
-
-        <div class="product-card">
-            <img src="images/<%= item.image %>" alt="Imagen del producto">
-                <div>
-                    <h2><%= item.name %></h2>
-                    <div class="small mb-1">SKU: <%= item.id %></div>
-                    <p class="lead" style="margin: 0;"><%= item.description %> </p><br><br><form action="/add_to_cart" method="post">
-                        <input type="hidden" name="id" value="<%= item.id %>">
-                        <input id="name" type="hidden" name="name" value="<%= item.name %>">
-                        <input type="hidden" name="price" value="<%= item.price %>">
-                        <input type="hidden" name="sale_price" value="<%= item.sale_price %>">
-                        <input type="hidden" name="quantity" value="1">
-                        <input type="hidden" name="image" value="<%= item.image %>">
-                        <button type="submit">Agregar al carrito</button>
-                    </form>
-                    
-                   
-                </div>
-        </div>    
-                
         <!-- Product section-->
-            <div class="container px-4 px-lg-5 my-5 ">
-                <div class="row gx-4 gx-lg-5 align-items-center" style=" box-shadow: 0 5px 20px rgba(0, 0, 0, .3); background: #D5C7BC; border-radius: 10px;">
-                    <div class="col-md-6" ><img style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0, 0, 0, .3); width: 80%; max-height: 80%; margin-top: 5%;" class="card-img-top mb-5 mb-md-0" src="images/<%= item.image %>" alt="..." /></div>
+                <div class="box row gx-4 gx-lg-5 align-items-center" style=" box-shadow: 0 5px 20px rgba(0, 0, 0, .3); background: #f7f6f9; border-radius: 10px; margin-top: 100px;">
+                    <div class="col-md-6" ><img style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0, 0, 0, .3); width: 100%;" class="card-img-top mb-5 mb-md-0" src="images/<%= item.image %>" alt="..." /></div>
                     <div class="col-md-6">
-                        <h1 class="display-5 fw-bolder"><%= item.name %></h1>
-                        <div class="small mb-1">SKU: <%= item.id %></div>
+                        <h2 class="display-5 fw-bolder" style="margin-left: 6%;"><%= item.name %></h2>
+                        <div style="margin-left: 6%;" class="small mb-1">SKU: <%= item.id %></div>
                         <div class="fs-5 mb-5">
                             <% if(item.sale_price){ %>
-                            <span class="text-decoration-line-through">$<%= item.price %></span>
                             <span>$<%= item.sale_price %></span>
+                            <span style="font-size: 10px; margin-right: 10000px; margin-top: 20px;" class="text-decoration-line-through">$<%= item.price %></span>
                             <% }else{ %>
                                 <span>$<%= item.price %></span>
                             <% } %>
                         </div>
-                        <p class="lead" style="color: black;"><%= item.description %></p>
-                        <div class="d-flex">
+                        <p class="lead" style="color: black; margin-left: 6%; margin-top: -5%; margin-bottom: 10%;"><%= item.description %></p>
+                        <div class="d-flex" style="margin: 0; position: relative;">
                             <form action="/add_to_cart" method="post">
                                 <input type="hidden" name="id" value="<%= item.id %>">
                                 <input id="name" type="hidden" name="name" value="<%= item.name %>">
@@ -81,142 +60,140 @@
                                 <input type="hidden" name="sale_price" value="<%= item.sale_price %>">
                                 <input type="hidden" name="quantity" value="1">
                                 <input type="hidden" name="image" value="<%= item.image %>">
-                                <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
+                                <button type="submit">Añadir al carrito</button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
+
         <% }%>
         <% }) %>
+    
 
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Productos relacionados</h2>
-                <div id="related-products-carousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <% for(let i = 0; i < 16; i += 4) { %>
-                            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-                                <div class="row">
-                                    <% for(let j = 0; j < 4; j++) { %>
-                                        <% if(result[i + j] && result[i + j].id != id_producto) { %>
-                                            <div class="col mb-5">
-                                                <div class="card h-100">
-                                                    <!-- Sale badge-->
-                                                    <div class="badge bg-dark text-white position-absolute top-0 start-0">Sale</div>
-                                                    <!-- Product image-->
-                                                    <img class="card-img-top" width="200" height="200" src="images/<%= result[i + j].image %>" alt="..." />
-                                                    <!-- Product details-->
-                                                    <div class="card-body p-4">
-                                                        <div class="text-center">
-                                                            <!-- Product name-->
-                                                            <h5 class="fw-bolder"><%= result[i + j].name %></h5>
-                                                            <!-- Product reviews-->
-                                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                                <div class="bi-star-fill"></div>
-                                                            </div>
-                                                            <!-- Product price-->
-                                                            <% if(result[i + j].sale_price){ %>
-                                                                <span class="text-decoration-line-through">$<%= result[i + j].price %></span>
-                                                                <span>$<%= result[i + j].sale_price %></span>
-                                                            <% } else { %>
-                                                                <span>$<%= result[i + j].price %></span>
-                                                            <% } %>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Product actions-->
-                                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                        <form action="/add_to_cart" method="post">
-                                                            <input type="hidden" name="id" value="<%= result[i + j].id %>">
-                                                            <input id="name" type="hidden" name="name" value="<%= result[i + j].name %>">
-                                                            <input type="hidden" name="price" value="<%= result[i + j].price %>">
-                                                            <input type="hidden" name="sale_price" value="<%= result[i + j].sale_price %>">
-                                                            <input type="hidden" name="quantity" value="1">
-                                                            <input type="hidden" name="image" value="<%= result[i + j].image %>">
-                                                            <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
-                                                        </form>
-                                                    </div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Productos relacionados</h2>
+        <div id="related-products-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <% for(let i = 0; i < 16; i += 4) { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <div class="row">
+                            <% for(let j = 0; j < 4; j++) { %>
+                                <% if(result[i + j] && result[i + j].id != id_producto) { %>
+                                    <div class="col mb-5">
+                                        <div class="card h-100">
+                                        <!-- Sale badge-->
+                                        <div class="badge bg-dark text-white position-absolute top-0 start-0">Sale</div>
+                                        <!-- Product image-->
+                                        <img class="card-img-top" width="200" height="200" src="images/<%= result[i + j].image %>" alt="..." />
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- Product name-->
+                                                <h5 class="fw-bolder"><%= result[i + j].name %></h5>
+                                                <!-- Product reviews-->
+                                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
                                                 </div>
+                                                <!-- Product price-->
+                                                <% if(result[i + j].sale_price){ %>
+                                                    <span class="text-decoration-line-through">$<%= result[i + j].price %></span>
+                                                    <span>$<%= result[i + j].sale_price %></span>
+                                                <% } else { %>
+                                                    <span>$<%= result[i + j].price %></span>
+                                                <% } %>
                                             </div>
-                                        <% } %>
-                                    <% } %>
-                                </div>
-                            </div>
-                        <% } %>
+                                        </div>
+                                        <!-- Product actions-->
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <form action="/add_to_cart" method="post">
+                                                <input type="hidden" name="id" value="<%= result[i + j].id %>">
+                                                <input id="name" type="hidden" name="name" value="<%= result[i + j].name %>">
+                                                <input type="hidden" name="price" value="<%= result[i + j].price %>">
+                                                <input type="hidden" name="sale_price" value="<%= result[i + j].sale_price %>">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input type="hidden" name="image" value="<%= result[i + j].image %>">
+                                                <input type="submit" value="Añadir al carrito" class="btn btn-outline-dark mt-auto">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: -3%;">
-                        <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
-                          <span style="color: black;">Anterior</span>
-                        </button>
-                        <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
-                          <span style="color: black;">Siguiente</span>
-                        </button>
-                      </div>
-                      
-                </div>
+                <% } %>
             </div>
-        </section>
-        
-        
-        
-        
+            <div style="display: flex; justify-content: space-between; margin-top: -3%;">
+                <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="prev">
+                <span style="color: black;">Anterior</span>
+                </button>
+                <button type="button" data-bs-target="#related-products-carousel" data-bs-slide="next">
+                <span style="color: black;">Siguiente</span>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</section>
+    
 
         <!-- Footer-->
         <%- include("footer") %>
         <script>
             // Obtener todos los elementos con la clase "product-name"
             var productNames = document.getElementsByClassName("product-name");
-          
+        
             // Agregar un controlador de eventos de clic a cada elemento
             for (var i = 0; i < productNames.length; i++) {
-              productNames[i].addEventListener("click", function() {
+                productNames[i].addEventListener("click", function() {
                 // Obtener el ID del producto desde el atributo "data-product-id"
                 var productId = this.getAttribute("data-product-id");
-          
-                // Redirigir al usuario al detalle del producto
-                window.location.href = "/ver_producto?id=" + productId;
-              });
+    
+            // Redirigir al usuario al detalle del producto
+            window.location.href = "/ver_producto?id=" + productId;
+            });
             }
-          </script> 
+        </script> 
 
         <script>
             // Obtener todos los elementos de enlace de la lista
             const links = document.querySelectorAll('#box-search a');
-          
+        
             // Función que se ejecutará cuando se haga clic en un enlace
             const handleClick = (event) => {
               event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-          
+        
               const productId = event.currentTarget.getAttribute('data-product-id'); // Obtener el ID del producto
-          
+        
               // Crear un formulario oculto
-              const form = document.createElement('form');
-              form.method = 'POST';
-              form.action = '/view_product';
-          
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/view_product';
+        
               // Crear un campo de entrada oculto para enviar el ID del producto
-              const productIdInput = document.createElement('input');
-              productIdInput.type = 'hidden';
-              productIdInput.name = 'id';
-              productIdInput.value = productId;
-          
+            const productIdInput = document.createElement('input');
+            productIdInput.type = 'hidden';
+            productIdInput.name = 'id';
+            productIdInput.value = productId;
+        
               // Agregar el campo de entrada al formulario
-              form.appendChild(productIdInput);
-          
+            form.appendChild(productIdInput);
+        
               // Agregar el formulario al documento y enviarlo
-              document.body.appendChild(form);
-              form.submit();
+            document.body.appendChild(form);
+            form.submit();
             };
-          
+        
             // Agregar el evento de clic a cada enlace de la lista
             links.forEach(link => {
-              link.addEventListener('click', handleClick);
+            link.addEventListener('click', handleClick);
             });
-          </script>
+        </script>
 
         <script src="js/scripts.js"></script>
         <!-- Bootstrap core JS-->

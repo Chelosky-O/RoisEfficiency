@@ -40,29 +40,25 @@
                 <span class="text" style="color: black;">Registrarse</span>
                 </button>
             </li>
-            <li class="nav-item">
-                <button class="nav-link btn" onclick="location.href='#bottom'">
-                    <i class="fas fa-question-circle"></i> 
-                <span class="text" style="color: black;">Nosotros</span>
-                </button>
-            </li>
             <li id="ctn-icon-serch">
                 <button class="nav-link btn" id="icon-search">
                     <i class="fas fa-search"></i>
                 <span class="text" style="color: black;">Búsqueda</span>
                 </button>
-                
+            </li>
+            <li class="nav-item">
+                <button class="nav-link btn" onclick="location.href='#bottom'">
+                    <i class="fas fa-question-circle"></i> 
+                <span class="text" style="color: black;">Nosotros</span>
+                </button>
             </li>
             </ul>
             <% } else { %>
             <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">Hola <%= user_name %>, edita tu perfil aquí! &#128075;</a>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link btn" onclick="location.href='#bottom'">
-                    <i class="fas fa-question-circle"></i> 
-                <span class="text" style="color: black;">Nosotros</span>
+                <button class="nav-link btn" onclick="redirectToProfile()">
+                    <i class="fas fa-user"></i> 
+                <span class="text" style="color: black;">Mi cuenta</span>
                 </button>
             </li>
             <li id="ctn-icon-serch">
@@ -70,18 +66,32 @@
                     <i class="fas fa-search"></i>
                 <span class="text" style="color: black;">Búsqueda</span>
                 </button>
-                
             </li>
             <li class="nav-item">
-                <form class="d-flex" action="/logout" method="post">
-                <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;" value="Cerrar sesión" />
-                </form>
+                <button class="nav-link btn" onclick="location.href='#bottom'">
+                    <i class="fas fa-question-circle"></i> 
+                <span class="text" style="color: black;">Nosotros</span>
+                </button>
+            </li>
+            <li class="nav-item" >
+                <form action="/logout" method="post"> 
+                <button class="nav-link btn">
+                    <i class="fas fa-sign-out-alt"></i> 
+                <span class="text" style="color: black;">Cerrar sesión</span>
+                </button>
+            </form>
             </li>
             </ul>
             <% } %>
         </div>
         </div>
     </nav>
+
+    <script>
+        function redirectToProfile() {
+            window.location.href = "/profile";
+        }
+        </script>
     
     <script>
         const scrollToBottom = () => {
