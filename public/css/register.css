@@ -1,217 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins',sans-serif;
-}
-body{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: whitesmoke;
-}
-.container{
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
-.container .title{
-  font-size: 25px;
-  font-weight: 500;
+.custom-login-dark {
+  height: 80vh;
+  background: #E1E8EE;
+  background-size: 100% 100%;
   position: relative;
 }
-.container .title::before{
-  content: "";
+
+.custom-login-dark form {
+  width: 40%; /* Ajusta el ancho en porcentaje */
+  height: 80%; /* Ajusta la altura en porcentaje */
+  max-width: 90%;
+  background-color: #1e2833;
+  padding: 40px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
   position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 30px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 }
-.content form .user-details{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
+
+.custom-login-dark form input[type="file"] {
+  width: 50%;
 }
-form .user-details .input-box{
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+
+.custom-login-dark .illustration {
+  text-align: center;
+  padding: 15px 0 20px;
+  font-size: 100px;
+  color: #FFFFFF;
 }
-form .input-box span.details{
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.user-details .input-box input{
-  height: 45px;
-  width: 100%;
+
+.custom-login-dark form .form-control {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #434a52;
+  border-radius: 0;
+  box-shadow: none;
   outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
+  color: inherit;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
-  border-color: #9b59b6;
+
+.custom-login-dark form .btn-primary {
+  background: #214a80;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
 }
- form .gender-details .gender-title{
-  font-size: 20px;
-  font-weight: 500;
- }
- form .category{
-   display: flex;
-   width: 80%;
-   margin: 14px 0 ;
-   justify-content: space-between;
- }
- form .category label{
-   display: flex;
-   align-items: center;
-   cursor: pointer;
- }
- form .category label .dot{
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  margin-right: 10px;
-  background: #d9d9d9;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
+
+.custom-login-dark form .btn-primary:hover,
+.custom-login-dark form .btn-primary:active {
+  background: #1a3c6c;
+  outline: none;
 }
- #dot-1:checked ~ .category label .one,
- #dot-2:checked ~ .category label .two,
- #dot-3:checked ~ .category label .three{
-   background: #9b59b6;
-   border-color: #d9d9d9;
- }
- form input[type="radio"]{
-   display: none;
- }
- form .button{
-   height: 45px;
-   margin: 35px 0
- }
- form .button input{
-   height: 100%;
-   width: 100%;
-   border-radius: 5px;
-   border: none;
-   color: #fff;
-   font-size: 18px;
-   font-weight: 500;
-   letter-spacing: 1px;
-   cursor: pointer;
-   transition: all 0.3s ease;
-   background: linear-gradient(135deg, #71b7e6, #9b59b6);
- }
- form .button input:hover{
-  /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
-  }
- @media(max-width: 584px){
- .container{
-  max-width: 100%;
+
+.custom-login-dark form .forgot {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #6f7a85;
+  opacity: 0.9;
+  text-decoration: none;
 }
-form .user-details .input-box{
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  form .category{
-    width: 100%;
-  }
-  .content form .user-details{
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-  .user-details::-webkit-scrollbar{
-    width: 5px;
-  }
-  }
-  @media(max-width: 459px){
-  .container .content .category{
-    flex-direction: column;
-  }
+
+.custom-login-dark form .forgot:hover,
+.custom-login-dark form .forgot:active {
+  opacity: 1;
+  text-decoration: none;
 }
-input:invalid {
-  border-color: red;
+
+.custom-login-dark form .btn-primary:active {
+  transform: translateY(1px);
 }
-button {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color: white;
-    background-color: #171717;
-    padding: 1em 2em;
-    border: none;
-    border-radius: .6rem;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  
-  button span:not(:nth-child(6)) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 30px;
-    width: 30px;
-    background-color: #393E46;
-    border-radius: 50%;
-    transition: .6s ease;
-  }
-  
-  button span:nth-child(6) {
-    position: relative;
-  }
-  
-  button span:nth-child(1) {
-    transform: translate(-3.3em, -4em);
-  }
-  
-  button span:nth-child(2) {
-    transform: translate(-6em, 1.3em);
-  }
-  
-  button span:nth-child(3) {
-    transform: translate(-.2em, 1.8em);
-  }
-  
-  button span:nth-child(4) {
-    transform: translate(3.5em, 1.4em);
-  }
-  
-  button span:nth-child(5) {
-    transform: translate(3.5em, -3.8em);
-  }
-  
-  button:hover span:not(:nth-child(6)) {
-    transform: translate(-50%, -50%) scale(4);
-    transition: 1.5s ease;
-  }
-  h1 {
-    font-size: 40px;
-    font-weight: bold;
-    font-family: "Candara";
-    color: #000000; /* Negro */
-    margin-left: 0;
-  }
-  
-  h1 span.gris {
-    color: #808080; /* Gris */
-  }
-  
-  h1 span.burdeo {
-    color: #752B50; /* Burdeo */
-  }

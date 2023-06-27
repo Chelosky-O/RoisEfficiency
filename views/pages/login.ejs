@@ -10,9 +10,63 @@
         <link rel="icon" href="images/LOGO-1.png"/>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/login.css" rel="stylesheet" />
+        <link href="css/header.css" rel="stylesheet" />
     </head>
     <body>
-      <%- include("header") %>
+      <!-- Nueva fila superior con color de fondo -->
+    <div class="container-fluid">
+      <div class="row barra-principal" style="background-color: #750d37; color: white; padding: 2px; z-index: 10;">
+          <div class="col text-center" style="max-width: 100%;">
+              Rois Chile <i class="fas fa-glasses"></i> | Envíos a todo Chile <i class="fas fa-shipping-fast"></i> | Entregas en la V región <i class="fas fa-truck"></i> 
+          </div>
+      </div>
+  </div> 
+
+  <nav class="navbar navbar-expand-lg navbar-light sticky-header" style="background-color: whitesmoke; height: 80px;">
+      <div class="container-fluid px-4 px-lg-5">
+      <a class="nav-link active" aria-current="page" href="/">
+          <h1 class="text-start">ÓPTICA <span class="burdeo">R</span><span class="gris">O</span><span class="burdeo">IS</span></h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if(typeof isLoggedIn === 'undefined' || !isLoggedIn) { %>
+          <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+              <button class="nav-link btn" onclick="location.href='/login'">
+                  <i class="fas fa-user"></i>
+              <span class="text" style="color: black;">Iniciar sesión</span>
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link btn" onclick="location.href='/register'">
+                  <i class="fas fa-user-plus"></i>
+              <span class="text" style="color: black;">Registrarse</span>
+              </button>
+          </li>
+          <li class="nav-item">
+              <button class="nav-link btn" onclick="location.href='#bottom'">
+                  <i class="fas fa-question-circle"></i> 
+              <span class="text" style="color: black;">Nosotros</span>
+              </button>
+          </li>
+          </ul>
+          <% } else { %>
+          <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+              <a class="nav-link greeting" style="color: #752B50; font-weight: bold;" href="/profile">Hola <%= user_name %>, edita tu perfil aquí! &#128075;</a>
+          </li>
+          <li class="nav-item">
+              <form class="d-flex" action="/logout" method="post">
+              <input type="submit" class="btn btn-outline-dark mt-auto" style="color: white;background-color: #333333;" value="Cerrar sesión" />
+              </form>
+          </li>
+          </ul>
+          <% } %>
+      </div>
+      </div>
+  </nav>
 
     <div class="overlay">
       <form class="mi-clase" method="post" action="/authLogin">
