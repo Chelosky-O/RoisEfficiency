@@ -24,37 +24,8 @@
     padding: 1%;
 }
 
-h2{
+.cuerpo h2{
     color: black;
-}
-
-.alert {
-    position: relative;
-    padding: 15px;
-    width: 51%;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 7px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.alert-info {
-    color: white;
-    background-color:  #750D37;
-    text-align: center;
-}
-
-.alert-dismissable {
-    padding-right: 35px;
-}
-
-.alert-dismissable .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 15px;
-    color: inherit;
 }
 
 .panel-close {
@@ -90,41 +61,6 @@ h2{
     padding-bottom: 4.5%;
     height: 8%;
     margin: 0;
-}
-
-button .change-boton {
-    display: inline-block;
-    color: #252537;
-    width: 280px;
-    height: 50px;
-    padding: 0 20px;
-    background: #fff;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s linear;
-    margin: 7% auto;
-    letter-spacing: 0.05em;
-}
-
-button .change-boton:hover {
-    transform: translatey(3px);
-    box-shadow: none;
-}
-
-/* buttons hover Animation */
-button .change-boton :hover {
-    animation: ani9 0.4s ease-in-out infinite alternate;
-}
-@keyframes ani9 {
-    0% {
-        transform: translateY(3px);
-    }
-    100% {
-        transform: translateY(5px);
-    }
 }
 
 .container-botones {
