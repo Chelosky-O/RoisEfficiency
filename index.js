@@ -171,10 +171,10 @@ app.get('/orders', function(req, res) {
         });
         con.query("SELECT * FROM orders WHERE email = ?", [email], (err, orders) => {
             if (err) {
-                res.render('pages/orders', {errorMsg:"Error en la consulta de la base de datos", result:null, email:email});
+                res.render('pages/orders', {errorMsg:"Error en la consulta de la base de datos", result:null, email:email, isLoggedIn:req.session.isLoggedIn});
             } else {
                 if (orders.length === 0) {
-                    res.render('pages/orders', {errorMsg:"No hay ordenes asociadas a ti", result:null, email:email});
+                    res.render('pages/orders', {errorMsg:"No hay ordenes asociadas a ti", result:null, email:email, isLoggedIn:req.session.isLoggedIn});
                 } else {
                     let orderPromises = orders.map((order) => {
                         return new Promise((resolve, reject) => {
@@ -213,10 +213,10 @@ app.get('/orders', function(req, res) {
                     });
                     Promise.all(orderPromises)
                     .then(() => {
-                        res.render('pages/orders', {errorMsg:undefined, result:orders, email:email});
+                        res.render('pages/orders', {errorMsg:undefined, result:orders, email:email, isLoggedIn:req.session.isLoggedIn});
                     })
                     .catch((err) => {
-                        res.render('pages/orders', {errorMsg:err, result:null, email:email});
+                        res.render('pages/orders', {errorMsg:err, result:null, email:email, isLoggedIn:req.session.isLoggedIn});
                     });
                 }
             }
@@ -323,7 +323,7 @@ app.post('/actStatusOrder', async function(req, res) {
                 throw err;
             }
 
-            var query = "SELECT product_ids FROM orders WHERE id = ?";
+            var query = "SELECT product_ids, email, name FROM orders WHERE id = ?";
 
             con.query(query, [orderId], async function(err, result) {
                 if (err) {
@@ -334,6 +334,8 @@ app.post('/actStatusOrder', async function(req, res) {
                 }
 
                 var productIds = result[0].product_ids.split(',');
+                var customerEmail = result[0].email;
+                var customerName = result[0].name;
                 var zeroQuantityFlag = false;
 
                 for (var i = 0; i < productIds.length; i++) {
@@ -360,6 +362,20 @@ app.post('/actStatusOrder', async function(req, res) {
 
                     if(zeroQuantityFlag) break;
                 }
+
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: global.gmail,
+                        pass: global.gmailPassword
+                    }
+                });
+
+                let mailOptions = {
+                    from: global.gmail,
+                    to: customerEmail,
+                    subject: 'Actualización de estado de su pedido',
+                };
 
                 if (zeroQuantityFlag) {
                     con.rollback(function(err) {
@@ -389,7 +405,17 @@ app.post('/actStatusOrder', async function(req, res) {
                                         res.status(500).send("Error al actualizar el estado de la orden a REEMBOLSO POR FALTA DE STOCK");
                                         throw err;
                                     }
-
+                                    mailOptions.html = `
+                                    <h1>Estimado(a) ${customerName},</h1>
+                                    <p>Recibimos su transferencia.</p>
+                                    <p>Sin embargo, se acabó el stock de los productos que solicitó. Reembolsaremos el total de la compra y el estado del pedido será "REEMBOLSO POR FALTA DE STOCK"</p>
+                                    <p>Atentamente,</p>
+                                    <p>OpticaRois</p>`;
+                                    transporter.sendMail(mailOptions, function(error, info){
+                                        if (error) {
+                                          console.log(error);
+                                        }
+                                    });
                                     res.send("No se puede actualizar la orden porque la cantidad de producto es 0");
                                     refundCon.end();
                                 });
@@ -438,6 +464,16 @@ app.post('/actStatusOrder', async function(req, res) {
                                                 });
                                             }
 
+                                            mailOptions.html = `
+                                            <h1>Estimado(a) ${customerName},</h1>
+                                            <p>Hemos recibido su pago y hemos enviado su pedido.</p>
+                                            <p>Atentamente,</p>
+                                            <p>OpticaRois</p>`;
+                                            transporter.sendMail(mailOptions, function(error, info){
+                                                if (error) {
+                                                  console.log(error);
+                                                }
+                                            });
                                             res.send("Estado de la orden y cantidades de productos actualizados con éxito");
                                         });
                                     }
@@ -450,6 +486,7 @@ app.post('/actStatusOrder', async function(req, res) {
         });
     });
 });
+
 
 
 app.get('/adminEscaneo', function(req,res){
