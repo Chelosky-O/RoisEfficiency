@@ -8,6 +8,7 @@ const multer  = require('multer');
 const fileUpload = require('express-fileupload');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+const { Console } = require('console');
 global.gmail = "ivan.caceres_s@mail.udp.cl"
 global.gmailPassword = "IAMVAL2021";
 
@@ -805,11 +806,17 @@ app.post('/add_to_cart', function(req,res){
 });
 
 app.get('/cart', function(req,res){
-    var cart = req.session.cart;
+    if(req.session.cart != undefined){
+        var cart = req.session.cart;
     var total = req.session.total;
     var isLoggedIn = req.session.isLoggedIn
 
     res.render('pages/carrito',{cart:cart,total:total,isLoggedIn:isLoggedIn});
+    }
+    else{
+        res.redirect('/');
+    }
+    
 });
 
 app.post('/remove_product', function(req,res){
