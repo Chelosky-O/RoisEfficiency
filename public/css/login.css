@@ -52,44 +52,35 @@ header.head-form p {letter-spacing: 0.05em; color: black;}
     border-radius: 5px 0px 0px 5px;
 }
 
-
-
 /* Show/hide password Font Icon */
 #eye {
     background: #fff;
     color: #333;
-  
     margin: 5.9px 0 0 0;
     margin-left: -20px;
     padding: 15px 9px 19px 0px;
     border-radius: 0px 5px 5px 0px;
-  
     float: right;
     position: relative;
     right: 1%;
     top: -.2%;
     z-index: 5;
-    
     cursor: pointer;
 }
+
 /* inputs form  */
 input[class="form-input"]{
     width: 240px;
     height: 50px;
-  
     margin-top: 2%;
     padding: 15px;
-    
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #5E6472;
-  
     outline: none;
     border: none;
-  
     border-radius: 0px 5px 5px 0px;
     transition: 0.2s linear;
-    
 }
 input[id="txt-input"] {width: 250px;}
 /* focus  */
@@ -106,24 +97,20 @@ input:focus {
 button.login-boton {
     display: inline-block;
     color: black;
-  
     width: 280px;
     height: 50px;
-  
     padding: 0 20px;
     background: #fff;
     border-radius: 5px;
-    
     outline: none;
     border: none;
-  
     cursor: pointer;
     text-align: center;
     transition: all 0.2s linear;
-    
     margin: 7% auto;
     letter-spacing: 0.05em;
 }
+
 /* Submits */
 .submits {
     width: 48%;

@@ -66,8 +66,7 @@ h2{
 }
 .cuerpo input {
     width: 40%;
-    height: 50px;
-    padding-top: 3.6%;
+    padding-top: 4%;
     padding-bottom: 4.6%;
     height: 10%;
     font-size: 16px;
@@ -185,6 +184,8 @@ button .change-boton :hover {
     margin-right: 10px;
 }
 
+
+
 .dropdown-menu a {
     display: block;
     padding: 8px 12px;
@@ -208,12 +209,12 @@ header.head-form h2 {
     color: #3e403f;
 }
 /*  A welcome message or an explanation of the login form */
-header.head-form p {letter-spacing: 0.05em; color: black;}
+header.head-form p {letter-spacing: 0.05em; color: black; font-weight: 200;}
 
 button.login-boton {
     display: inline-block;
     color: black;
-    width: 280px;
+    width: 200px;
     height: 50px;
     padding: 0 20px;
     background: #fff;
@@ -240,7 +241,7 @@ button.login-boton {
 /* buttons hover */
 button.login-boton :hover {
     transform: translatey(3px);
-    box-shadow: none;
+    box-shadow: rgb(0, 0, 0);
     animation: ani9 0.4s ease-in-out infinite alternate;
 }
 
@@ -251,4 +252,23 @@ button.login-boton :hover {
     100% {
         transform: translateY(5px);
     }
+}
+input[class="form-input"]{
+    width: 240px;
+    height: 50px;
+    margin-top: 2%;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #5E6472;
+    outline: none;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.2s linear;
+}
+input[id="txt-input"] {width: 250px;}
+/* focus  */
+input:focus {
+    transform: translateX(-2px);
+    border-radius: 5px;
 }
