@@ -11,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/barra_busqueda.css" rel="stylesheet" />
+        <link href="css/barra_busqueda.css" rel="stylesheet"/>
         <link href="css/producto.css" rel="stylesheet" />
     </head>
     <body>
@@ -75,7 +75,7 @@
         <h2 class="fw-bolder mb-4">Productos relacionados</h2>
         <div id="related-products-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <% for(let i = 0; i < 16; i += 4) { %>
+                <% for(let i = 0; i < 10; i += 4) { %>
                     <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
                         <div class="row">
                             <% for(let j = 0; j < 4; j++) { %>
@@ -85,7 +85,7 @@
                                         <!-- Sale badge-->
                                         <div class="badge bg-dark text-white position-absolute top-0 start-0">Sale</div>
                                         <!-- Product image-->
-                                        <img class="card-img-top" width="200" height="200" src="images/<%= result[i + j].image %>" alt="..." />
+                                        <img class="card-img-top" style="margin-left: -12px;" width="100" height="200" src="images/<%= result[i + j].image %>" alt="..." />
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -140,7 +140,6 @@
         </div>
     </div>
 </section>
-    
 
         <!-- Footer-->
         <%- include("footer") %>
