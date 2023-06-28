@@ -124,7 +124,7 @@
         // Recorrer todas las celdas de estado
         document.querySelectorAll(".status-cell").forEach(cell => {
             // Si el estado es "PAGADO", agregar la clase "status-pagado"
-            if (cell.innerText == "PAGADO") {
+            if (cell.innerText == "PAGADO Y ENVIADO") {
                 cell.classList.add("status-pagado");
             }
             // Si el estado es "NO PAGADO", agregar la clase "status-nopagado"
@@ -154,7 +154,7 @@
                             if (xhr.status === 200) {
                                 alert("Estado de la orden actualizado con éxito");
                                 // Cambia el estado visualmente a "PAGADO"
-                                cell.innerText = "PAGADO";
+                                cell.innerText = "PAGADO Y ENVIADO";
                                 cell.classList.remove("status-nopagado");
                                 cell.classList.add("status-pagado");
                             } else {

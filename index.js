@@ -160,6 +160,73 @@ app.get('/adminMain', function(req, res) {
     }
 });
 
+app.get('/orders', function(req, res) {
+    if (req.session.isLoggedIn === true) {
+        let email = req.session.user_email;
+        var con = mysql.createConnection({
+            host:"localhost",
+            user:"root",
+            password:"",
+            database:"RoisEfficiency"
+        });
+        con.query("SELECT * FROM orders WHERE email = ?", [email], (err, orders) => {
+            if (err) {
+                res.render('pages/orders', {errorMsg:"Error en la consulta de la base de datos", result:null, email:email});
+            } else {
+                if (orders.length === 0) {
+                    res.render('pages/orders', {errorMsg:"No hay ordenes asociadas a ti", result:null, email:email});
+                } else {
+                    let orderPromises = orders.map((order) => {
+                        return new Promise((resolve, reject) => {
+                            let productIds = order.product_ids.split(",");
+                            let productCounts = {}; // object to store counts of each product
+                            let productPromises = productIds.map((productId) => {
+                                return new Promise((resolve, reject) => {
+                                    con.query("SELECT name FROM products WHERE id = ?", [productId], (err, result) => {
+                                        if(err) {
+                                            reject("Error en la consulta de la base de datos");
+                                        } else {
+                                            let productName = result[0] ? result[0].name : "Producto descontinuado";
+                                            if (productCounts[productName]) {
+                                                productCounts[productName]++;
+                                            } else {
+                                                productCounts[productName] = 1;
+                                            }
+                                            resolve();
+                                        }
+                                    });
+                                });
+                            });
+                            Promise.all(productPromises)
+                            .then(() => {
+                                let productNames = [];
+                                for (let [name, count] of Object.entries(productCounts)) {
+                                    productNames.push(`${count}x${name}`);
+                                }
+                                order.product_names = productNames.join(", ");
+                                resolve();
+                            })
+                            .catch((err) => {
+                                reject(err);
+                            });
+                        });
+                    });
+                    Promise.all(orderPromises)
+                    .then(() => {
+                        res.render('pages/orders', {errorMsg:undefined, result:orders, email:email});
+                    })
+                    .catch((err) => {
+                        res.render('pages/orders', {errorMsg:err, result:null, email:email});
+                    });
+                }
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
+
 app.get('/adminCerrarSesion', function(req, res) {
     if (req.session.adminIsLoggedIn === true) {
         req.session.adminIsLoggedIn=false;
@@ -330,7 +397,7 @@ app.post('/actStatusOrder', async function(req, res) {
                         });
                     });
                 } else {
-                    var query = "UPDATE orders SET status = 'PAGADO' WHERE id = ? AND status = 'NO PAGADO'";
+                    var query = "UPDATE orders SET status = 'PAGADO Y ENVIADO' WHERE id = ? AND status = 'NO PAGADO'";
 
                     con.query(query, [orderId], function(err, result) {
                         if (err) {
