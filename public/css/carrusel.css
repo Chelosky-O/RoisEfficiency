@@ -1,29 +1,65 @@
 /* === Google Font Import - Poppins === */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+
+.main {
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 10px; /* Agrega un espacio de relleno alrededor del contenido */
+  }
+  
+  .content {
+    margin-bottom: 5%;
+  }
+  
+  .card {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc; /* Agrega un borde más delgado a las tarjetas */
+  }
+  
+  .card::before {
+    content: "";
+    position: absolute;
+    height: 40%;
+    width: 100%;
+    background: #750d37;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .card .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+    z-index: 100;
+  }
+  
 main{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 .main{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f2f2f2;
-}
-
-section{
-    position: relative;  
-    height: 450px;
-    width: 1075px;
+    height: 40%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background: white;
 }
 
+.content{
+    margin-bottom: 5%;
+}
 .swiper{
     width: 950px;
 }
@@ -55,9 +91,9 @@ section{
 }
 
 section .card .image{
-    height: 140px;
-    width: 140px;
-    border-radius: 50%;
+    height: 200px;
+    width: 250px;
+    border-radius: 10%;
     padding: 3px;
     background: #750d37;
 }
@@ -66,7 +102,7 @@ section .card .image img{
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 10%;
     border: 3px solid #fff;
 }
 
@@ -164,3 +200,14 @@ section .card .image img{
     opacity: 1;
     color: #750d37;
 }
+
+.no h1{
+    margin-top: 5%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.seccion{
+    margin-bottom: 5%;
+}
+
