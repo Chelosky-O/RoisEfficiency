@@ -16,6 +16,25 @@
         <link href="css/header.css" rel="stylesheet" />
     </head>
     <style>
+        .no-order-button {
+        display: inline-block;
+        background-color: #750d37;
+        color: #fff;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        }
+
+        .no-order-button:hover {
+            background-color: #5d092d;
+        }
+
+        .material-icons-outlined {
+            vertical-align: middle;
+        }
         .inventory-table {
             width: 100%;
             border-collapse: collapse;
@@ -129,36 +148,43 @@
   </nav>
       
   <div style="margin-bottom: 5%;">
-    <table class="inventory-table">
-        <thead>
-            <tr>
-                <th>ID ORDEN</th>
-                <th>MONTO</th>
-                <th>NOMBRE</th>
-                <th>Email</th>
-                <th>Estado</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Fecha</th>
-                <th>Productos</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for(var i = 0; i < result.length; i++) { %>
-            <tr>
-                <td><%= result[i].id %></td>
-                <td>$<%= result[i].cost.toLocaleString() %></td>
-                <td><%= result[i].name %></td>
-                <td><%= result[i].email %></td>
-                <td class="status-cell" id="status-<%= result[i].id %>"><%= result[i].status %></td>
-                <td><%= result[i].address %></td>
-                <td><%= result[i].phone %></td>
-                <td><%= result[i].date %></td>
-                <td><%= result[i].product_names %></td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+    <% if (result && result.length) { %>
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th>ID ORDEN</th>
+                    <th>MONTO</th>
+                    <th>NOMBRE</th>
+                    <th>Email</th>
+                    <th>Estado</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < result.length; i++) { %>
+                <tr>
+                    <td><%= result[i].id %></td>
+                    <td>$<%= result[i].cost.toLocaleString() %></td>
+                    <td><%= result[i].name %></td>
+                    <td><%= result[i].email %></td>
+                    <td class="status-cell" id="status-<%= result[i].id %>"><%= result[i].status %></td>
+                    <td><%= result[i].address %></td>
+                    <td><%= result[i].phone %></td>
+                    <td><%= result[i].date %></td>
+                    <td><%= result[i].product_names %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <div style="text-align:center; padding: 10%;">
+            <h2><span class="material-icons-outlined">sentiment_dissatisfied</span> No tienes ninguna orden</h2>
+            <a href="/" class="no-order-button"><span class="material-icons-outlined">shopping_cart</span> Vamos a comprar</a>
+        </div>
+    <% } %>
 </div>
 
         <!-- Footer-->
