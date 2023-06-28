@@ -53,9 +53,9 @@
                         <div class="fs-5 mb-5">
                             <% if(item.sale_price){ %>
                             <span>$<%= item.sale_price %></span>
-                            <span style="font-size: 10px; margin-right: 10000px; margin-top: 20px;" class="text-decoration-line-through">$<%= item.price %></span>
+                            <span style="font-size: 10px; margin-right: 10000px; margin-top: 20px;" class="text-decoration-line-through">$<%= item.price.toLocaleString() %></span>
                             <% }else{ %>
-                                <span>$<%= item.price %></span>
+                                <span>$<%= item.price.toLocaleString() %></span>
                             <% } %>
                         </div>
                         <p class="lead" style="color: black; margin-left: 6%; margin-top: -5%; margin-bottom: 10%;"><%= item.description %></p>
