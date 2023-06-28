@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    <!------------------------------------------------------------------------------------ -->
     <!--header -->
     <div class="container-fluid">
       <div class="row barra-principal" style="background-color: #750d37; color: white; padding: 2px; z-index: 10;">
@@ -64,6 +65,8 @@
       </div>
       </div>
   </nav>
+<!--Fin header -->
+<!-------------------------------------------------------------------------------------------------------->
 
   <!-------------------------------------------------------------------------------------------------------->
   <!--Formulario de registro a continuación-->
@@ -75,133 +78,63 @@
         <p style="font-family: 'Abel', sans-serif;">Recuerda ingresar correctamente tu información</p>
       </header>
 
-        <div class="container-input" >
+        <div class="container-input" style="width: 100%;" >
 
-          <label for="first-name">Primer nombre:</label>
-            <div class="input-container">
-              <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="first-name" name="primer_nombre" value="" required>
-            </div>
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fa fa-user"></i></span>
+              <input type="text" name="primer_nombre" placeholder="Primer nombre" required>
+            </div><br>
     
-          <label for="last-name">Segundo nombre:</label>
-            <div class="input-container">
-              <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="last-name" name="segundo_nombre" value="" required>
-            </div>
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fa fa-user"></i></span>
+              <input type="text" name="segundo_nombre" placeholder="Segundo nombre" required>
+            </div><br>
     
-          <label for="first-name">Primer apellido:</label>
-            <div class="input-container">
-              <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="first-name" name="primer_apellido" value="" required>
-            </div>
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fa fa-user"></i></span>
+              <input type="text" name="primer_apellido" placeholder="Primer apellido" required>
+            </div><br>
     
-          <label for="last-name">Segundo apellido:</label>
-            <div class="input-container">
-              <span><i class="fa fa-user-circle"></i></span>
-              <input type="text" id="last-name" name="segundo_apellido" value="" required>
-            </div>
-    
-          <label for="field1">Email:</label>
-            <div class="input-container">
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fa fa-user"></i></span>
+              <input type="text" name="segundo_apellido" placeholder="Segundo apellido" required>
+            </div><br>
+
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fas fa-id-card"></i></span>
+              <input type="text" name="rut" placeholder="Rut" required pattern="^[0-9]{7,8}-[0-9kK]{1}$">
+            </div><br>
+
+            <div class="input-container" style="margin-bottom: -2%;">
+              <span><i class="fas fa-map-marker-alt"></i></span>
+              <input type="text" name="direccion" placeholder="Dirección" required>
+            </div><br>
+
+            <div class="input-container" style="margin-bottom: -2%;">
               <span><i class="fa fa-envelope"></i></span>
-              <input type="mail" id="field1" name="email" value="" required>
-            </div>
+              <input type="email" name="email" placeholder="Email" required>
+            </div><br>
     
-          <label for="current-password">Contraseña actual:</label>
-            <div class="input-container">
+            <div class="input-container" style="margin-bottom: -2%;">
               <span><i class="fa fa-key"></i></span>
-              <input type="password" id="current-password" name="current_password" required>
-            </div>
+              <input type="password" name="password" placeholder="Contraseña" required>
+            </div><br> 
 
-          <label for="field3">Receta:</label>
-            <div class="input-container" style="left: 10%;">
-              <input style="color: black;" type="file" id="field3" name="file"><br><br>
-            </div>
+          <label style="color: white;">Receta:</label>
+            <div class="input-container" style="left: 7%;">
+              <input style="color: white;" id="file_input" type="file" name="file" required><br><br>
+            </div><br>
 
-          <div class="container-botones" style="margin-top: -1%; margin-bottom: -5%;">
+          <div class="container-botones" style="margin-top: -10%; margin-bottom: -5%;">
             <button class="btn login-boton" type="submit">Registrarse</button> 
-            <button class="btn login-boton" onclick="returnar()">Cancelar</button>
+            <button class="btn login-boton" type="button" onclick="resetFields()">Limpiar campos</button>
           </div>
+          <% if (errorMsg) { %>
+            <div class="error-msg"><%= errorMsg %></div>
+          <% } %>
         </div>
     </form>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="form_wrapper mi-clase" style="margin-bottom: 2%; margin-top: 2%;">
-    <div class="form_container1">
-      <div class="title_container">
-        <h2>Formulario de registro</h2>
-      </div>
-      <div class="row1 clearfix">
-        <div class="">
-          <form action="/register" method="post" enctype="multipart/form-data"> 
-            <div class="row clearfix">
-              <div class="col_half">
-                <div class="input_field"> <span><i class="fa fa-user"></i></span>
-                  <input type="text" name="primer_nombre" placeholder="Primer nombre" required/>
-                </div>
-              </div>
-              <div class="col_half">
-                <div class="input_field"> <span><i class="fa fa-user"></i></span>
-                  <input type="text" name="segundo_nombre" placeholder="Segundo nombre" required />
-                </div>
-              </div>
-            </div>
-            <div class="row clearfix">
-              <div class="col_half">
-                <div class="input_field"> <span><i class="fa fa-user"></i></span>
-                  <input type="text" name="primer_apellido" placeholder="Primer apellido" required/>
-                </div>
-              </div>
-              <div class="col_half">
-                <div class="input_field"> <span><i class="fa fa-user"></i></span>
-                  <input type="text" name="segundo_apellido" placeholder="Segundo apellido" required />
-                </div>
-              </div>
-            </div>
-            <div class="input_field"> <span><i class="fas fa-file-alt"></i></span>
-              <input type="text" name="rut"" placeholder="Rut" required pattern="^[0-9]{7,8}-[0-9kK]{1}$"/>
-            </div>
-            <div class="input_field"> <span><i class="fas fa-map-marker-alt"></i></span>
-              <input type="text" name="direccion" placeholder="Dirección" required />
-            </div>
-            <div class="input_field"> <span><i class="fa fa-envelope"></i></span>
-              <input type="email" name="email" placeholder="Email" required />
-            </div>
-            <div class="input_field"> <span><i class="fa fa-lock"></i></span>
-              <input type="password" name="password" placeholder="Contraseña" required />
-            </div>
-            <div class="input_field">
-              <label for="file_input">
-                Receta:
-              </label>
-              <input id="file_input" type="file" name="file" required />
-            </div>
-            <input class="button" type="button" onclick="resetFields()" value="Limpiar campos"/>
-            <input class="button register-boton" type="submit" value="Registrar" />
-            <% if (errorMsg) { %>
-              <div class="error-msg"><%= errorMsg %></div>
-            <% } %>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
     <%- include("footer") %>
 
@@ -230,5 +163,3 @@
     </script>
   </body>
 </html>
-
-
