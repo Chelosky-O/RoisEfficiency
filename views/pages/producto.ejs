@@ -84,7 +84,7 @@
         <div class="swiper-wrapper content">
             <% result.forEach(function(item) { %>
                 <%if(item.id!=id_producto){%>
-                    <div class="swiper-slide card">
+                    <div class="swiper-slide card product-name" data-product-id="<%= item.id %>">
                         <div class="card-content">
                         <div class="image">
                         <img src="images/<%=item.image%>" alt=""> 
@@ -157,13 +157,14 @@
     </script>
         <script>
             // Obtener todos los elementos con la clase "product-name"
+            
             var productNames = document.getElementsByClassName("product-name");
-        
             // Agregar un controlador de eventos de clic a cada elemento
             for (var i = 0; i < productNames.length; i++) {
                 productNames[i].addEventListener("click", function() {
                 // Obtener el ID del producto desde el atributo "data-product-id"
                 var productId = this.getAttribute("data-product-id");
+                
     
             // Redirigir al usuario al detalle del producto
             window.location.href = "/ver_producto?id=" + productId;
