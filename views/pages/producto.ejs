@@ -156,7 +156,7 @@
                     <div class="swiper-slide card">
                         <div class="card-content">
                         <div class="image">
-                        <img src="images/img9.jpg" alt=""> 
+                        <img src="images/<%=item.image%>" alt=""> 
                         </div>
             
                         <div class="media-icons">
@@ -166,8 +166,8 @@
                         </div>
             
                         <div class="name-profession">
-                            <span class="name">Someone Name</span>
-                            <span class="profession">Web Developer</span>
+                            <span class="name"><%=item.name%></span>
+                            <span class="profession"><%=item.price%></span>
                         </div>
             
                         <div class="rating">
@@ -184,8 +184,8 @@
                             </div>
                         </div>
                         </div>
+                        <%})%>
         </div>
-        <%})%>
     </div>
 
         <div class="swiper-button-next"></div>
